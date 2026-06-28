@@ -1,0 +1,16 @@
+numpy==2.4.6
+pandas==3.0.1
+torch==2.10.0
+tqdm==4.67.3
+matplotlib==3.10.8
+scikit-learn==1.8.0
+transformers==4.57.3
+huggingface-hub==0.36.2
+datasets==4.6.0
+fsspec==2026.2.0
+peft==0.18.1
+requests==2.34.2
+einops==0.8.2
+wfdb==4.3.1
+open-flamingo==0.0.2
+opentslm @ git+https://github.com/StanfordBDHG/OpenTSLM.git@refs/pull/47/head

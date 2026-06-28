@@ -15,3 +15,8 @@ datasets/adhd_children_dataset
 # Local environment files
 .env
 *.local.json
+
+
+# Temporary files
+*.tmp
+/tmp
