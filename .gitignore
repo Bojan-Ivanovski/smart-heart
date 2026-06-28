@@ -1,0 +1,17 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Local datasets
+datasets/neuropsychiatric_imaging_dataset
+datasets/cognitive_electrophysiology_dataset
+datasets/adhd_working_memory_reward_dataset
+datasets/adhd_inhibition_attention_dataset
+datasets/adhd_individuals_gameplay_dataset
+datasets/adhd_dualcontrol_dataset
+datasets/adhd_cognitive_function_dataset
+datasets/adhd_children_dataset
+
+# Local environment files
+.env
+*.local.json
