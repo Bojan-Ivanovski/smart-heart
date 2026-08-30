@@ -62,7 +62,6 @@ def parse_args() -> argparse.Namespace:
         default="both",
     )
     parser.add_argument("--max-evaluation-samples", type=int)
-    parser.add_argument("--max-new-tokens", type=int, default=2)
     return parser.parse_args()
 
 
@@ -116,7 +115,6 @@ def main() -> None:
             model_id=args.model_id,
             enable_lora=args.enable_lora,
             checkpoint_root=args.checkpoint_root,
-            max_new_tokens=args.max_new_tokens,
             max_samples=args.max_evaluation_samples,
         )
         summaries = Evaluator(runtime, model_factory).evaluate(

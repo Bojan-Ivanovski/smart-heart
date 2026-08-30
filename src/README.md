@@ -56,10 +56,10 @@ test results are reported separately, and the model is loaded only once:
 python -m src.main --mode evaluate --dataset gameplay --evaluation-split both
 ```
 
-Use `--max-evaluation-samples` to cap the number of samples evaluated per split
-and `--max-new-tokens` to control the generated answer length. Capped evaluation
-uses a deterministic shuffle instead of taking adjacent windows from the first
-patient. Evaluation uses the same `--seed` as training to reconstruct the patient
-assignments and sample order.
+Use `--max-evaluation-samples` to cap the number of samples evaluated per split.
+Capped evaluation uses a deterministic shuffle instead of taking adjacent windows
+from the first patient. Evaluation uses the same `--seed` as training to
+reconstruct the patient assignments and sample order. Generation stops when the
+model emits the EOS token learned during training.
 
 Run `python -m src.main --help` for the complete set of dataset, windowing, optimizer, accelerator, LoRA, seed, and checkpoint options.

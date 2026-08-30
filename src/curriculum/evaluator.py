@@ -75,7 +75,7 @@ class Evaluator:
                     break
                 batch = batch[:remaining]
 
-            outputs = model.generate(batch, max_new_tokens=config.max_new_tokens)
+            outputs = model.generate(batch)
             for sample, output in zip(batch, outputs):
                 expected = str(sample["answer"]).upper()
                 predicted = Evaluator._extract_label(output)
