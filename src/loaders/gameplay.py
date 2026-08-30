@@ -92,6 +92,7 @@ class ADHDGameplay(Dataset):
                                 f"{group}_{subject_id}_{source_name}_{file_path.stem}"
                             ),
                             adhd=(group == "ADHD"),
+                            split_group=f"{group}_{subject_id}",
                         )
                         self.patients.append(patient)
                         spans = patient.get_window_spans(

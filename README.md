@@ -6,7 +6,7 @@ The goal of SmartHeart is to train a model using OpenTSLM technology so it can u
 
 ## Current Status
 
-The repository includes an early implementation for preparing EEG-based ADHD data for OpenTSLM. It supports the children `.mat` recordings and gameplay bandpower CSV recordings, configurable time-series windows, dataset previews, LoRA training, deterministic seeds, automatic checkpoint reuse, and automatic XLA, CUDA, MPS, or CPU selection.
+The repository includes an early implementation for preparing EEG-based ADHD data for OpenTSLM. It supports the children `.mat` recordings and gameplay bandpower CSV recordings, configurable time-series windows, patient-level stratified dataset splits, LoRA training, deterministic seeds, automatic checkpoint reuse, and automatic XLA, CUDA, MPS, or CPU selection.
 
 ## Environment
 

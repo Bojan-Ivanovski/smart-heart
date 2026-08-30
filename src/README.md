@@ -12,6 +12,13 @@ SmartHeart separates dataset loading, runtime selection, model construction, and
 - `loaders/`: source-specific children and gameplay dataset adapters.
 - `utility/`: accelerator selection and reusable time-series windowing helpers.
 
+## Dataset Splits
+
+Training uses deterministic, label-stratified splits of 60% training, 20%
+validation, and 20% testing. Splits are made by patient rather than by time-series
+window. For gameplay data, every recording and session belonging to the same
+subject remains in one split. `--seed` controls the assignment.
+
 ## Commands
 
 Previewing a dataset is the safe default:

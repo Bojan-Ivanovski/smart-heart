@@ -83,8 +83,15 @@ def main() -> None:
         fresh_start=args.fresh_start,
         seed=args.seed,
     )
+    splits = pipeline_builder.split_dataset(dataset, seed=config.seed)
+    print(
+        f"[split] train samples={len(splits.train)} groups={splits.train_groups}; "
+        f"validation samples={len(splits.validation)} "
+        f"groups={splits.validation_groups}; "
+        f"test samples={len(splits.test)} groups={splits.test_groups}"
+    )
     dataloader = pipeline_builder.build_dataloader(
-        dataset,
+        splits.train,
         batch_size=config.batch_size,
         shuffle=True,
     )

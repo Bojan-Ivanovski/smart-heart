@@ -12,6 +12,11 @@ class Patient:
     path: Path
     patient_id: str
     adhd: bool = False
+    split_group: str | None = None
+
+    @property
+    def split_key(self) -> str:
+        return self.split_group or self.patient_id
 
     def to_dict(self, loader_function: Callable) -> dict[str, object]:
         data: Tensor = loader_function(self.path, self.patient_id)
