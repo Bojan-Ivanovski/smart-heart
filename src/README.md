@@ -45,6 +45,10 @@ python -m src.main --mode train --model-id google/gemma-3-270m --fresh-start
 The checkpoint format stores model weights but not optimizer or completed-epoch
 state, so loading it warm-starts another configured training run.
 
+Training targets append the selected tokenizer's EOS token to the `YES` and `NO`
+labels. This teaches generation to stop after one classification token. Checkpoints
+created before this behavior should be retrained once with `--fresh-start`.
+
 Evaluate a checkpoint with generated `YES` or `NO` predictions. Validation and
 test results are reported separately, and the model is loaded only once:
 

@@ -62,7 +62,7 @@ def parse_args() -> argparse.Namespace:
         default="both",
     )
     parser.add_argument("--max-evaluation-samples", type=int)
-    parser.add_argument("--max-new-tokens", type=int, default=10)
+    parser.add_argument("--max-new-tokens", type=int, default=2)
     return parser.parse_args()
 
 

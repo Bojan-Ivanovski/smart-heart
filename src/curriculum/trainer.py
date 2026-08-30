@@ -56,6 +56,10 @@ class Trainer:
             print(f"[checkpoint] loading={checkpoint_path}")
             model.load_from_file(str(checkpoint_path))
 
+        eos_token = model.get_eos_token()
+        if not eos_token:
+            raise ValueError("The selected model tokenizer has no EOS token")
+
         trainable_parameters = [
             parameter for parameter in model.parameters() if parameter.requires_grad
         ]
@@ -78,6 +82,7 @@ class Trainer:
 
             for batch_index, batch in enumerate(dataloader, start=1):
                 optimizer.zero_grad(set_to_none=True)
+                self._append_eos_token(batch, eos_token)
                 loss = model.compute_loss(batch)
                 loss.backward()
                 clip_grad_norm_(trainable_parameters, config.max_grad_norm)
@@ -110,3 +115,10 @@ class Trainer:
             checkpoint_path=checkpoint_path,
             elapsed_seconds=perf_counter() - start_time,
         )
+
+    @staticmethod
+    def _append_eos_token(batch: list[dict[str, object]], eos_token: str) -> None:
+        for sample in batch:
+            answer = str(sample["answer"]).strip()
+            if not answer.endswith(eos_token):
+                sample["answer"] = answer + eos_token

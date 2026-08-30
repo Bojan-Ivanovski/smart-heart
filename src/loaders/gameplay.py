@@ -110,6 +110,6 @@ class ADHDGameplay(Dataset):
         sample = patient.to_dict(loader_function)
         sample["time_series"] = sample["time_series"][:, start:end]
         sample["post_prompt"] = (
-            f"{sample['post_prompt']} Window covers timesteps {start} to {end}."
+            f"Window covers timesteps {start} to {end}. {sample['post_prompt']}"
         )
         return sample

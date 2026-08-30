@@ -7,7 +7,7 @@ class EvaluationConfig:
     model_id: str = "google/gemma-3-270m"
     enable_lora: bool = True
     checkpoint_root: Path = Path("checkpoints")
-    max_new_tokens: int = 10
+    max_new_tokens: int = 2
     max_samples: int | None = None
 
     def __post_init__(self) -> None:

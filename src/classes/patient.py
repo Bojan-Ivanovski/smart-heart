@@ -31,7 +31,9 @@ class Patient:
                 "Given the following time series data, determine if the patient "
                 "has ADHD."
             ),
-            "post_prompt": "Does this patient have ADHD?",
+            "post_prompt": (
+                "Does this patient have ADHD? Answer with exactly YES or NO."
+            ),
             "time_series": data,
             "time_series_text": [
                 "This is the time series data. It has a mean of {} and a standard "

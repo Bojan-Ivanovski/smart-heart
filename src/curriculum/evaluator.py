@@ -100,5 +100,8 @@ class Evaluator:
 
     @staticmethod
     def _extract_label(output: str) -> str | None:
-        match = re.search(r"\b(YES|NO)\b", output.upper())
+        normalized_output = output.strip().upper()
+        match = re.match(r"(YES|NO)", normalized_output)
+        if match is None:
+            match = re.search(r"\b(YES|NO)\b", normalized_output)
         return match.group(1) if match else None
