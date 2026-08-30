@@ -1,0 +1,833 @@
+{
+  "schema_version": "1.0.0",
+  "contract_name": "smartheart.curriculum.patient",
+  "dataset_id": "smartheart-mock-curriculum-v1",
+  "synthetic": true,
+  "description": "Synthetic contract fixture for curriculum training and evaluation. Values are illustrative and must not be treated as clinical data.",
+  "label_definitions": {
+    "ADHD": "Patient-level ADHD diagnosis is present.",
+    "NOT_ADHD": "Patient-level ADHD diagnosis is not present.",
+    "UNCERTAIN": "Available evidence is insufficient for a binary conclusion."
+  },
+  "curriculum_stages": {
+    "mcq_warmup": {
+      "scope": "window",
+      "output_type": "single_choice",
+      "evaluation": "exact_choice_accuracy"
+    },
+    "eeg_captioning": {
+      "scope": "window",
+      "output_type": "structured_caption",
+      "evaluation": "feature_agreement"
+    },
+    "attention_task_cot": {
+      "scope": "task_interval",
+      "output_type": "evidence_and_conclusion",
+      "evaluation": "evidence_accuracy_and_conclusion_accuracy"
+    },
+    "resting_state_cot": {
+      "scope": "recording_and_patient",
+      "output_type": "evidence_and_interpretation",
+      "evaluation": "evidence_accuracy_and_interpretation_accuracy"
+    },
+    "diagnostic_cot": {
+      "scope": "patient",
+      "output_type": "evidence_and_diagnosis",
+      "evaluation": "patient_level_classification_and_evidence_accuracy"
+    }
+  },
+  "patients": [
+    {
+      "patient_id": "mock-patient-001",
+      "split_group": "mock-patient-001",
+      "dataset_source": "synthetic_contract_fixture",
+      "demographics": {
+        "age_years": 11,
+        "age_group": "child",
+        "sex": "female",
+        "handedness": "right"
+      },
+      "clinical_ground_truth": {
+        "diagnosis": "ADHD",
+        "label_source": "synthetic_mock_label",
+        "verified": false
+      },
+      "recordings": [
+        {
+          "recording_id": "mock-patient-001-attention-01",
+          "recording_type": "attention_task",
+          "condition": "visual_continuous_performance_task",
+          "source_uri": "mock://signals/mock-patient-001-attention-01.npy",
+          "acquisition": {
+            "modality": "EEG",
+            "device": "mock-five-channel-headset",
+            "sampling_rate_hz": 256,
+            "channel_names": [
+              "AF3",
+              "AF4",
+              "T7",
+              "T8",
+              "Pz"
+            ],
+            "reference": "common_average",
+            "units": "microvolts"
+          },
+          "task_protocol": {
+            "task_name": "visual_continuous_performance_task",
+            "expected_response": "press_for_target",
+            "baseline_reaction_time_ms": 510
+          }
+        },
+        {
+          "recording_id": "mock-patient-001-resting-01",
+          "recording_type": "resting_state",
+          "condition": "eyes_closed",
+          "source_uri": "mock://signals/mock-patient-001-resting-01.npy",
+          "acquisition": {
+            "modality": "EEG",
+            "device": "mock-five-channel-headset",
+            "sampling_rate_hz": 256,
+            "channel_names": [
+              "AF3",
+              "AF4",
+              "T7",
+              "T8",
+              "Pz"
+            ],
+            "reference": "common_average",
+            "units": "microvolts"
+          }
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "mock-patient-001-window-001",
+          "recording_id": "mock-patient-001-attention-01",
+          "window_index": 0,
+          "start_timestep": 0,
+          "end_timestep": 512,
+          "start_seconds": 0.0,
+          "end_seconds": 2.0,
+          "signal": {
+            "storage": "external_array",
+            "source_uri": "mock://signals/mock-patient-001-attention-01.npy",
+            "array_slice": "[:, 0:512]",
+            "shape": [
+              5,
+              512
+            ],
+            "dtype": "float32",
+            "layout": "channels_first",
+            "values_preview": [
+              [0.12, 0.44, 0.73, 0.31],
+              [0.08, 0.39, 0.68, 0.28],
+              [-0.11, 0.24, 0.57, 0.18],
+              [-0.09, 0.21, 0.52, 0.16],
+              [0.04, 0.35, 0.64, 0.26]
+            ]
+          },
+          "task_event": {
+            "trial_id": "trial-001",
+            "stimulus_type": "target",
+            "expected_response": "press",
+            "actual_response": "press",
+            "response_correct": true,
+            "reaction_time_ms": 655
+          },
+          "quality": {
+            "usable": true,
+            "artifact": false,
+            "artifact_types": [],
+            "missing_channel_names": []
+          },
+          "derived_features": {
+            "mean_microvolts": 0.18,
+            "standard_deviation_microvolts": 8.4,
+            "dominant_band": "theta",
+            "band_power": {
+              "delta": 0.18,
+              "theta": 0.38,
+              "alpha": 0.2,
+              "beta": 0.16,
+              "gamma": 0.08
+            },
+            "theta_beta_ratio": 2.38
+          },
+          "curriculum_targets": {
+            "mcq_warmup": {
+              "input": {
+                "prompt": "Which frequency band is dominant in this EEG window?",
+                "choices": {
+                  "A": "Delta",
+                  "B": "Theta",
+                  "C": "Alpha",
+                  "D": "Beta"
+                }
+              },
+              "target": {
+                "choice": "B",
+                "answer": "Theta"
+              },
+              "supervision": "deterministic_feature_calculation"
+            },
+            "eeg_captioning": {
+              "input": {
+                "prompt": "Describe the observable EEG characteristics without making a diagnosis."
+              },
+              "target": {
+                "caption": "Theta activity is dominant and elevated relative to beta, with no major artifact detected.",
+                "features": {
+                  "dominant_band": "theta",
+                  "theta_beta_ratio": "elevated",
+                  "artifact": false
+                }
+              },
+              "supervision": "template_from_verified_features"
+            },
+            "attention_task_cot": {
+              "applicable": true,
+              "input": {
+                "prompt": "Summarize the task and EEG evidence, then provide an attention-related conclusion."
+              },
+              "target": {
+                "observations": [
+                  "The target response was correct.",
+                  "Reaction time was 145 ms slower than baseline.",
+                  "Theta activity was elevated relative to beta."
+                ],
+                "conclusion": "The interval shows slowed but correct task performance with EEG evidence consistent with reduced attentional efficiency."
+              },
+              "supervision": "task_metadata_and_verified_features"
+            },
+            "resting_state_cot": {
+              "applicable": false,
+              "reason": "Window belongs to an attention task recording."
+            }
+          }
+        },
+        {
+          "window_id": "mock-patient-001-window-002",
+          "recording_id": "mock-patient-001-attention-01",
+          "window_index": 1,
+          "start_timestep": 512,
+          "end_timestep": 1024,
+          "start_seconds": 2.0,
+          "end_seconds": 4.0,
+          "signal": {
+            "storage": "external_array",
+            "source_uri": "mock://signals/mock-patient-001-attention-01.npy",
+            "array_slice": "[:, 512:1024]",
+            "shape": [
+              5,
+              512
+            ],
+            "dtype": "float32",
+            "layout": "channels_first",
+            "values_preview": [
+              [0.18, 0.52, 0.81, 0.37],
+              [0.14, 0.47, 0.76, 0.33],
+              [-0.08, 0.31, 0.66, 0.25],
+              [-0.05, 0.28, 0.61, 0.22],
+              [0.09, 0.43, 0.72, 0.31]
+            ]
+          },
+          "task_event": {
+            "trial_id": "trial-002",
+            "stimulus_type": "target",
+            "expected_response": "press",
+            "actual_response": "none",
+            "response_correct": false,
+            "reaction_time_ms": null
+          },
+          "quality": {
+            "usable": true,
+            "artifact": false,
+            "artifact_types": [],
+            "missing_channel_names": []
+          },
+          "derived_features": {
+            "mean_microvolts": 0.25,
+            "standard_deviation_microvolts": 9.1,
+            "dominant_band": "theta",
+            "band_power": {
+              "delta": 0.2,
+              "theta": 0.43,
+              "alpha": 0.17,
+              "beta": 0.13,
+              "gamma": 0.07
+            },
+            "theta_beta_ratio": 3.31
+          },
+          "curriculum_targets": {
+            "mcq_warmup": {
+              "input": {
+                "prompt": "Which ratio is elevated in this EEG window?",
+                "choices": {
+                  "A": "Alpha to delta",
+                  "B": "Beta to theta",
+                  "C": "Theta to beta",
+                  "D": "Gamma to alpha"
+                }
+              },
+              "target": {
+                "choice": "C",
+                "answer": "Theta to beta"
+              },
+              "supervision": "deterministic_feature_calculation"
+            },
+            "eeg_captioning": {
+              "input": {
+                "prompt": "Describe the observable EEG characteristics without making a diagnosis."
+              },
+              "target": {
+                "caption": "The usable segment has strongly elevated theta relative to beta and contains no detected artifact.",
+                "features": {
+                  "dominant_band": "theta",
+                  "theta_beta_ratio": "strongly_elevated",
+                  "artifact": false
+                }
+              },
+              "supervision": "template_from_verified_features"
+            },
+            "attention_task_cot": {
+              "applicable": true,
+              "input": {
+                "prompt": "Summarize the task and EEG evidence, then provide an attention-related conclusion."
+              },
+              "target": {
+                "observations": [
+                  "The expected target response was omitted.",
+                  "Theta activity was strongly elevated relative to beta.",
+                  "No major artifact was detected."
+                ],
+                "conclusion": "The omission error and EEG pattern provide evidence consistent with an attention lapse during this interval."
+              },
+              "supervision": "task_metadata_and_verified_features"
+            },
+            "resting_state_cot": {
+              "applicable": false,
+              "reason": "Window belongs to an attention task recording."
+            }
+          }
+        },
+        {
+          "window_id": "mock-patient-001-window-003",
+          "recording_id": "mock-patient-001-resting-01",
+          "window_index": 0,
+          "start_timestep": 0,
+          "end_timestep": 512,
+          "start_seconds": 0.0,
+          "end_seconds": 2.0,
+          "signal": {
+            "storage": "external_array",
+            "source_uri": "mock://signals/mock-patient-001-resting-01.npy",
+            "array_slice": "[:, 0:512]",
+            "shape": [
+              5,
+              512
+            ],
+            "dtype": "float32",
+            "layout": "channels_first",
+            "values_preview": [
+              [0.11, 0.41, 0.7, 0.29],
+              [0.07, 0.36, 0.65, 0.25],
+              [-0.12, 0.22, 0.55, 0.17],
+              [-0.1, 0.19, 0.5, 0.14],
+              [0.03, 0.33, 0.62, 0.24]
+            ]
+          },
+          "resting_state": {
+            "condition": "eyes_closed",
+            "minutes_from_recording_start": 0.0
+          },
+          "quality": {
+            "usable": true,
+            "artifact": false,
+            "artifact_types": [],
+            "missing_channel_names": []
+          },
+          "derived_features": {
+            "mean_microvolts": 0.16,
+            "standard_deviation_microvolts": 8.0,
+            "dominant_band": "theta",
+            "band_power": {
+              "delta": 0.19,
+              "theta": 0.4,
+              "alpha": 0.19,
+              "beta": 0.15,
+              "gamma": 0.07
+            },
+            "theta_beta_ratio": 2.67
+          },
+          "curriculum_targets": {
+            "mcq_warmup": {
+              "input": {
+                "prompt": "Is the theta-to-beta ratio greater than 2.0?",
+                "choices": {
+                  "A": "Yes",
+                  "B": "No"
+                }
+              },
+              "target": {
+                "choice": "A",
+                "answer": "Yes"
+              },
+              "supervision": "deterministic_feature_calculation"
+            },
+            "eeg_captioning": {
+              "input": {
+                "prompt": "Describe the observable EEG characteristics without making a diagnosis."
+              },
+              "target": {
+                "caption": "The eyes-closed resting segment is theta-dominant with an elevated theta-to-beta ratio and no major artifact.",
+                "features": {
+                  "dominant_band": "theta",
+                  "theta_beta_ratio": "elevated",
+                  "artifact": false
+                }
+              },
+              "supervision": "template_from_verified_features"
+            },
+            "attention_task_cot": {
+              "applicable": false,
+              "reason": "Window belongs to a resting-state recording."
+            },
+            "resting_state_cot": {
+              "applicable": true,
+              "input": {
+                "prompt": "Summarize the resting-state evidence and provide a signal-level interpretation without making a diagnosis."
+              },
+              "target": {
+                "observations": [
+                  "The window was recorded during eyes-closed rest.",
+                  "Theta was the dominant band.",
+                  "The theta-to-beta ratio was elevated.",
+                  "No major artifact was detected."
+                ],
+                "interpretation": "This usable resting-state window shows a slow-frequency-dominant pattern."
+              },
+              "supervision": "recording_metadata_and_verified_features"
+            }
+          }
+        }
+      ],
+      "patient_curriculum_target": {
+        "diagnostic_cot": {
+          "input": {
+            "prompt": "Review the patient-level evidence and return a supported ADHD classification.",
+            "evidence_window_ids": [
+              "mock-patient-001-window-001",
+              "mock-patient-001-window-002",
+              "mock-patient-001-window-003"
+            ]
+          },
+          "target": {
+            "evidence": [
+              "One attention-task target response was omitted.",
+              "All usable windows showed elevated theta relative to beta.",
+              "The resting-state window showed a slow-frequency-dominant pattern."
+            ],
+            "diagnosis": "ADHD"
+          },
+          "supervision": "synthetic_patient_label_with_structured_evidence"
+        }
+      }
+    },
+    {
+      "patient_id": "mock-patient-002",
+      "split_group": "mock-patient-002",
+      "dataset_source": "synthetic_contract_fixture",
+      "demographics": {
+        "age_years": 12,
+        "age_group": "child",
+        "sex": "male",
+        "handedness": "left"
+      },
+      "clinical_ground_truth": {
+        "diagnosis": "NOT_ADHD",
+        "label_source": "synthetic_mock_label",
+        "verified": false
+      },
+      "recordings": [
+        {
+          "recording_id": "mock-patient-002-attention-01",
+          "recording_type": "attention_task",
+          "condition": "visual_continuous_performance_task",
+          "source_uri": "mock://signals/mock-patient-002-attention-01.npy",
+          "acquisition": {
+            "modality": "EEG",
+            "device": "mock-five-channel-headset",
+            "sampling_rate_hz": 256,
+            "channel_names": [
+              "AF3",
+              "AF4",
+              "T7",
+              "T8",
+              "Pz"
+            ],
+            "reference": "common_average",
+            "units": "microvolts"
+          },
+          "task_protocol": {
+            "task_name": "visual_continuous_performance_task",
+            "expected_response": "press_for_target",
+            "baseline_reaction_time_ms": 500
+          }
+        },
+        {
+          "recording_id": "mock-patient-002-resting-01",
+          "recording_type": "resting_state",
+          "condition": "eyes_closed",
+          "source_uri": "mock://signals/mock-patient-002-resting-01.npy",
+          "acquisition": {
+            "modality": "EEG",
+            "device": "mock-five-channel-headset",
+            "sampling_rate_hz": 256,
+            "channel_names": [
+              "AF3",
+              "AF4",
+              "T7",
+              "T8",
+              "Pz"
+            ],
+            "reference": "common_average",
+            "units": "microvolts"
+          }
+        }
+      ],
+      "windows": [
+        {
+          "window_id": "mock-patient-002-window-001",
+          "recording_id": "mock-patient-002-attention-01",
+          "window_index": 0,
+          "start_timestep": 0,
+          "end_timestep": 512,
+          "start_seconds": 0.0,
+          "end_seconds": 2.0,
+          "signal": {
+            "storage": "external_array",
+            "source_uri": "mock://signals/mock-patient-002-attention-01.npy",
+            "array_slice": "[:, 0:512]",
+            "shape": [
+              5,
+              512
+            ],
+            "dtype": "float32",
+            "layout": "channels_first",
+            "values_preview": [
+              [0.1, 0.28, 0.43, 0.21],
+              [0.08, 0.25, 0.4, 0.19],
+              [-0.07, 0.16, 0.34, 0.12],
+              [-0.06, 0.14, 0.31, 0.1],
+              [0.03, 0.22, 0.38, 0.17]
+            ]
+          },
+          "task_event": {
+            "trial_id": "trial-001",
+            "stimulus_type": "target",
+            "expected_response": "press",
+            "actual_response": "press",
+            "response_correct": true,
+            "reaction_time_ms": 515
+          },
+          "quality": {
+            "usable": true,
+            "artifact": false,
+            "artifact_types": [],
+            "missing_channel_names": []
+          },
+          "derived_features": {
+            "mean_microvolts": 0.11,
+            "standard_deviation_microvolts": 6.2,
+            "dominant_band": "alpha",
+            "band_power": {
+              "delta": 0.15,
+              "theta": 0.22,
+              "alpha": 0.31,
+              "beta": 0.24,
+              "gamma": 0.08
+            },
+            "theta_beta_ratio": 0.92
+          },
+          "curriculum_targets": {
+            "mcq_warmup": {
+              "input": {
+                "prompt": "Which frequency band is dominant in this EEG window?",
+                "choices": {
+                  "A": "Delta",
+                  "B": "Theta",
+                  "C": "Alpha",
+                  "D": "Beta"
+                }
+              },
+              "target": {
+                "choice": "C",
+                "answer": "Alpha"
+              },
+              "supervision": "deterministic_feature_calculation"
+            },
+            "eeg_captioning": {
+              "input": {
+                "prompt": "Describe the observable EEG characteristics without making a diagnosis."
+              },
+              "target": {
+                "caption": "Alpha activity is dominant, theta is not elevated relative to beta, and no major artifact is detected.",
+                "features": {
+                  "dominant_band": "alpha",
+                  "theta_beta_ratio": "not_elevated",
+                  "artifact": false
+                }
+              },
+              "supervision": "template_from_verified_features"
+            },
+            "attention_task_cot": {
+              "applicable": true,
+              "input": {
+                "prompt": "Summarize the task and EEG evidence, then provide an attention-related conclusion."
+              },
+              "target": {
+                "observations": [
+                  "The target response was correct.",
+                  "Reaction time was 15 ms slower than baseline.",
+                  "Theta was not elevated relative to beta."
+                ],
+                "conclusion": "The interval shows accurate task performance without strong evidence of reduced attention."
+              },
+              "supervision": "task_metadata_and_verified_features"
+            },
+            "resting_state_cot": {
+              "applicable": false,
+              "reason": "Window belongs to an attention task recording."
+            }
+          }
+        },
+        {
+          "window_id": "mock-patient-002-window-002",
+          "recording_id": "mock-patient-002-attention-01",
+          "window_index": 1,
+          "start_timestep": 512,
+          "end_timestep": 1024,
+          "start_seconds": 2.0,
+          "end_seconds": 4.0,
+          "signal": {
+            "storage": "external_array",
+            "source_uri": "mock://signals/mock-patient-002-attention-01.npy",
+            "array_slice": "[:, 512:1024]",
+            "shape": [
+              5,
+              512
+            ],
+            "dtype": "float32",
+            "layout": "channels_first",
+            "values_preview": [
+              [0.09, 0.27, 0.42, 0.2],
+              [0.07, 0.24, 0.39, 0.18],
+              [-0.08, 0.15, 0.33, 0.11],
+              [-0.05, 0.13, 0.3, 0.09],
+              [0.02, 0.21, 0.37, 0.16]
+            ]
+          },
+          "task_event": {
+            "trial_id": "trial-002",
+            "stimulus_type": "target",
+            "expected_response": "press",
+            "actual_response": "press",
+            "response_correct": true,
+            "reaction_time_ms": 530
+          },
+          "quality": {
+            "usable": true,
+            "artifact": false,
+            "artifact_types": [],
+            "missing_channel_names": []
+          },
+          "derived_features": {
+            "mean_microvolts": 0.1,
+            "standard_deviation_microvolts": 6.4,
+            "dominant_band": "alpha",
+            "band_power": {
+              "delta": 0.16,
+              "theta": 0.23,
+              "alpha": 0.3,
+              "beta": 0.23,
+              "gamma": 0.08
+            },
+            "theta_beta_ratio": 1.0
+          },
+          "curriculum_targets": {
+            "mcq_warmup": {
+              "input": {
+                "prompt": "Is the theta-to-beta ratio greater than 2.0?",
+                "choices": {
+                  "A": "Yes",
+                  "B": "No"
+                }
+              },
+              "target": {
+                "choice": "B",
+                "answer": "No"
+              },
+              "supervision": "deterministic_feature_calculation"
+            },
+            "eeg_captioning": {
+              "input": {
+                "prompt": "Describe the observable EEG characteristics without making a diagnosis."
+              },
+              "target": {
+                "caption": "The segment is alpha-dominant with a balanced theta-to-beta relationship and no major artifact.",
+                "features": {
+                  "dominant_band": "alpha",
+                  "theta_beta_ratio": "not_elevated",
+                  "artifact": false
+                }
+              },
+              "supervision": "template_from_verified_features"
+            },
+            "attention_task_cot": {
+              "applicable": true,
+              "input": {
+                "prompt": "Summarize the task and EEG evidence, then provide an attention-related conclusion."
+              },
+              "target": {
+                "observations": [
+                  "The target response was correct.",
+                  "Reaction time was 30 ms slower than baseline.",
+                  "The theta-to-beta ratio was not elevated."
+                ],
+                "conclusion": "The interval shows accurate task performance without strong evidence of an attention lapse."
+              },
+              "supervision": "task_metadata_and_verified_features"
+            },
+            "resting_state_cot": {
+              "applicable": false,
+              "reason": "Window belongs to an attention task recording."
+            }
+          }
+        },
+        {
+          "window_id": "mock-patient-002-window-003",
+          "recording_id": "mock-patient-002-resting-01",
+          "window_index": 0,
+          "start_timestep": 0,
+          "end_timestep": 512,
+          "start_seconds": 0.0,
+          "end_seconds": 2.0,
+          "signal": {
+            "storage": "external_array",
+            "source_uri": "mock://signals/mock-patient-002-resting-01.npy",
+            "array_slice": "[:, 0:512]",
+            "shape": [
+              5,
+              512
+            ],
+            "dtype": "float32",
+            "layout": "channels_first",
+            "values_preview": [
+              [0.08, 0.26, 0.41, 0.19],
+              [0.06, 0.23, 0.38, 0.17],
+              [-0.09, 0.14, 0.32, 0.1],
+              [-0.06, 0.12, 0.29, 0.08],
+              [0.01, 0.2, 0.36, 0.15]
+            ]
+          },
+          "resting_state": {
+            "condition": "eyes_closed",
+            "minutes_from_recording_start": 0.0
+          },
+          "quality": {
+            "usable": true,
+            "artifact": false,
+            "artifact_types": [],
+            "missing_channel_names": []
+          },
+          "derived_features": {
+            "mean_microvolts": 0.09,
+            "standard_deviation_microvolts": 6.0,
+            "dominant_band": "alpha",
+            "band_power": {
+              "delta": 0.15,
+              "theta": 0.21,
+              "alpha": 0.33,
+              "beta": 0.23,
+              "gamma": 0.08
+            },
+            "theta_beta_ratio": 0.91
+          },
+          "curriculum_targets": {
+            "mcq_warmup": {
+              "input": {
+                "prompt": "Which frequency band is dominant in this resting-state window?",
+                "choices": {
+                  "A": "Delta",
+                  "B": "Theta",
+                  "C": "Alpha",
+                  "D": "Beta"
+                }
+              },
+              "target": {
+                "choice": "C",
+                "answer": "Alpha"
+              },
+              "supervision": "deterministic_feature_calculation"
+            },
+            "eeg_captioning": {
+              "input": {
+                "prompt": "Describe the observable EEG characteristics without making a diagnosis."
+              },
+              "target": {
+                "caption": "The eyes-closed resting segment is alpha-dominant with no elevated theta-to-beta ratio or major artifact.",
+                "features": {
+                  "dominant_band": "alpha",
+                  "theta_beta_ratio": "not_elevated",
+                  "artifact": false
+                }
+              },
+              "supervision": "template_from_verified_features"
+            },
+            "attention_task_cot": {
+              "applicable": false,
+              "reason": "Window belongs to a resting-state recording."
+            },
+            "resting_state_cot": {
+              "applicable": true,
+              "input": {
+                "prompt": "Summarize the resting-state evidence and provide a signal-level interpretation without making a diagnosis."
+              },
+              "target": {
+                "observations": [
+                  "The window was recorded during eyes-closed rest.",
+                  "Alpha was the dominant band.",
+                  "The theta-to-beta ratio was not elevated.",
+                  "No major artifact was detected."
+                ],
+                "interpretation": "This usable resting-state window shows an alpha-dominant pattern without elevated theta relative to beta."
+              },
+              "supervision": "recording_metadata_and_verified_features"
+            }
+          }
+        }
+      ],
+      "patient_curriculum_target": {
+        "diagnostic_cot": {
+          "input": {
+            "prompt": "Review the patient-level evidence and return a supported ADHD classification.",
+            "evidence_window_ids": [
+              "mock-patient-002-window-001",
+              "mock-patient-002-window-002",
+              "mock-patient-002-window-003"
+            ]
+          },
+          "target": {
+            "evidence": [
+              "Both attention-task target responses were correct.",
+              "Reaction times remained close to baseline.",
+              "The usable windows did not show elevated theta relative to beta."
+            ],
+            "diagnosis": "NOT_ADHD"
+          },
+          "supervision": "synthetic_patient_label_with_structured_evidence"
+        }
+      }
+    }
+  ]
+}
