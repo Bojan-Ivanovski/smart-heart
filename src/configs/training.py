@@ -12,6 +12,7 @@ class TrainingConfig:
     max_grad_norm: float = 1.0
     enable_lora: bool = True
     checkpoint_root: Path = Path("checkpoints")
+    fresh_start: bool = False
     seed: int = 42
 
     def __post_init__(self) -> None:

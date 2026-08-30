@@ -45,6 +45,11 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=PROJECT_ROOT / "checkpoints",
     )
+    parser.add_argument(
+        "--fresh-start",
+        action="store_true",
+        help="Delete the selected model's checkpoint before training.",
+    )
     return parser.parse_args()
 
 
@@ -75,6 +80,7 @@ def main() -> None:
         max_grad_norm=args.max_grad_norm,
         enable_lora=args.enable_lora,
         checkpoint_root=args.checkpoint_root,
+        fresh_start=args.fresh_start,
         seed=args.seed,
     )
     dataloader = pipeline_builder.build_dataloader(
@@ -91,6 +97,7 @@ def main() -> None:
     print(f"runtime: {summary.runtime}")
     print(f"epochs: {summary.epochs}")
     print(f"steps: {summary.steps}")
+    print(f"checkpoint_loaded: {summary.checkpoint_loaded}")
     print(f"final_loss: {summary.final_loss:.6f}")
     print(f"checkpoint_path: {summary.checkpoint_path}")
     print(f"elapsed_seconds: {summary.elapsed_seconds:.2f}")

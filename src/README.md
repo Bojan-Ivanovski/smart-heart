@@ -27,4 +27,15 @@ Training must be requested explicitly:
 python -m src.main --mode train --dataset gameplay --device auto
 ```
 
+Each model ID maps to one file under `--checkpoint-root`. If that file exists,
+training loads its model weights automatically and overwrites it after the run.
+Use `--fresh-start` to delete the matching file before initializing the model:
+
+```powershell
+python -m src.main --mode train --model-id google/gemma-3-270m --fresh-start
+```
+
+The checkpoint format stores model weights but not optimizer or completed-epoch
+state, so loading it warm-starts another configured training run.
+
 Run `python -m src.main --help` for the complete set of dataset, windowing, optimizer, accelerator, LoRA, seed, and checkpoint options.

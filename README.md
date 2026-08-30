@@ -6,7 +6,7 @@ The goal of SmartHeart is to train a model using OpenTSLM technology so it can u
 
 ## Current Status
 
-The repository includes an early implementation for preparing EEG-based ADHD data for OpenTSLM. It supports the children `.mat` recordings and gameplay bandpower CSV recordings, configurable time-series windows, dataset previews, LoRA training, deterministic seeds, checkpoint output, and automatic XLA, CUDA, MPS, or CPU selection.
+The repository includes an early implementation for preparing EEG-based ADHD data for OpenTSLM. It supports the children `.mat` recordings and gameplay bandpower CSV recordings, configurable time-series windows, dataset previews, LoRA training, deterministic seeds, automatic checkpoint reuse, and automatic XLA, CUDA, MPS, or CPU selection.
 
 ## Environment
 
@@ -43,5 +43,11 @@ Start training explicitly:
 ```powershell
 python -m src.main --mode train --dataset gameplay --device auto
 ```
+
+Training automatically loads the checkpoint matching `--model-id` when that file
+already exists under `--checkpoint-root`. To discard it and train from the base
+model, add `--fresh-start`; this deletes only the selected model's checkpoint.
+Checkpoints contain model weights, so reuse is a warm start rather than an optimizer
+or epoch resume.
 
 See [src/README.md](src/README.md) or run `python -m src.main --help` for additional options.

@@ -17,6 +17,7 @@ class TrainingSummary:
     runtime: str
     epochs: int
     steps: int
+    checkpoint_loaded: bool
     final_loss: float
     checkpoint_path: Path
     elapsed_seconds: float
@@ -40,10 +41,18 @@ class Trainer:
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(config.seed)
 
+        checkpoint_path = self._checkpoint_path(config)
+        checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
+        checkpoint_loaded = self._prepare_checkpoint(checkpoint_path, config)
+
         model = self.model_factory.create(
             config.model_id,
             enable_lora=config.enable_lora,
         )
+        if checkpoint_loaded:
+            print(f"[checkpoint] loading={checkpoint_path}")
+            model.load_from_file(str(checkpoint_path))
+
         trainable_parameters = [
             parameter for parameter in model.parameters() if parameter.requires_grad
         ]
@@ -55,9 +64,6 @@ class Trainer:
             lr=config.learning_rate,
             weight_decay=config.weight_decay,
         )
-        checkpoint_path = self._checkpoint_path(config)
-        checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
-
         step_count = 0
         final_loss = float("nan")
         start_time = perf_counter()
@@ -96,6 +102,7 @@ class Trainer:
             runtime=self.runtime.kind,
             epochs=config.epochs,
             steps=step_count,
+            checkpoint_loaded=checkpoint_loaded,
             final_loss=final_loss,
             checkpoint_path=checkpoint_path,
             elapsed_seconds=perf_counter() - start_time,
@@ -103,5 +110,21 @@ class Trainer:
 
     @staticmethod
     def _checkpoint_path(config: TrainingConfig) -> Path:
-        safe_model_id = config.model_id.replace("/", "__")
+        safe_model_id = config.model_id.replace("/", "__").replace("\\", "__")
         return config.checkpoint_root / safe_model_id
+
+    @staticmethod
+    def _prepare_checkpoint(
+        checkpoint_path: Path,
+        config: TrainingConfig,
+    ) -> bool:
+        resolved_root = config.checkpoint_root.resolve()
+        resolved_checkpoint = checkpoint_path.resolve()
+        if resolved_checkpoint.parent != resolved_root:
+            raise ValueError("Checkpoint path must be inside checkpoint_root")
+        if checkpoint_path.exists() and not checkpoint_path.is_file():
+            raise ValueError(f"Checkpoint path is not a file: {checkpoint_path}")
+        if config.fresh_start and checkpoint_path.is_file():
+            checkpoint_path.unlink()
+            print(f"[checkpoint] removed={checkpoint_path}")
+        return checkpoint_path.is_file()
