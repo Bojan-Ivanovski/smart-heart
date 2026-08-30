@@ -47,14 +47,23 @@ def loader_function(path: Path, patient_id: str) -> Tensor:
 
 
 class ADHDGameplay(Dataset):
-    def __init__(self, path: Path, source: str | None = None):
+    def __init__(
+        self,
+        path: Path,
+        source: str | None = None,
+        window_size: int | None = None,
+        window_stride: int | None = None,
+    ):
         self.patients: list[Patient] = []
+        self.samples: list[tuple[Patient, tuple[int, int]]] = []
         self.path = (
             path
             / "adhd_individuals_gameplay_dataset"
         )
         self.groups = ["ADHD", "Non-ADHD"]
         self.source = source
+        self.window_size = window_size
+        self.window_stride = window_stride
 
         for group in self.groups:
             group_path = self.path / group
@@ -86,10 +95,21 @@ class ADHDGameplay(Dataset):
                             adhd=(group == "ADHD"),
                         )
                         self.patients.append(patient)
+                        spans = patient.get_window_spans(
+                            loader_function,
+                            self.window_size,
+                            self.window_stride,
+                        )
+                        self.samples.extend((patient, span) for span in spans)
 
     def __len__(self):
-        return len(self.patients)
+        return len(self.samples)
 
     def __getitem__(self, idx):
-        patient: Patient = self.patients[idx]
-        return patient.to_dict(loader_function)
+        patient, (start, end) = self.samples[idx]
+        sample = patient.to_dict(loader_function)
+        sample["time_series"] = sample["time_series"][:, start:end]
+        sample["post_prompt"] = (
+            f"{sample['post_prompt']} Window covers timesteps {start} to {end}."
+        )
+        return sample

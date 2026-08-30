@@ -11,6 +11,7 @@ datasets/adhd_individuals_gameplay_dataset
 datasets/adhd_dualcontrol_dataset
 datasets/adhd_cognitive_function_dataset
 datasets/adhd_children_dataset
+datasets/*.zip
 
 # Local environment files
 .env
@@ -20,3 +21,6 @@ datasets/adhd_children_dataset
 # Temporary files
 *.tmp
 /tmp
+
+
+.vscode

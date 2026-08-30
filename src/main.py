@@ -1,9 +1,6 @@
-
-
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader
 from time import perf_counter
 from torch.nn.utils import clip_grad_norm_
-from .loaders.children import ADHDChildren
 from .loaders.gameplay import ADHDGameplay
 from opentslm.time_series_datasets.util import extend_time_series_to_match_patch_size_and_aggregate
 from opentslm.model_config import PATCH_SIZE
@@ -11,8 +8,56 @@ from opentslm.model.llm.OpenTSLMSP import OpenTSLMSP
 from pathlib import Path
 import torch
 
+WINDOW_SIZE = 4096
+WINDOW_STRIDE = 4096
+
+try:
+    import torch_xla.core.xla_model as xm
+
+    XLA_AVAILABLE = True
+except ImportError:
+    xm = None
+    XLA_AVAILABLE = False
+
+
+def resolve_runtime():
+    if XLA_AVAILABLE:
+        device = xm.xla_device()
+        return {
+            "kind": "xla",
+            "device": device,
+            "model_init_device": "cpu",
+        }
+
+    if torch.cuda.is_available():
+        return {
+            "kind": "cuda",
+            "device": torch.device("cuda"),
+            "model_init_device": "cuda",
+        }
+
+    if torch.backends.mps.is_available():
+        return {
+            "kind": "mps",
+            "device": torch.device("mps"),
+            "model_init_device": "mps",
+        }
+
+    return {
+        "kind": "cpu",
+        "device": torch.device("cpu"),
+        "model_init_device": "cpu",
+    }
+
+
+runtime = resolve_runtime()
+
 dataloader = DataLoader(
-    ADHDGameplay(Path("datasets")),
+    ADHDGameplay(
+        Path("datasets"),
+        window_size=WINDOW_SIZE,
+        window_stride=WINDOW_STRIDE,
+    ),
     shuffle=True,
     batch_size=1,
     collate_fn=lambda batch: extend_time_series_to_match_patch_size_and_aggregate(
@@ -20,7 +65,13 @@ dataloader = DataLoader(
     ),
 )
 
-model = OpenTSLMSP(llm_id="google/gemma-3-270m")
+model = OpenTSLMSP(
+    llm_id="google/gemma-3-270m",
+    device=runtime["model_init_device"],
+)
+if runtime["kind"] == "xla":
+    model.to(runtime["device"])
+    model.device = runtime["device"]
 model.enable_lora()
 optimizer = torch.optim.AdamW(
     model.parameters(),
@@ -41,7 +92,6 @@ for epoch_index in range(1, 2):
     epoch_step_count = 0
 
     for batch_index, batch in enumerate(dataloader, start=1):
-        windowed_batch = []
         optimizer.zero_grad(set_to_none=True)
         print(f"[debug] patient_step={batch_index}")
         loss = model.compute_loss(batch)
@@ -50,7 +100,11 @@ for epoch_index in range(1, 2):
             model.parameters(),
             1.0,
         )
-        optimizer.step()
+        if runtime["kind"] == "xla":
+            xm.optimizer_step(optimizer, barrier=True)
+            xm.mark_step()
+        else:
+            optimizer.step()
 
         loss_value = float(loss.detach().item())
         final_loss_value = loss_value

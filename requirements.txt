@@ -1,6 +1,7 @@
 numpy==2.4.6
 pandas==3.0.1
-torch==2.10.0
+torch==2.9.0
+torch_xla[tpu]==2.9.0; platform_system == "Linux"
 tqdm==4.67.3
 matplotlib==3.10.8
 scikit-learn==1.8.0
