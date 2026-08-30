@@ -45,4 +45,17 @@ python -m src.main --mode train --model-id google/gemma-3-270m --fresh-start
 The checkpoint format stores model weights but not optimizer or completed-epoch
 state, so loading it warm-starts another configured training run.
 
+Evaluate a checkpoint with generated `YES` or `NO` predictions. Validation and
+test results are reported separately, and the model is loaded only once:
+
+```powershell
+python -m src.main --mode evaluate --dataset gameplay --evaluation-split both
+```
+
+Use `--max-evaluation-samples` to cap the number of samples evaluated per split
+and `--max-new-tokens` to control the generated answer length. Capped evaluation
+uses a deterministic shuffle instead of taking adjacent windows from the first
+patient. Evaluation uses the same `--seed` as training to reconstruct the patient
+assignments and sample order.
+
 Run `python -m src.main --help` for the complete set of dataset, windowing, optimizer, accelerator, LoRA, seed, and checkpoint options.

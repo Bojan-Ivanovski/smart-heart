@@ -7,6 +7,7 @@ from opentslm.model_config import PATCH_SIZE
 from opentslm.time_series_datasets.util import (
     extend_time_series_to_match_patch_size_and_aggregate,
 )
+from torch import Generator
 from torch.utils.data import DataLoader, Dataset, Subset
 
 from .classes.patient import Patient
@@ -139,6 +140,7 @@ class DatasetPipelineBuilder:
         *,
         batch_size: int,
         shuffle: bool,
+        seed: int | None = None,
     ) -> DataLoader:
         collate_fn = partial(
             extend_time_series_to_match_patch_size_and_aggregate,
@@ -150,4 +152,5 @@ class DatasetPipelineBuilder:
             shuffle=shuffle,
             batch_size=batch_size,
             collate_fn=collate_fn,
+            generator=Generator().manual_seed(seed) if seed is not None else None,
         )

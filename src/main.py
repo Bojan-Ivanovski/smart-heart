@@ -2,7 +2,9 @@ import argparse
 from pathlib import Path
 
 from .builders import DATASET_TYPES, DatasetPipelineBuilder
+from .configs.evaluation import EvaluationConfig
 from .configs.training import TrainingConfig
+from .curriculum.evaluator import Evaluator
 from .curriculum.model_factory import OpenTSLMModelFactory
 from .curriculum.trainer import Trainer
 from .utility.runtime import resolve_runtime
@@ -12,9 +14,13 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Preview SmartHeart EEG datasets or train an OpenTSLM model."
+        description="Preview, train, or evaluate SmartHeart EEG datasets."
     )
-    parser.add_argument("--mode", choices=["preview", "train"], default="preview")
+    parser.add_argument(
+        "--mode",
+        choices=["preview", "train", "evaluate"],
+        default="preview",
+    )
     parser.add_argument(
         "--dataset",
         choices=sorted(DATASET_TYPES),
@@ -50,6 +56,13 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Delete the selected model's checkpoint before training.",
     )
+    parser.add_argument(
+        "--evaluation-split",
+        choices=["validation", "test", "both"],
+        default="both",
+    )
+    parser.add_argument("--max-evaluation-samples", type=int)
+    parser.add_argument("--max-new-tokens", type=int, default=10)
     return parser.parse_args()
 
 
@@ -71,6 +84,53 @@ def main() -> None:
         print(f"prompt: {sample['post_prompt']}")
         return
 
+    splits = pipeline_builder.split_dataset(dataset, seed=args.seed)
+    print(
+        f"[split] train samples={len(splits.train)} groups={splits.train_groups}; "
+        f"validation samples={len(splits.validation)} "
+        f"groups={splits.validation_groups}; "
+        f"test samples={len(splits.test)} groups={splits.test_groups}"
+    )
+    runtime = resolve_runtime(args.device)
+    model_factory = OpenTSLMModelFactory(runtime)
+
+    if args.mode == "evaluate":
+        selected_splits = {
+            "validation": splits.validation,
+            "test": splits.test,
+        }
+        if args.evaluation_split != "both":
+            selected_splits = {
+                args.evaluation_split: selected_splits[args.evaluation_split]
+            }
+        dataloaders = {
+            name: pipeline_builder.build_dataloader(
+                split,
+                batch_size=args.batch_size,
+                shuffle=args.max_evaluation_samples is not None,
+                seed=args.seed,
+            )
+            for name, split in selected_splits.items()
+        }
+        evaluation_config = EvaluationConfig(
+            model_id=args.model_id,
+            enable_lora=args.enable_lora,
+            checkpoint_root=args.checkpoint_root,
+            max_new_tokens=args.max_new_tokens,
+            max_samples=args.max_evaluation_samples,
+        )
+        summaries = Evaluator(runtime, model_factory).evaluate(
+            dataloaders,
+            evaluation_config,
+        )
+        for summary in summaries:
+            print(
+                f"Evaluation complete: split={summary.split} "
+                f"correct={summary.correct_predictions}/"
+                f"{summary.evaluated_samples} accuracy={summary.accuracy:.2%}"
+            )
+        return
+
     config = TrainingConfig(
         model_id=args.model_id,
         epochs=args.epochs,
@@ -83,20 +143,13 @@ def main() -> None:
         fresh_start=args.fresh_start,
         seed=args.seed,
     )
-    splits = pipeline_builder.split_dataset(dataset, seed=config.seed)
-    print(
-        f"[split] train samples={len(splits.train)} groups={splits.train_groups}; "
-        f"validation samples={len(splits.validation)} "
-        f"groups={splits.validation_groups}; "
-        f"test samples={len(splits.test)} groups={splits.test_groups}"
-    )
     dataloader = pipeline_builder.build_dataloader(
         splits.train,
         batch_size=config.batch_size,
         shuffle=True,
+        seed=config.seed,
     )
-    runtime = resolve_runtime(args.device)
-    trainer = Trainer(runtime, OpenTSLMModelFactory(runtime))
+    trainer = Trainer(runtime, model_factory)
     summary = trainer.train(dataloader, config)
 
     print("Training complete")

@@ -44,6 +44,12 @@ Start training explicitly:
 python -m src.main --mode train --dataset gameplay --device auto
 ```
 
+Evaluate the saved checkpoint on both held-out partitions:
+
+```powershell
+python -m src.main --mode evaluate --dataset gameplay --evaluation-split both
+```
+
 Training automatically loads the checkpoint matching `--model-id` when that file
 already exists under `--checkpoint-root`. To discard it and train from the base
 model, add `--fresh-start`; this deletes only the selected model's checkpoint.
