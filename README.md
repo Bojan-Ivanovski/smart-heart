@@ -6,7 +6,7 @@ The goal of SmartHeart is to train a model using OpenTSLM technology so it can u
 
 ## Current Status
 
-The repository now includes an early implementation focused on preparing EEG-based ADHD data for OpenTSLM. The current prototype loads patient `.mat` files from the `adhd_children_dataset`, converts them into per-patient samples, and builds a PyTorch `DataLoader` that prepares batched time-series inputs using OpenTSLM utilities.
+The repository includes an early implementation for preparing EEG-based ADHD data for OpenTSLM. It supports the children `.mat` recordings and gameplay bandpower CSV recordings, configurable time-series windows, dataset previews, LoRA training, deterministic seeds, checkpoint output, and automatic XLA, CUDA, MPS, or CPU selection.
 
 ## Environment
 
@@ -27,5 +27,21 @@ More information about the current implementation can be found in [src/README.md
 - `.python-version`: defines the Python version used for local development.
 - `requirements.txt`: lists the current Python dependencies for the project.
 - `datasets/`: not committed; all datasets are stored here.
-- `src/`: source code and implementation files.
+- `src/`: package containing the CLI, data pipeline, runtime selection, model factory, and trainer.
 - `tmp/`: temporary workspace files used during local experimentation.
+
+## Usage
+
+Preview the active gameplay dataset without initializing a language model:
+
+```powershell
+python -m src.main
+```
+
+Start training explicitly:
+
+```powershell
+python -m src.main --mode train --dataset gameplay --device auto
+```
+
+See [src/README.md](src/README.md) or run `python -m src.main --help` for additional options.

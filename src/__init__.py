@@ -1,0 +1,1 @@
+"""SmartHeart EEG classification package."""

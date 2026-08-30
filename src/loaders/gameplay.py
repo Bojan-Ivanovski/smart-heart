@@ -1,5 +1,4 @@
 from pathlib import Path
-import os
 
 import numpy as np
 import torch
@@ -7,7 +6,7 @@ import torch.nn.functional as F
 from torch import Tensor
 from torch.utils.data import Dataset
 
-from ..patient import Patient
+from ..classes.patient import Patient
 
 BANDPOWER_HEADER_PREFIX = "Theta"
 MAX_TIMESTEPS = 4096
@@ -53,14 +52,11 @@ class ADHDGameplay(Dataset):
         source: str | None = None,
         window_size: int | None = None,
         window_stride: int | None = None,
-    ):
+    ) -> None:
         self.patients: list[Patient] = []
         self.samples: list[tuple[Patient, tuple[int, int]]] = []
-        self.path = (
-            path
-            / "adhd_individuals_gameplay_dataset"
-        )
-        self.groups = ["ADHD", "Non-ADHD"]
+        self.path = path / "adhd_individuals_gameplay_dataset"
+        self.groups = ("ADHD", "Non-ADHD")
         self.source = source
         self.window_size = window_size
         self.window_stride = window_stride
@@ -71,27 +67,30 @@ class ADHDGameplay(Dataset):
                 print(f"Directory {group_path} does not exist or is not a directory.")
                 continue
 
-            for subject_dir in sorted(os.listdir(group_path)):
-                subject_path = group_path / subject_dir
+            for subject_path in sorted(group_path.iterdir()):
                 if not subject_path.is_dir():
                     continue
+                subject_id = subject_path.name
 
-                source_dirs = [self.source] if self.source else sorted(os.listdir(subject_path))
-                for source_dir in source_dirs:
-                    session_dir = subject_path / source_dir
+                session_dirs = (
+                    [subject_path / self.source]
+                    if self.source
+                    else sorted(subject_path.iterdir())
+                )
+                for session_dir in session_dirs:
                     if not session_dir.exists() or not session_dir.is_dir():
                         continue
+                    source_name = session_dir.name
 
-                    for file in sorted(os.listdir(session_dir)):
-                        if not file.lower().endswith(".csv"):
-                            continue
-                        file_path = session_dir / file
+                    for file_path in sorted(session_dir.glob("*.csv")):
                         if not is_bandpower_csv(file_path):
                             continue
 
                         patient = Patient(
                             path=file_path,
-                            patient_id=f"{group}_{subject_dir}_{source_dir}_{Path(file).stem}",
+                            patient_id=(
+                                f"{group}_{subject_id}_{source_name}_{file_path.stem}"
+                            ),
                             adhd=(group == "ADHD"),
                         )
                         self.patients.append(patient)
@@ -102,10 +101,10 @@ class ADHDGameplay(Dataset):
                         )
                         self.samples.extend((patient, span) for span in spans)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.samples)
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx: int) -> dict[str, object]:
         patient, (start, end) = self.samples[idx]
         sample = patient.to_dict(loader_function)
         sample["time_series"] = sample["time_series"][:, start:end]
