@@ -10,7 +10,7 @@ The repository includes an early implementation for preparing EEG-based ADHD dat
 
 ## Environment
 
-The project currently targets Python `3.12`, as defined in `.python-version`. Python dependencies are listed in `requirements.txt`, including PyTorch, SciPy, Hugging Face tooling, and OpenTSLM.
+The project currently targets Python `3.12`, as defined in `.python-version`. Base CPU and CUDA dependencies are listed in `requirements.txt`. TPU environments should install `requirements-tpu.txt`, which adds PyTorch/XLA and the Cloud TPU runtime.
 
 ## Datasets
 

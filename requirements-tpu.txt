@@ -1,0 +1,4 @@
+-r requirements.txt
+
+--find-links https://storage.googleapis.com/libtpu-wheels/index.html
+torch_xla[tpu]==2.9.0
