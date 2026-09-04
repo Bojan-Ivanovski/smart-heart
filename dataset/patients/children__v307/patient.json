@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0.0",
+  "patient_id": "children__v307",
+  "split_group": "children__v307",
+  "split": "train",
+  "source_dataset": "adhd_children",
+  "demographics": {
+    "age_group": "child",
+    "age_years": null,
+    "sex": null
+  },
+  "clinical_ground_truth": {
+    "diagnosis": "NOT_ADHD",
+    "label_source": "source_dataset_group",
+    "verified": true
+  },
+  "recordings": [
+    {
+      "recording_id": "visual-attention-01",
+      "signal_path": "signals.npz",
+      "signal_key": "visual_attention_01",
+      "representation": "raw_eeg",
+      "shape": [
+        19,
+        22807
+      ],
+      "dtype": "float32",
+      "layout": "channels_first",
+      "sampling_rate_hz": 128,
+      "channel_names": [
+        "Fz",
+        "Cz",
+        "Pz",
+        "C3",
+        "T3",
+        "C4",
+        "T4",
+        "Fp1",
+        "Fp2",
+        "F3",
+        "F4",
+        "F7",
+        "F8",
+        "P3",
+        "P4",
+        "T5",
+        "T6",
+        "O1",
+        "O2"
+      ],
+      "condition": "visual_attention_cartoon_counting",
+      "task": "visual_attention",
+      "quality": {
+        "usable": true,
+        "artifact": null,
+        "artifact_types": [],
+        "review_status": "not_reviewed"
+      },
+      "transformation": "transposed_to_channels_first_and_cast_to_float32",
+      "original_timesteps": null
+    }
+  ],
+  "windows": [],
+  "curriculum_targets": {
+    "diagnostic_cot": {
+      "scope": "patient",
+      "target": {
+        "diagnosis": "NOT_ADHD"
+      },
+      "supervision": "source_dataset_group",
+      "evidence": []
+    }
+  }
+}

@@ -5,19 +5,19 @@ SmartHeart separates dataset loading, runtime selection, model construction, and
 ## Modules
 
 - `main.py`: command-line entry point for dataset previews and training.
-- `builders.py`: dataset registry and OpenTSLM `DataLoader` construction.
-- `classes/`: domain objects such as patient recordings.
+- `builders.py`: canonical source selection, persisted split selection, and OpenTSLM `DataLoader` construction.
 - `configs/`: validated, immutable training configuration.
 - `curriculum/`: OpenTSLM model construction, training, metrics, and checkpoints.
-- `loaders/`: source-specific children and gameplay dataset adapters.
+- `loaders/`: canonical manifest and NPZ dataset adapter.
 - `utility/`: accelerator selection and reusable time-series windowing helpers.
 
 ## Dataset Splits
 
-Training uses deterministic, label-stratified splits of 60% training, 20%
+The canonical dataset stores label-stratified assignments of 60% training, 20%
 validation, and 20% testing. Splits are made by patient rather than by time-series
-window. For gameplay data, every recording and session belonging to the same
-subject remains in one split. `--seed` controls the assignment.
+window, so every recording and window belonging to one patient remains in one
+split. Runtime code reads these persisted assignments; `--seed` controls shuffled
+sample order, not split membership.
 
 ## Commands
 
@@ -26,6 +26,8 @@ Previewing a dataset is the safe default:
 ```powershell
 python -m src.main
 python -m src.main --mode preview --dataset children
+python -m src.main --mode preview --dataset cognitive_function
+python -m src.main --mode preview --dataset all
 ```
 
 Training must be requested explicitly:
@@ -58,8 +60,7 @@ python -m src.main --mode evaluate --dataset gameplay --evaluation-split both
 
 Use `--max-evaluation-samples` to cap the number of samples evaluated per split.
 Capped evaluation uses a deterministic shuffle instead of taking adjacent windows
-from the first patient. Evaluation uses the same `--seed` as training to
-reconstruct the patient assignments and sample order. Generation stops when the
-model emits the EOS token learned during training.
+from the first patient. Evaluation uses `--seed` for that sample order. Generation
+stops when the model emits the EOS token learned during training.
 
 Run `python -m src.main --help` for the complete set of dataset, windowing, optimizer, accelerator, LoRA, seed, and checkpoint options.

@@ -1,0 +1,327 @@
+{
+  "schema_version": "1.0.0",
+  "patient_id": "cognitive-function__madhd__023",
+  "split_group": "cognitive-function__madhd__023",
+  "split": "train",
+  "source_dataset": "adhd_cognitive_function",
+  "demographics": {
+    "age_group": "adult",
+    "age_years": null,
+    "sex": "male"
+  },
+  "clinical_ground_truth": {
+    "diagnosis": "ADHD",
+    "label_source": "source_dataset_group",
+    "verified": true
+  },
+  "recordings": [
+    {
+      "recording_id": "01-eyes_open_baseline_cz_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "01_eyes_open_baseline_cz_f4",
+      "representation": "raw_eeg",
+      "shape": [
+        2,
+        7680
+      ],
+      "dtype": "float32",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "Cz",
+        "F4"
+      ],
+      "condition": "eyes_open_baseline_cz_f4",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": null,
+        "artifact_types": [],
+        "review_status": "not_reviewed"
+      },
+      "transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32",
+      "original_timesteps": null
+    },
+    {
+      "recording_id": "02-eyes_closed_cz_f4_20s",
+      "signal_path": "signals.npz",
+      "signal_key": "02_eyes_closed_cz_f4_20s",
+      "representation": "raw_eeg",
+      "shape": [
+        2,
+        5120
+      ],
+      "dtype": "float32",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "Cz",
+        "F4"
+      ],
+      "condition": "eyes_closed_cz_f4_20s",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": null,
+        "artifact_types": [],
+        "review_status": "not_reviewed"
+      },
+      "transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32",
+      "original_timesteps": null
+    },
+    {
+      "recording_id": "03-eyes_open_cz_f4_20s",
+      "signal_path": "signals.npz",
+      "signal_key": "03_eyes_open_cz_f4_20s",
+      "representation": "raw_eeg",
+      "shape": [
+        2,
+        5120
+      ],
+      "dtype": "float32",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "Cz",
+        "F4"
+      ],
+      "condition": "eyes_open_cz_f4_20s",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": null,
+        "artifact_types": [],
+        "review_status": "not_reviewed"
+      },
+      "transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32",
+      "original_timesteps": null
+    },
+    {
+      "recording_id": "04-cognitive_challenge_cz_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "04_cognitive_challenge_cz_f4",
+      "representation": "raw_eeg",
+      "shape": [
+        2,
+        11520
+      ],
+      "dtype": "float32",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "Cz",
+        "F4"
+      ],
+      "condition": "cognitive_challenge_cz_f4",
+      "task": "cognitive_task",
+      "quality": {
+        "usable": true,
+        "artifact": null,
+        "artifact_types": [],
+        "review_status": "not_reviewed"
+      },
+      "transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32",
+      "original_timesteps": null
+    },
+    {
+      "recording_id": "05-pre_omni_harmonic_baseline_cz_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "05_pre_omni_harmonic_baseline_cz_f4",
+      "representation": "raw_eeg",
+      "shape": [
+        2,
+        3840
+      ],
+      "dtype": "float32",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "Cz",
+        "F4"
+      ],
+      "condition": "pre_omni_harmonic_baseline_cz_f4",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": null,
+        "artifact_types": [],
+        "review_status": "not_reviewed"
+      },
+      "transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32",
+      "original_timesteps": null
+    },
+    {
+      "recording_id": "06-omni_harmonic_assessment_cz_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "06_omni_harmonic_assessment_cz_f4",
+      "representation": "raw_eeg",
+      "shape": [
+        2,
+        7680
+      ],
+      "dtype": "float32",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "Cz",
+        "F4"
+      ],
+      "condition": "omni_harmonic_assessment_cz_f4",
+      "task": "auditory_task",
+      "quality": {
+        "usable": true,
+        "artifact": null,
+        "artifact_types": [],
+        "review_status": "not_reviewed"
+      },
+      "transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32",
+      "original_timesteps": null
+    },
+    {
+      "recording_id": "07-eyes_open_baseline_o1_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "07_eyes_open_baseline_o1_f4",
+      "representation": "raw_eeg",
+      "shape": [
+        2,
+        7680
+      ],
+      "dtype": "float32",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "O1",
+        "F4"
+      ],
+      "condition": "eyes_open_baseline_o1_f4",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": null,
+        "artifact_types": [],
+        "review_status": "not_reviewed"
+      },
+      "transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32",
+      "original_timesteps": null
+    },
+    {
+      "recording_id": "08-eyes_closed_o1_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "08_eyes_closed_o1_f4",
+      "representation": "raw_eeg",
+      "shape": [
+        2,
+        5120
+      ],
+      "dtype": "float32",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "O1",
+        "F4"
+      ],
+      "condition": "eyes_closed_o1_f4",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": null,
+        "artifact_types": [],
+        "review_status": "not_reviewed"
+      },
+      "transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32",
+      "original_timesteps": null
+    },
+    {
+      "recording_id": "09-eyes_open_o1_f4_30s",
+      "signal_path": "signals.npz",
+      "signal_key": "09_eyes_open_o1_f4_30s",
+      "representation": "raw_eeg",
+      "shape": [
+        2,
+        5120
+      ],
+      "dtype": "float32",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "O1",
+        "F4"
+      ],
+      "condition": "eyes_open_o1_f4_30s",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": null,
+        "artifact_types": [],
+        "review_status": "not_reviewed"
+      },
+      "transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32",
+      "original_timesteps": null
+    },
+    {
+      "recording_id": "10-eyes_closed_f3_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "10_eyes_closed_f3_f4",
+      "representation": "raw_eeg",
+      "shape": [
+        2,
+        11520
+      ],
+      "dtype": "float32",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "F3",
+        "F4"
+      ],
+      "condition": "eyes_closed_f3_f4",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": null,
+        "artifact_types": [],
+        "review_status": "not_reviewed"
+      },
+      "transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32",
+      "original_timesteps": null
+    },
+    {
+      "recording_id": "11-eyes_closed_fz_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "11_eyes_closed_fz_f4",
+      "representation": "raw_eeg",
+      "shape": [
+        2,
+        11520
+      ],
+      "dtype": "float32",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "Fz",
+        "F4"
+      ],
+      "condition": "eyes_closed_fz_f4",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": null,
+        "artifact_types": [],
+        "review_status": "not_reviewed"
+      },
+      "transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32",
+      "original_timesteps": null
+    }
+  ],
+  "windows": [],
+  "curriculum_targets": {
+    "diagnostic_cot": {
+      "scope": "patient",
+      "target": {
+        "diagnosis": "ADHD"
+      },
+      "supervision": "source_dataset_group",
+      "evidence": []
+    }
+  }
+}

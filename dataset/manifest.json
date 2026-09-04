@@ -1,0 +1,1731 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_id": "smartheart",
+  "description": "Canonical patient-level EEG dataset for SmartHeart.",
+  "split_policy": {
+    "unit": "patient",
+    "stratified_by": [
+      "source_dataset",
+      "diagnosis"
+    ],
+    "ratios": {
+      "train": 0.6,
+      "validation": 0.2,
+      "test": 0.2
+    },
+    "seed": 42,
+    "assignment": "persisted_in_patient_and_manifest_metadata"
+  },
+  "sources": [
+    {
+      "source_dataset": "adhd_children",
+      "source_url": "https://ieee-dataport.org/open-access/eeg-data-adhd-control-children",
+      "signal_representation": "raw_eeg",
+      "patient_count": 121,
+      "recording_count": 121
+    },
+    {
+      "source_dataset": "adhd_cognitive_function",
+      "source_url": "https://data.mendeley.com/datasets/6k4g25fhzg/1",
+      "license": "CC BY 4.0",
+      "signal_representation": "raw_eeg",
+      "patient_count": 79,
+      "recording_count": 869
+    },
+    {
+      "source_dataset": "adhd_gameplay",
+      "source_url": "https://ieee-dataport.org/open-access/focus-eeg-brain-recordings-adhd-and-non-adhd-individuals-during-gameplay",
+      "signal_representation": "band_power_timeseries",
+      "patient_count": 10,
+      "recording_count": 100
+    }
+  ],
+  "excluded_patients": [
+    {
+      "patient_id": "cognitive-function__fadhd__007",
+      "reason": "Publisher identifies female ADHD subject 7 as corrupted."
+    }
+  ],
+  "patients": [
+    {
+      "patient_id": "children__v107",
+      "path": "patients/children__v107/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v108",
+      "path": "patients/children__v108/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v109",
+      "path": "patients/children__v109/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v10p",
+      "path": "patients/children__v10p/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v110",
+      "path": "patients/children__v110/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v111",
+      "path": "patients/children__v111/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v112",
+      "path": "patients/children__v112/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v113",
+      "path": "patients/children__v113/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v114",
+      "path": "patients/children__v114/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v115",
+      "path": "patients/children__v115/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v116",
+      "path": "patients/children__v116/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v117",
+      "path": "patients/children__v117/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v118",
+      "path": "patients/children__v118/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v120",
+      "path": "patients/children__v120/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v121",
+      "path": "patients/children__v121/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v123",
+      "path": "patients/children__v123/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v125",
+      "path": "patients/children__v125/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v127",
+      "path": "patients/children__v127/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v129",
+      "path": "patients/children__v129/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v12p",
+      "path": "patients/children__v12p/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v131",
+      "path": "patients/children__v131/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v133",
+      "path": "patients/children__v133/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v134",
+      "path": "patients/children__v134/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v138",
+      "path": "patients/children__v138/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v140",
+      "path": "patients/children__v140/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v143",
+      "path": "patients/children__v143/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v147",
+      "path": "patients/children__v147/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v149",
+      "path": "patients/children__v149/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v14p",
+      "path": "patients/children__v14p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v151",
+      "path": "patients/children__v151/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v15p",
+      "path": "patients/children__v15p/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v173",
+      "path": "patients/children__v173/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v177",
+      "path": "patients/children__v177/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v179",
+      "path": "patients/children__v179/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v181",
+      "path": "patients/children__v181/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v183",
+      "path": "patients/children__v183/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v18p",
+      "path": "patients/children__v18p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v190",
+      "path": "patients/children__v190/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v196",
+      "path": "patients/children__v196/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v198",
+      "path": "patients/children__v198/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v19p",
+      "path": "patients/children__v19p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v1p",
+      "path": "patients/children__v1p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v200",
+      "path": "patients/children__v200/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v204",
+      "path": "patients/children__v204/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v206",
+      "path": "patients/children__v206/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v209",
+      "path": "patients/children__v209/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v20p",
+      "path": "patients/children__v20p/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v213",
+      "path": "patients/children__v213/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v215",
+      "path": "patients/children__v215/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v219",
+      "path": "patients/children__v219/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v21p",
+      "path": "patients/children__v21p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v227",
+      "path": "patients/children__v227/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v22p",
+      "path": "patients/children__v22p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v231",
+      "path": "patients/children__v231/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v234",
+      "path": "patients/children__v234/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v236",
+      "path": "patients/children__v236/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v238",
+      "path": "patients/children__v238/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v244",
+      "path": "patients/children__v244/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v246",
+      "path": "patients/children__v246/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v24p",
+      "path": "patients/children__v24p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v250",
+      "path": "patients/children__v250/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v254",
+      "path": "patients/children__v254/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v25p",
+      "path": "patients/children__v25p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v263",
+      "path": "patients/children__v263/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v265",
+      "path": "patients/children__v265/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v270",
+      "path": "patients/children__v270/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v274",
+      "path": "patients/children__v274/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v279",
+      "path": "patients/children__v279/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v27p",
+      "path": "patients/children__v27p/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v284",
+      "path": "patients/children__v284/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v286",
+      "path": "patients/children__v286/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v288",
+      "path": "patients/children__v288/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v28p",
+      "path": "patients/children__v28p/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v297",
+      "path": "patients/children__v297/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v298",
+      "path": "patients/children__v298/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v299",
+      "path": "patients/children__v299/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v29p",
+      "path": "patients/children__v29p/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v300",
+      "path": "patients/children__v300/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v302",
+      "path": "patients/children__v302/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v303",
+      "path": "patients/children__v303/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v304",
+      "path": "patients/children__v304/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v305",
+      "path": "patients/children__v305/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v306",
+      "path": "patients/children__v306/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v307",
+      "path": "patients/children__v307/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v308",
+      "path": "patients/children__v308/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v309",
+      "path": "patients/children__v309/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v30p",
+      "path": "patients/children__v30p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v310",
+      "path": "patients/children__v310/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v31p",
+      "path": "patients/children__v31p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v32p",
+      "path": "patients/children__v32p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v33p",
+      "path": "patients/children__v33p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v34p",
+      "path": "patients/children__v34p/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v35p",
+      "path": "patients/children__v35p/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v36p",
+      "path": "patients/children__v36p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v37p",
+      "path": "patients/children__v37p/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v38p",
+      "path": "patients/children__v38p/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v39p",
+      "path": "patients/children__v39p/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v3p",
+      "path": "patients/children__v3p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v40p",
+      "path": "patients/children__v40p/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v41p",
+      "path": "patients/children__v41p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v42p",
+      "path": "patients/children__v42p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v43p",
+      "path": "patients/children__v43p/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v44p",
+      "path": "patients/children__v44p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v45p",
+      "path": "patients/children__v45p/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v46p",
+      "path": "patients/children__v46p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v47p",
+      "path": "patients/children__v47p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v48p",
+      "path": "patients/children__v48p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v49p",
+      "path": "patients/children__v49p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v50p",
+      "path": "patients/children__v50p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v51p",
+      "path": "patients/children__v51p/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v52p",
+      "path": "patients/children__v52p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v53p",
+      "path": "patients/children__v53p/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v54p",
+      "path": "patients/children__v54p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v55p",
+      "path": "patients/children__v55p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v56p",
+      "path": "patients/children__v56p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v57p",
+      "path": "patients/children__v57p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v58p",
+      "path": "patients/children__v58p/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v59p",
+      "path": "patients/children__v59p/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v60p",
+      "path": "patients/children__v60p/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v6p",
+      "path": "patients/children__v6p/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "children__v8p",
+      "path": "patients/children__v8p/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_children",
+      "diagnosis": "ADHD",
+      "recording_count": 1
+    },
+    {
+      "patient_id": "cognitive-function__fadhd__001",
+      "path": "patients/cognitive-function__fadhd__001/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fadhd__002",
+      "path": "patients/cognitive-function__fadhd__002/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fadhd__003",
+      "path": "patients/cognitive-function__fadhd__003/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fadhd__004",
+      "path": "patients/cognitive-function__fadhd__004/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fadhd__005",
+      "path": "patients/cognitive-function__fadhd__005/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fadhd__006",
+      "path": "patients/cognitive-function__fadhd__006/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fadhd__008",
+      "path": "patients/cognitive-function__fadhd__008/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fadhd__009",
+      "path": "patients/cognitive-function__fadhd__009/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fadhd__010",
+      "path": "patients/cognitive-function__fadhd__010/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fadhd__011",
+      "path": "patients/cognitive-function__fadhd__011/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fc__001",
+      "path": "patients/cognitive-function__fc__001/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fc__002",
+      "path": "patients/cognitive-function__fc__002/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fc__003",
+      "path": "patients/cognitive-function__fc__003/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fc__004",
+      "path": "patients/cognitive-function__fc__004/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fc__005",
+      "path": "patients/cognitive-function__fc__005/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fc__006",
+      "path": "patients/cognitive-function__fc__006/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fc__007",
+      "path": "patients/cognitive-function__fc__007/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fc__008",
+      "path": "patients/cognitive-function__fc__008/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fc__009",
+      "path": "patients/cognitive-function__fc__009/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fc__010",
+      "path": "patients/cognitive-function__fc__010/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fc__011",
+      "path": "patients/cognitive-function__fc__011/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fc__012",
+      "path": "patients/cognitive-function__fc__012/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__fc__013",
+      "path": "patients/cognitive-function__fc__013/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__001",
+      "path": "patients/cognitive-function__madhd__001/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__002",
+      "path": "patients/cognitive-function__madhd__002/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__003",
+      "path": "patients/cognitive-function__madhd__003/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__004",
+      "path": "patients/cognitive-function__madhd__004/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__005",
+      "path": "patients/cognitive-function__madhd__005/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__006",
+      "path": "patients/cognitive-function__madhd__006/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__007",
+      "path": "patients/cognitive-function__madhd__007/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__008",
+      "path": "patients/cognitive-function__madhd__008/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__009",
+      "path": "patients/cognitive-function__madhd__009/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__010",
+      "path": "patients/cognitive-function__madhd__010/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__011",
+      "path": "patients/cognitive-function__madhd__011/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__012",
+      "path": "patients/cognitive-function__madhd__012/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__013",
+      "path": "patients/cognitive-function__madhd__013/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__014",
+      "path": "patients/cognitive-function__madhd__014/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__015",
+      "path": "patients/cognitive-function__madhd__015/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__016",
+      "path": "patients/cognitive-function__madhd__016/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__017",
+      "path": "patients/cognitive-function__madhd__017/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__018",
+      "path": "patients/cognitive-function__madhd__018/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__019",
+      "path": "patients/cognitive-function__madhd__019/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__020",
+      "path": "patients/cognitive-function__madhd__020/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__021",
+      "path": "patients/cognitive-function__madhd__021/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__022",
+      "path": "patients/cognitive-function__madhd__022/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__023",
+      "path": "patients/cognitive-function__madhd__023/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__024",
+      "path": "patients/cognitive-function__madhd__024/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__025",
+      "path": "patients/cognitive-function__madhd__025/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__026",
+      "path": "patients/cognitive-function__madhd__026/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__madhd__027",
+      "path": "patients/cognitive-function__madhd__027/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__001",
+      "path": "patients/cognitive-function__mc__001/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__002",
+      "path": "patients/cognitive-function__mc__002/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__003",
+      "path": "patients/cognitive-function__mc__003/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__004",
+      "path": "patients/cognitive-function__mc__004/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__005",
+      "path": "patients/cognitive-function__mc__005/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__006",
+      "path": "patients/cognitive-function__mc__006/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__007",
+      "path": "patients/cognitive-function__mc__007/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__008",
+      "path": "patients/cognitive-function__mc__008/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__009",
+      "path": "patients/cognitive-function__mc__009/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__010",
+      "path": "patients/cognitive-function__mc__010/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__011",
+      "path": "patients/cognitive-function__mc__011/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__012",
+      "path": "patients/cognitive-function__mc__012/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__013",
+      "path": "patients/cognitive-function__mc__013/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__014",
+      "path": "patients/cognitive-function__mc__014/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__015",
+      "path": "patients/cognitive-function__mc__015/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__016",
+      "path": "patients/cognitive-function__mc__016/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__017",
+      "path": "patients/cognitive-function__mc__017/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__018",
+      "path": "patients/cognitive-function__mc__018/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__019",
+      "path": "patients/cognitive-function__mc__019/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__020",
+      "path": "patients/cognitive-function__mc__020/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__021",
+      "path": "patients/cognitive-function__mc__021/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__022",
+      "path": "patients/cognitive-function__mc__022/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__023",
+      "path": "patients/cognitive-function__mc__023/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__024",
+      "path": "patients/cognitive-function__mc__024/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__025",
+      "path": "patients/cognitive-function__mc__025/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__026",
+      "path": "patients/cognitive-function__mc__026/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__027",
+      "path": "patients/cognitive-function__mc__027/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__028",
+      "path": "patients/cognitive-function__mc__028/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "cognitive-function__mc__029",
+      "path": "patients/cognitive-function__mc__029/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_cognitive_function",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 11
+    },
+    {
+      "patient_id": "gameplay__adhd__07",
+      "path": "patients/gameplay__adhd__07/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_gameplay",
+      "diagnosis": "ADHD",
+      "recording_count": 12
+    },
+    {
+      "patient_id": "gameplay__adhd__08",
+      "path": "patients/gameplay__adhd__08/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_gameplay",
+      "diagnosis": "ADHD",
+      "recording_count": 12
+    },
+    {
+      "patient_id": "gameplay__adhd__09",
+      "path": "patients/gameplay__adhd__09/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_gameplay",
+      "diagnosis": "ADHD",
+      "recording_count": 12
+    },
+    {
+      "patient_id": "gameplay__adhd__10",
+      "path": "patients/gameplay__adhd__10/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_gameplay",
+      "diagnosis": "ADHD",
+      "recording_count": 12
+    },
+    {
+      "patient_id": "gameplay__non-adhd__01",
+      "path": "patients/gameplay__non-adhd__01/patient.json",
+      "split": "validation",
+      "source_dataset": "adhd_gameplay",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 10
+    },
+    {
+      "patient_id": "gameplay__non-adhd__02",
+      "path": "patients/gameplay__non-adhd__02/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_gameplay",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 10
+    },
+    {
+      "patient_id": "gameplay__non-adhd__03",
+      "path": "patients/gameplay__non-adhd__03/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_gameplay",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 10
+    },
+    {
+      "patient_id": "gameplay__non-adhd__04",
+      "path": "patients/gameplay__non-adhd__04/patient.json",
+      "split": "test",
+      "source_dataset": "adhd_gameplay",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 10
+    },
+    {
+      "patient_id": "gameplay__non-adhd__05",
+      "path": "patients/gameplay__non-adhd__05/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_gameplay",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 10
+    },
+    {
+      "patient_id": "gameplay__non-adhd__06",
+      "path": "patients/gameplay__non-adhd__06/patient.json",
+      "split": "train",
+      "source_dataset": "adhd_gameplay",
+      "diagnosis": "NOT_ADHD",
+      "recording_count": 2
+    }
+  ]
+}

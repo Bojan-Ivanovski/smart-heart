@@ -1,0 +1,228 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smartheart.local/schema/patient-v1.json",
+  "title": "SmartHeart Patient",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "patient_id",
+    "split_group",
+    "split",
+    "source_dataset",
+    "demographics",
+    "clinical_ground_truth",
+    "recordings",
+    "windows",
+    "curriculum_targets"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "patient_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "split_group": {
+      "type": "string",
+      "minLength": 1
+    },
+    "split": {
+      "enum": [
+        "train",
+        "validation",
+        "test"
+      ]
+    },
+    "source_dataset": {
+      "type": "string",
+      "minLength": 1
+    },
+    "demographics": {
+      "type": "object",
+      "required": [
+        "age_group",
+        "age_years",
+        "sex"
+      ],
+      "properties": {
+        "age_group": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "age_years": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "sex": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "clinical_ground_truth": {
+      "type": "object",
+      "required": [
+        "diagnosis",
+        "label_source",
+        "verified"
+      ],
+      "properties": {
+        "diagnosis": {
+          "enum": [
+            "ADHD",
+            "NOT_ADHD",
+            "UNCERTAIN"
+          ]
+        },
+        "label_source": {
+          "type": "string"
+        },
+        "verified": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "recordings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/recording"
+      }
+    },
+    "windows": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/window"
+      }
+    },
+    "curriculum_targets": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "recording": {
+      "type": "object",
+      "required": [
+        "recording_id",
+        "signal_path",
+        "signal_key",
+        "representation",
+        "shape",
+        "dtype",
+        "layout",
+        "sampling_rate_hz",
+        "channel_names",
+        "condition",
+        "task",
+        "quality"
+      ],
+      "properties": {
+        "recording_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "signal_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "signal_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "representation": {
+          "enum": [
+            "raw_eeg",
+            "band_power_timeseries"
+          ]
+        },
+        "shape": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "integer",
+              "minimum": 1
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "dtype": {
+          "const": "float32"
+        },
+        "layout": {
+          "const": "channels_first"
+        },
+        "sampling_rate_hz": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "channel_names": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "condition": {
+          "type": "string"
+        },
+        "task": {
+          "type": "string"
+        },
+        "quality": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    },
+    "window": {
+      "type": "object",
+      "required": [
+        "window_id",
+        "recording_id",
+        "start_timestep",
+        "end_timestep"
+      ],
+      "properties": {
+        "window_id": {
+          "type": "string"
+        },
+        "recording_id": {
+          "type": "string"
+        },
+        "start_timestep": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end_timestep": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "curriculum_targets": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

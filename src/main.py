@@ -26,7 +26,7 @@ def parse_args() -> argparse.Namespace:
         choices=sorted(DATASET_TYPES),
         default="gameplay",
     )
-    parser.add_argument("--datasets-root", type=Path, default=PROJECT_ROOT / "datasets")
+    parser.add_argument("--dataset-root", type=Path, default=PROJECT_ROOT / "dataset")
     parser.add_argument("--window-size", type=int, default=4096)
     parser.add_argument("--window-stride", type=int, default=4096)
     parser.add_argument("--batch-size", type=int, default=1)
@@ -67,7 +67,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    pipeline_builder = DatasetPipelineBuilder(args.datasets_root)
+    pipeline_builder = DatasetPipelineBuilder(args.dataset_root)
     dataset = pipeline_builder.build_dataset(
         args.dataset,
         window_size=args.window_size,
@@ -83,7 +83,7 @@ def main() -> None:
         print(f"prompt: {sample['post_prompt']}")
         return
 
-    splits = pipeline_builder.split_dataset(dataset, seed=args.seed)
+    splits = pipeline_builder.split_dataset(dataset)
     print(
         f"[split] train samples={len(splits.train)} groups={splits.train_groups}; "
         f"validation samples={len(splits.validation)} "
