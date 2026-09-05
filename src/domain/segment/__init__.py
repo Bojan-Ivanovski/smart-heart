@@ -14,6 +14,7 @@ from .multiple_choice_options import MultipleChoiceOptions
 from .multiple_choice_question import MultipleChoiceAnswer, MultipleChoiceQuestion
 from .quality import SegmentQuality
 from .window_policy import WindowPolicy, WindowSelection
+from .window_analysis import WindowAnalysis
 
 
 class Segment(ContractModel):
@@ -50,5 +51,6 @@ __all__ = [
     "SegmentQuality",
     "SegmentsDocument",
     "WindowPolicy",
+    "WindowAnalysis",
     "WindowSelection",
 ]

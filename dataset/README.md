@@ -43,8 +43,12 @@ model windows are runtime slices of these arrays and are not duplicated on disk.
 - Missing metadata is represented by `null`; it must not be invented.
 - `segments` contains variable-length, signal-derived regions with meaningful targets.
 - Each segment defines a fixed-size runtime window policy for model input.
-- Segment window policies are authoritative; CLI window settings apply only to legacy records.
+- Segment window policies are authoritative and cannot be overridden by the CLI.
 - Runtime windowing stays inside segment boundaries and does not modify the recording.
+- Every emitted window receives a cached spectral and time-domain analysis derived
+  from its exact signal values.
+- MCQ and EEG-caption supervision is derived from that window analysis. Recording
+  and diagnostic reasoning continue to use their broader stored targets.
 - Measured evidence, synthetic interpretation, and protected diagnosis remain separate.
 - Curriculum evidence must identify its supervision source.
 - `diagnostic_cot.target.diagnosis` is currently the only universal target.

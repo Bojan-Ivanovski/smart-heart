@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from typing import Annotated
 
@@ -81,5 +82,11 @@ def preview(
         typer.echo(f"[{series_index}] shape={tuple(series.shape)} {description}")
     typer.echo("\nPOST-PROMPT")
     typer.echo(sample["post_prompt"])
+    typer.echo("\nREFERENCE ANALYSIS (NOT INCLUDED IN MODEL PROMPT)")
+    for analysis_index, analysis in enumerate(
+        sample.get("reference_analyses", []),
+        start=1,
+    ):
+        typer.echo(f"[{analysis_index}] {json.dumps(analysis, sort_keys=True)}")
     typer.echo("\nEXPECTED ANSWER")
     typer.echo(sample["answer"].removesuffix(_PREVIEW_EOS_TOKEN))

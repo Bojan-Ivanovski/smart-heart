@@ -4,10 +4,11 @@ import numpy as np
 import torch
 from torch.utils.data import Dataset
 
+from .features import analyze_window
 from .parser import PatientDocuments, parse_patient
 from ..domain.patient import DatasetSplit
 from ..domain.recording import Recording
-from ..domain.segment import Segment
+from ..domain.segment import Segment, WindowAnalysis
 
 
 class SmartHeartDataset(Dataset):
@@ -27,6 +28,7 @@ class SmartHeartDataset(Dataset):
         self._recordings: dict[tuple[str, str], Recording] = {}
         self._segments: dict[tuple[str, str], Segment] = {}
         self._samples: list[tuple[str, str, str, int, int]] = []
+        self._window_analysis_cache: dict[int, WindowAnalysis] = {}
 
         patients_root = self.dataset_root / "patients"
         if not patients_root.is_dir():
@@ -103,29 +105,20 @@ class SmartHeartDataset(Dataset):
         _, profile, _, _ = self._documents[patient_id]
         return profile.model_dump(mode="json", exclude_none=True)
 
+    def window_analysis(self, index: int) -> dict[str, object]:
+        analysis = self._window_analysis_cache.get(index)
+        if analysis is None:
+            window = self._load_window(index)
+            analysis = self._analyze_window(index, window)
+        return analysis.model_dump(mode="json")
+
     def __getitem__(self, index: int) -> dict[str, object]:
         patient_id, recording_id, segment_id, start, end = self._samples[index]
         patient, profile, _, _ = self._documents[patient_id]
         recording = self._recordings[(patient_id, recording_id)]
         segment = self._segments[(patient_id, segment_id)]
-        signal_path = self.dataset_root / "patients" / patient_id / recording.signal_path
-
-        try:
-            with np.load(signal_path, allow_pickle=False) as archive:
-                if recording.signal_key not in archive:
-                    raise ValueError(
-                        f"Signal key '{recording.signal_key}' is missing from "
-                        f"'{signal_path}'."
-                    )
-                signal = archive[recording.signal_key]
-                if signal.shape != recording.shape:
-                    raise ValueError(
-                        f"Signal shape {signal.shape} does not match "
-                        f"{recording.shape} for '{recording.recording_id}'."
-                    )
-                window = np.array(signal[:, start:end], dtype=np.float32, copy=True)
-        except OSError as error:
-            raise ValueError(f"Could not load signal archive '{signal_path}'.") from error
+        window = self._load_window(index)
+        analysis = self._analyze_window(index, window)
 
         sample: dict[str, object] = {
             "time_series": torch.from_numpy(window),
@@ -141,6 +134,7 @@ class SmartHeartDataset(Dataset):
             "condition": recording.condition,
             "task": recording.task,
             "segment_type": segment.segment_type,
+            "window_analysis": analysis.model_dump(mode="json"),
             "clinical_profile": profile.model_dump(mode="json", exclude_none=True),
             "segment_curriculum_targets": segment.curriculum_targets.model_dump(
                 mode="json",
@@ -158,6 +152,46 @@ class SmartHeartDataset(Dataset):
         if recording.sampling_rate_hz is not None:
             sample["sampling_rate_hz"] = recording.sampling_rate_hz
         return sample
+
+    def _load_window(self, index: int) -> np.ndarray:
+        patient_id, recording_id, _, start, end = self._samples[index]
+        recording = self._recordings[(patient_id, recording_id)]
+        signal_path = self.dataset_root / "patients" / patient_id / recording.signal_path
+        try:
+            with np.load(signal_path, allow_pickle=False) as archive:
+                if recording.signal_key not in archive:
+                    raise ValueError(
+                        f"Signal key '{recording.signal_key}' is missing from "
+                        f"'{signal_path}'."
+                    )
+                signal = archive[recording.signal_key]
+                if signal.shape != recording.shape:
+                    raise ValueError(
+                        f"Signal shape {signal.shape} does not match "
+                        f"{recording.shape} for '{recording.recording_id}'."
+                    )
+                return np.array(
+                    signal[:, start:end],
+                    dtype=np.float32,
+                    copy=True,
+                )
+        except OSError as error:
+            raise ValueError(f"Could not load signal archive '{signal_path}'.") from error
+
+    def _analyze_window(self, index: int, window: np.ndarray) -> WindowAnalysis:
+        analysis = self._window_analysis_cache.get(index)
+        if analysis is not None:
+            return analysis
+        patient_id, recording_id, _, _, _ = self._samples[index]
+        recording = self._recordings[(patient_id, recording_id)]
+        analysis = analyze_window(
+            window,
+            representation=recording.representation,
+            sampling_rate_hz=recording.sampling_rate_hz,
+            channel_names=recording.channel_names,
+        )
+        self._window_analysis_cache[index] = analysis
+        return analysis
 
     def _add_segment_windows(self, patient_id: str, segment: Segment) -> None:
         size = segment.window_policy.size_samples

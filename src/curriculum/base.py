@@ -22,6 +22,7 @@ class OpenTSLMSample(TypedDict, total=False):
     split: str
     source_dataset: str
     question_id: str
+    reference_analyses: list[dict[str, object]]
 
 
 class CurriculumDataset(Dataset, ABC):
@@ -77,11 +78,15 @@ class CurriculumDataset(Dataset, ABC):
         pre_prompt: str,
         post_prompt: str,
         answer: str,
+        source_samples: Sequence[dict[str, object]] | None = None,
     ) -> OpenTSLMSample:
         if not indices:
             raise ValueError("A curriculum sample requires at least one window.")
 
-        source_samples = [self.dataset[index] for index in indices]
+        if source_samples is None:
+            source_samples = [self.dataset[index] for index in indices]
+        elif len(source_samples) != len(indices):
+            raise ValueError("Source samples must match the supplied indices.")
         time_series, time_series_text = self._prepare_time_series(source_samples)
         first = source_samples[0]
         return {
@@ -99,6 +104,9 @@ class CurriculumDataset(Dataset, ABC):
             ),
             "split": str(first["split"]),
             "source_dataset": str(first["source_dataset"]),
+            "reference_analyses": [
+                dict(sample["window_analysis"]) for sample in source_samples
+            ],
         }
 
     @staticmethod
