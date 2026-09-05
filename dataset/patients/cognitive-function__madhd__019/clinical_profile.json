@@ -1,0 +1,85 @@
+{
+  "referral": {
+    "reason": "Evaluation of persistent attention and task-completion difficulty.",
+    "referral_source": "self"
+  },
+  "comorbidity_screen": {
+    "anxiety": "not_indicated",
+    "depression": "not_indicated",
+    "learning_disorder": "screening_recommended",
+    "sleep": {
+      "average_hours": 7.529512,
+      "difficulty": "mild_sleep_onset_delay",
+      "daytime_fatigue": "mild",
+      "disorder": "not_indicated"
+    }
+  },
+  "alternative_explanations": [
+    {
+      "factor": "mild_sleep_onset_delay",
+      "assessment": "May contribute to fatigue but does not fully explain the cross-setting symptom pattern."
+    }
+  ],
+  "informants": [
+    {
+      "role": "self",
+      "summary": "The patient reports persistent difficulty organizing work, tracking deadlines, and completing extended tasks."
+    },
+    {
+      "role": "clinician",
+      "summary": "Clinical interview describes longstanding executive-function and sustained-attention difficulty across settings."
+    }
+  ],
+  "functional_impairment": {
+    "settings": [
+      "work",
+      "home"
+    ],
+    "academic": "none",
+    "social": "mild",
+    "home": "moderate"
+  },
+  "symptoms": {
+    "duration_months": 286,
+    "onset_age_years": 8,
+    "inattention": {
+      "count": 8,
+      "maximum": 9,
+      "examples": [
+        "Loses track of deadlines when several tasks compete for attention.",
+        "Needs written reminders for multi-step responsibilities.",
+        "Attention decreases during lengthy independent work."
+      ]
+    },
+    "hyperactivity_impulsivity": {
+      "count": 4,
+      "maximum": 9,
+      "examples": [
+        "Fidgets when seated for extended periods.",
+        "Occasionally interrupts group discussions.",
+        "Sometimes has difficulty waiting during group activities."
+      ]
+    },
+    "pattern": "persistent",
+    "recent_changes": "stable"
+  },
+  "rating_scales": [
+    {
+      "instrument": "synthetic_adult_self_report_scale",
+      "score": 24,
+      "maximum": 27,
+      "interpretation": "elevated"
+    },
+    {
+      "instrument": "synthetic_clinician_adhd_scale",
+      "score": 24,
+      "maximum": 27,
+      "interpretation": "elevated"
+    }
+  ],
+  "medication": {
+    "adhd_medication_status": "unmedicated",
+    "medicated_during_recording": false,
+    "other_medications": []
+  }
+}

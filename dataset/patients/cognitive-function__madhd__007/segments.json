@@ -1,0 +1,1392 @@
+{
+  "patient_id": "cognitive-function__madhd__007",
+  "segments": [
+    {
+      "segment_id": "01-eyes_open_baseline_cz_f4__segment-001",
+      "recording_id": "01-eyes_open_baseline_cz_f4",
+      "start_timestep": 0,
+      "end_timestep": 3072,
+      "duration_seconds": 12.0,
+      "segment_type": "beta_enrichment",
+      "selection_reason": "This region contains sustained beta enrichment relative to the recording-level spectral profile. The measured dominant band is delta and the theta-to-beta ratio is 6.561.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.581068,
+          "theta": 0.272403,
+          "alpha": 0.096406,
+          "beta": 0.041518,
+          "gamma": 0.008605
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 6.561082,
+        "spectral_entropy": 0.666702,
+        "rms_amplitude_normalized": 1.089994,
+        "zero_crossing_rate": 0.060241
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "01-eyes_open_baseline_cz_f4__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.581."
+          },
+          {
+            "question_id": "01-eyes_open_baseline_cz_f4__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 58.1% of relative power, followed by theta at 27.2%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "01-eyes_open_baseline_cz_f4__segment-002",
+      "recording_id": "01-eyes_open_baseline_cz_f4",
+      "start_timestep": 3072,
+      "end_timestep": 5120,
+      "duration_seconds": 8.0,
+      "segment_type": "alpha_enrichment",
+      "selection_reason": "This region contains sustained alpha enrichment relative to the recording-level spectral profile. The measured dominant band is delta and the theta-to-beta ratio is 7.943.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.588802,
+          "theta": 0.246268,
+          "alpha": 0.126196,
+          "beta": 0.031005,
+          "gamma": 0.007729
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 7.942848,
+        "spectral_entropy": 0.665133,
+        "rms_amplitude_normalized": 1.107937,
+        "zero_crossing_rate": 0.059599
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "01-eyes_open_baseline_cz_f4__segment-002__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.589."
+          },
+          {
+            "question_id": "01-eyes_open_baseline_cz_f4__segment-002__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 58.9% of relative power, followed by theta at 24.6%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "01-eyes_open_baseline_cz_f4__segment-003",
+      "recording_id": "01-eyes_open_baseline_cz_f4",
+      "start_timestep": 5120,
+      "end_timestep": 7680,
+      "duration_seconds": 10.0,
+      "segment_type": "representative_background",
+      "selection_reason": "This region represents a sustained background pattern without a large spectral or artifact deviation. The measured dominant band is delta and the theta-to-beta ratio is 8.531.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.696539,
+          "theta": 0.220835,
+          "alpha": 0.050054,
+          "beta": 0.025885,
+          "gamma": 0.006687
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 8.531389,
+        "spectral_entropy": 0.595428,
+        "rms_amplitude_normalized": 1.120388,
+        "zero_crossing_rate": 0.049824
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "01-eyes_open_baseline_cz_f4__segment-003__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.697."
+          },
+          {
+            "question_id": "01-eyes_open_baseline_cz_f4__segment-003__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 69.7% of relative power, followed by theta at 22.1%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "02-eyes_closed_cz_f4_20s__segment-001",
+      "recording_id": "02-eyes_closed_cz_f4_20s",
+      "start_timestep": 0,
+      "end_timestep": 5120,
+      "duration_seconds": 20.0,
+      "segment_type": "representative_background",
+      "selection_reason": "This region represents a sustained background pattern without a large spectral or artifact deviation. The measured dominant band is delta and the theta-to-beta ratio is 5.960.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.546367,
+          "theta": 0.270408,
+          "alpha": 0.128738,
+          "beta": 0.045371,
+          "gamma": 0.009116
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 5.95993,
+        "spectral_entropy": 0.675239,
+        "rms_amplitude_normalized": 1.059441,
+        "zero_crossing_rate": 0.059484
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "02-eyes_closed_cz_f4_20s__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.546."
+          },
+          {
+            "question_id": "02-eyes_closed_cz_f4_20s__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 54.6% of relative power, followed by theta at 27.0%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "03-eyes_open_cz_f4_20s__segment-001",
+      "recording_id": "03-eyes_open_cz_f4_20s",
+      "start_timestep": 0,
+      "end_timestep": 3072,
+      "duration_seconds": 12.0,
+      "segment_type": "theta_enrichment",
+      "selection_reason": "This region contains sustained theta enrichment relative to the recording-level spectral profile. The measured dominant band is delta and the theta-to-beta ratio is 8.090.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.683953,
+          "theta": 0.227648,
+          "alpha": 0.052295,
+          "beta": 0.02814,
+          "gamma": 0.007964
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 8.089837,
+        "spectral_entropy": 0.599259,
+        "rms_amplitude_normalized": 1.123034,
+        "zero_crossing_rate": 0.051937
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "03-eyes_open_cz_f4_20s__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.684."
+          },
+          {
+            "question_id": "03-eyes_open_cz_f4_20s__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 68.4% of relative power, followed by theta at 22.8%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "03-eyes_open_cz_f4_20s__segment-002",
+      "recording_id": "03-eyes_open_cz_f4_20s",
+      "start_timestep": 3072,
+      "end_timestep": 5120,
+      "duration_seconds": 8.0,
+      "segment_type": "alpha_enrichment",
+      "selection_reason": "This region contains sustained alpha enrichment relative to the recording-level spectral profile. The measured dominant band is delta and the theta-to-beta ratio is 5.722.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.555003,
+          "theta": 0.264183,
+          "alpha": 0.125418,
+          "beta": 0.046167,
+          "gamma": 0.009229
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 5.722334,
+        "spectral_entropy": 0.676796,
+        "rms_amplitude_normalized": 1.066721,
+        "zero_crossing_rate": 0.060821
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "03-eyes_open_cz_f4_20s__segment-002__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.555."
+          },
+          {
+            "question_id": "03-eyes_open_cz_f4_20s__segment-002__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 55.5% of relative power, followed by theta at 26.4%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "04-cognitive_challenge_cz_f4__segment-001",
+      "recording_id": "04-cognitive_challenge_cz_f4",
+      "start_timestep": 0,
+      "end_timestep": 4096,
+      "duration_seconds": 16.0,
+      "segment_type": "theta_enrichment",
+      "selection_reason": "This region contains sustained theta enrichment relative to the recording-level spectral profile. The measured dominant band is delta and the theta-to-beta ratio is 7.031.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.66662,
+          "theta": 0.231181,
+          "alpha": 0.060955,
+          "beta": 0.03288,
+          "gamma": 0.008364
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 7.031052,
+        "spectral_entropy": 0.613453,
+        "rms_amplitude_normalized": 1.123003,
+        "zero_crossing_rate": 0.054945
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "04-cognitive_challenge_cz_f4__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.667."
+          },
+          {
+            "question_id": "04-cognitive_challenge_cz_f4__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable cognitive task EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 66.7% of relative power, followed by theta at 23.1%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "04-cognitive_challenge_cz_f4__segment-002",
+      "recording_id": "04-cognitive_challenge_cz_f4",
+      "start_timestep": 4096,
+      "end_timestep": 11520,
+      "duration_seconds": 29.0,
+      "segment_type": "alpha_enrichment",
+      "selection_reason": "This region contains sustained alpha enrichment relative to the recording-level spectral profile. The measured dominant band is delta and the theta-to-beta ratio is 5.772.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.593614,
+          "theta": 0.243767,
+          "alpha": 0.111646,
+          "beta": 0.042233,
+          "gamma": 0.00874
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 5.771956,
+        "spectral_entropy": 0.660734,
+        "rms_amplitude_normalized": 1.087628,
+        "zero_crossing_rate": 0.057457
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "04-cognitive_challenge_cz_f4__segment-002__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.594."
+          },
+          {
+            "question_id": "04-cognitive_challenge_cz_f4__segment-002__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable cognitive task EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 59.4% of relative power, followed by theta at 24.4%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "05-pre_omni_harmonic_baseline_cz_f4__segment-001",
+      "recording_id": "05-pre_omni_harmonic_baseline_cz_f4",
+      "start_timestep": 0,
+      "end_timestep": 3840,
+      "duration_seconds": 15.0,
+      "segment_type": "alpha_enrichment",
+      "selection_reason": "This region contains sustained alpha enrichment relative to the recording-level spectral profile. The measured dominant band is delta and the theta-to-beta ratio is 6.485.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.563898,
+          "theta": 0.272369,
+          "alpha": 0.113434,
+          "beta": 0.042,
+          "gamma": 0.008299
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 6.484976,
+        "spectral_entropy": 0.664146,
+        "rms_amplitude_normalized": 1.076927,
+        "zero_crossing_rate": 0.058218
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "05-pre_omni_harmonic_baseline_cz_f4__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.564."
+          },
+          {
+            "question_id": "05-pre_omni_harmonic_baseline_cz_f4__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 56.4% of relative power, followed by theta at 27.2%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "06-omni_harmonic_assessment_cz_f4__segment-001",
+      "recording_id": "06-omni_harmonic_assessment_cz_f4",
+      "start_timestep": 0,
+      "end_timestep": 6144,
+      "duration_seconds": 24.0,
+      "segment_type": "representative_background",
+      "selection_reason": "This region represents a sustained background pattern without a large spectral or artifact deviation. The measured dominant band is delta and the theta-to-beta ratio is 6.990.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.645576,
+          "theta": 0.236404,
+          "alpha": 0.075943,
+          "beta": 0.033822,
+          "gamma": 0.008255
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 6.989652,
+        "spectral_entropy": 0.630643,
+        "rms_amplitude_normalized": 1.10931,
+        "zero_crossing_rate": 0.056487
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "06-omni_harmonic_assessment_cz_f4__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.646."
+          },
+          {
+            "question_id": "06-omni_harmonic_assessment_cz_f4__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable auditory task EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 64.6% of relative power, followed by theta at 23.6%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "06-omni_harmonic_assessment_cz_f4__segment-002",
+      "recording_id": "06-omni_harmonic_assessment_cz_f4",
+      "start_timestep": 6144,
+      "end_timestep": 7680,
+      "duration_seconds": 6.0,
+      "segment_type": "alpha_enrichment",
+      "selection_reason": "This region contains sustained alpha enrichment relative to the recording-level spectral profile. The measured dominant band is delta and the theta-to-beta ratio is 5.663.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.567427,
+          "theta": 0.240385,
+          "alpha": 0.14203,
+          "beta": 0.04245,
+          "gamma": 0.007708
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 5.66278,
+        "spectral_entropy": 0.648813,
+        "rms_amplitude_normalized": 1.080415,
+        "zero_crossing_rate": 0.056026
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "06-omni_harmonic_assessment_cz_f4__segment-002__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.567."
+          },
+          {
+            "question_id": "06-omni_harmonic_assessment_cz_f4__segment-002__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable auditory task EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 56.7% of relative power, followed by theta at 24.0%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "07-eyes_open_baseline_o1_f4__segment-001",
+      "recording_id": "07-eyes_open_baseline_o1_f4",
+      "start_timestep": 0,
+      "end_timestep": 7680,
+      "duration_seconds": 30.0,
+      "segment_type": "representative_background",
+      "selection_reason": "This region represents a sustained background pattern without a large spectral or artifact deviation. The measured dominant band is delta and the theta-to-beta ratio is 6.036.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.569617,
+          "theta": 0.260849,
+          "alpha": 0.11777,
+          "beta": 0.043215,
+          "gamma": 0.008549
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 6.036075,
+        "spectral_entropy": 0.667014,
+        "rms_amplitude_normalized": 1.079186,
+        "zero_crossing_rate": 0.058341
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "07-eyes_open_baseline_o1_f4__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.570."
+          },
+          {
+            "question_id": "07-eyes_open_baseline_o1_f4__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 57.0% of relative power, followed by theta at 26.1%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "08-eyes_closed_o1_f4__segment-001",
+      "recording_id": "08-eyes_closed_o1_f4",
+      "start_timestep": 0,
+      "end_timestep": 5120,
+      "duration_seconds": 20.0,
+      "segment_type": "representative_background",
+      "selection_reason": "This region represents a sustained background pattern without a large spectral or artifact deviation. The measured dominant band is delta and the theta-to-beta ratio is 5.960.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.546367,
+          "theta": 0.270408,
+          "alpha": 0.128738,
+          "beta": 0.045371,
+          "gamma": 0.009116
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 5.95993,
+        "spectral_entropy": 0.675239,
+        "rms_amplitude_normalized": 1.059441,
+        "zero_crossing_rate": 0.059484
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "08-eyes_closed_o1_f4__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.546."
+          },
+          {
+            "question_id": "08-eyes_closed_o1_f4__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 54.6% of relative power, followed by theta at 27.0%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "09-eyes_open_o1_f4_30s__segment-001",
+      "recording_id": "09-eyes_open_o1_f4_30s",
+      "start_timestep": 0,
+      "end_timestep": 3072,
+      "duration_seconds": 12.0,
+      "segment_type": "theta_enrichment",
+      "selection_reason": "This region contains sustained theta enrichment relative to the recording-level spectral profile. The measured dominant band is delta and the theta-to-beta ratio is 8.090.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.683953,
+          "theta": 0.227648,
+          "alpha": 0.052295,
+          "beta": 0.02814,
+          "gamma": 0.007964
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 8.089837,
+        "spectral_entropy": 0.599259,
+        "rms_amplitude_normalized": 1.123034,
+        "zero_crossing_rate": 0.051937
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "09-eyes_open_o1_f4_30s__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.684."
+          },
+          {
+            "question_id": "09-eyes_open_o1_f4_30s__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 68.4% of relative power, followed by theta at 22.8%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "09-eyes_open_o1_f4_30s__segment-002",
+      "recording_id": "09-eyes_open_o1_f4_30s",
+      "start_timestep": 3072,
+      "end_timestep": 5120,
+      "duration_seconds": 8.0,
+      "segment_type": "alpha_enrichment",
+      "selection_reason": "This region contains sustained alpha enrichment relative to the recording-level spectral profile. The measured dominant band is delta and the theta-to-beta ratio is 5.722.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.555003,
+          "theta": 0.264183,
+          "alpha": 0.125418,
+          "beta": 0.046167,
+          "gamma": 0.009229
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 5.722334,
+        "spectral_entropy": 0.676796,
+        "rms_amplitude_normalized": 1.066721,
+        "zero_crossing_rate": 0.060821
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "09-eyes_open_o1_f4_30s__segment-002__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.555."
+          },
+          {
+            "question_id": "09-eyes_open_o1_f4_30s__segment-002__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 55.5% of relative power, followed by theta at 26.4%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "10-eyes_closed_f3_f4__segment-001",
+      "recording_id": "10-eyes_closed_f3_f4",
+      "start_timestep": 0,
+      "end_timestep": 4096,
+      "duration_seconds": 16.0,
+      "segment_type": "theta_enrichment",
+      "selection_reason": "This region contains sustained theta enrichment relative to the recording-level spectral profile. The measured dominant band is delta and the theta-to-beta ratio is 7.031.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.66662,
+          "theta": 0.231181,
+          "alpha": 0.060955,
+          "beta": 0.03288,
+          "gamma": 0.008364
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 7.031052,
+        "spectral_entropy": 0.613453,
+        "rms_amplitude_normalized": 1.123003,
+        "zero_crossing_rate": 0.054945
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "10-eyes_closed_f3_f4__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.667."
+          },
+          {
+            "question_id": "10-eyes_closed_f3_f4__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 66.7% of relative power, followed by theta at 23.1%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "10-eyes_closed_f3_f4__segment-002",
+      "recording_id": "10-eyes_closed_f3_f4",
+      "start_timestep": 4096,
+      "end_timestep": 11520,
+      "duration_seconds": 29.0,
+      "segment_type": "alpha_enrichment",
+      "selection_reason": "This region contains sustained alpha enrichment relative to the recording-level spectral profile. The measured dominant band is delta and the theta-to-beta ratio is 5.772.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.593614,
+          "theta": 0.243767,
+          "alpha": 0.111646,
+          "beta": 0.042233,
+          "gamma": 0.00874
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 5.771956,
+        "spectral_entropy": 0.660734,
+        "rms_amplitude_normalized": 1.087628,
+        "zero_crossing_rate": 0.057457
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "10-eyes_closed_f3_f4__segment-002__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.594."
+          },
+          {
+            "question_id": "10-eyes_closed_f3_f4__segment-002__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 59.4% of relative power, followed by theta at 24.4%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "11-eyes_closed_fz_f4__segment-001",
+      "recording_id": "11-eyes_closed_fz_f4",
+      "start_timestep": 0,
+      "end_timestep": 5120,
+      "duration_seconds": 20.0,
+      "segment_type": "alpha_enrichment",
+      "selection_reason": "This region contains sustained alpha enrichment relative to the recording-level spectral profile. The measured dominant band is delta and the theta-to-beta ratio is 5.715.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.603528,
+          "theta": 0.243171,
+          "alpha": 0.101575,
+          "beta": 0.042548,
+          "gamma": 0.009178
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 5.715216,
+        "spectral_entropy": 0.654419,
+        "rms_amplitude_normalized": 1.092722,
+        "zero_crossing_rate": 0.058605
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "11-eyes_closed_fz_f4__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.604."
+          },
+          {
+            "question_id": "11-eyes_closed_fz_f4__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 60.4% of relative power, followed by theta at 24.3%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "11-eyes_closed_fz_f4__segment-002",
+      "recording_id": "11-eyes_closed_fz_f4",
+      "start_timestep": 5120,
+      "end_timestep": 11520,
+      "duration_seconds": 25.0,
+      "segment_type": "representative_background",
+      "selection_reason": "This region represents a sustained background pattern without a large spectral or artifact deviation. The measured dominant band is delta and the theta-to-beta ratio is 6.320.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.0
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.564586,
+          "theta": 0.277246,
+          "alpha": 0.101266,
+          "beta": 0.043866,
+          "gamma": 0.013036
+        },
+        "dominant_band": "delta",
+        "theta_beta_ratio": 6.320294,
+        "spectral_entropy": 0.679581,
+        "rms_amplitude_normalized": 1.039998,
+        "zero_crossing_rate": 0.07048
+      },
+      "window_policy": {
+        "size_samples": 1024,
+        "stride_samples": 512,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "11-eyes_closed_fz_f4__segment-002__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "A",
+            "answer_text": "Delta",
+            "explanation": "Delta has the largest measured relative power at 0.565."
+          },
+          {
+            "question_id": "11-eyes_closed_fz_f4__segment-002__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable resting state EEG with delta-dominant spectral activity.",
+            "spectral_description": "Delta contributes 56.5% of relative power, followed by theta at 27.7%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    }
+  ]
+}

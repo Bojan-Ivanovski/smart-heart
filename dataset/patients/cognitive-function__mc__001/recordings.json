@@ -1,0 +1,925 @@
+{
+  "patient_id": "cognitive-function__mc__001",
+  "recordings": [
+    {
+      "recording_id": "01-eyes_open_baseline_cz_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "01_eyes_open_baseline_cz_f4",
+      "shape": [
+        2,
+        7680
+      ],
+      "dtype": "float32",
+      "representation": "raw_eeg",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "Cz",
+        "F4"
+      ],
+      "condition": "eyes_open_baseline_cz_f4",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": "none",
+        "usable_fraction": 1.0,
+        "artifact_types": []
+      },
+      "preprocessing": {
+        "source_timesteps": 7680,
+        "stored_timesteps": 7680,
+        "steps": [
+          {
+            "operation": "canonical_import",
+            "parameters": {
+              "source_transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32"
+            }
+          }
+        ]
+      },
+      "analysis": {
+        "method": "welch_relative_power_and_time_domain_summary",
+        "feature_version": "1.0.0",
+        "aggregate_features": {
+          "relative_band_power": {
+            "delta": 0.297062,
+            "theta": 0.162893,
+            "alpha": 0.10163,
+            "beta": 0.300405,
+            "gamma": 0.13801
+          },
+          "dominant_band": "beta",
+          "theta_beta_ratio": 0.542245,
+          "theta_alpha_ratio": 1.602804,
+          "spectral_entropy": 0.91407,
+          "channel_correlation_mean": 0.382597,
+          "temporal_variability": "stable"
+        },
+        "interpretation_flags": [
+          "beta_dominant"
+        ]
+      },
+      "curriculum_targets": {
+        "resting_state_cot": {
+          "scope": "recording",
+          "supervision": "synthetic_from_measured_features",
+          "input_references": [
+            "01-eyes_open_baseline_cz_f4__segment-001"
+          ],
+          "target": {
+            "observations": [
+              "Beta contributes 30.0% of relative power, followed by delta at 29.7%.",
+              "The interval is stable across the analyzed samples.",
+              "The aggregate theta-to-beta ratio is 0.542."
+            ],
+            "reasoning_steps": [
+              "Recording quality is checked before interpreting its spectral summary.",
+              "Frequency balance and temporal variability are treated as resting-state descriptions.",
+              "The findings are not used as standalone diagnostic evidence."
+            ],
+            "conclusion": "The recording provides a usable synthetic summary of resting-state activity.",
+            "confidence": "moderate"
+          }
+        }
+      }
+    },
+    {
+      "recording_id": "02-eyes_closed_cz_f4_20s",
+      "signal_path": "signals.npz",
+      "signal_key": "02_eyes_closed_cz_f4_20s",
+      "shape": [
+        2,
+        5120
+      ],
+      "dtype": "float32",
+      "representation": "raw_eeg",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "Cz",
+        "F4"
+      ],
+      "condition": "eyes_closed_cz_f4_20s",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": "none",
+        "usable_fraction": 1.0,
+        "artifact_types": []
+      },
+      "preprocessing": {
+        "source_timesteps": 5120,
+        "stored_timesteps": 5120,
+        "steps": [
+          {
+            "operation": "canonical_import",
+            "parameters": {
+              "source_transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32"
+            }
+          }
+        ]
+      },
+      "analysis": {
+        "method": "welch_relative_power_and_time_domain_summary",
+        "feature_version": "1.0.0",
+        "aggregate_features": {
+          "relative_band_power": {
+            "delta": 0.328551,
+            "theta": 0.163928,
+            "alpha": 0.204667,
+            "beta": 0.215609,
+            "gamma": 0.087245
+          },
+          "dominant_band": "delta",
+          "theta_beta_ratio": 0.760302,
+          "theta_alpha_ratio": 0.80095,
+          "spectral_entropy": 0.86495,
+          "channel_correlation_mean": 0.516273,
+          "temporal_variability": "moderately_variable"
+        },
+        "interpretation_flags": [
+          "delta_dominant",
+          "moderately_variable"
+        ]
+      },
+      "curriculum_targets": {
+        "resting_state_cot": {
+          "scope": "recording",
+          "supervision": "synthetic_from_measured_features",
+          "input_references": [
+            "02-eyes_closed_cz_f4_20s__segment-001"
+          ],
+          "target": {
+            "observations": [
+              "Delta contributes 32.9% of relative power, followed by beta at 21.6%.",
+              "The interval is moderately variable across the analyzed samples.",
+              "The aggregate theta-to-beta ratio is 0.760."
+            ],
+            "reasoning_steps": [
+              "Recording quality is checked before interpreting its spectral summary.",
+              "Frequency balance and temporal variability are treated as resting-state descriptions.",
+              "The findings are not used as standalone diagnostic evidence."
+            ],
+            "conclusion": "The recording provides a usable synthetic summary of resting-state activity.",
+            "confidence": "moderate"
+          }
+        }
+      }
+    },
+    {
+      "recording_id": "03-eyes_open_cz_f4_20s",
+      "signal_path": "signals.npz",
+      "signal_key": "03_eyes_open_cz_f4_20s",
+      "shape": [
+        2,
+        5120
+      ],
+      "dtype": "float32",
+      "representation": "raw_eeg",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "Cz",
+        "F4"
+      ],
+      "condition": "eyes_open_cz_f4_20s",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": "none",
+        "usable_fraction": 1.0,
+        "artifact_types": []
+      },
+      "preprocessing": {
+        "source_timesteps": 5120,
+        "stored_timesteps": 5120,
+        "steps": [
+          {
+            "operation": "canonical_import",
+            "parameters": {
+              "source_transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32"
+            }
+          }
+        ]
+      },
+      "analysis": {
+        "method": "welch_relative_power_and_time_domain_summary",
+        "feature_version": "1.0.0",
+        "aggregate_features": {
+          "relative_band_power": {
+            "delta": 0.351774,
+            "theta": 0.160714,
+            "alpha": 0.151201,
+            "beta": 0.239631,
+            "gamma": 0.09668
+          },
+          "dominant_band": "delta",
+          "theta_beta_ratio": 0.670673,
+          "theta_alpha_ratio": 1.062916,
+          "spectral_entropy": 0.875547,
+          "channel_correlation_mean": 0.504575,
+          "temporal_variability": "highly_variable"
+        },
+        "interpretation_flags": [
+          "delta_dominant",
+          "highly_variable"
+        ]
+      },
+      "curriculum_targets": {
+        "resting_state_cot": {
+          "scope": "recording",
+          "supervision": "synthetic_from_measured_features",
+          "input_references": [
+            "03-eyes_open_cz_f4_20s__segment-001"
+          ],
+          "target": {
+            "observations": [
+              "Delta contributes 35.2% of relative power, followed by beta at 24.0%.",
+              "The interval is highly variable across the analyzed samples.",
+              "The aggregate theta-to-beta ratio is 0.671."
+            ],
+            "reasoning_steps": [
+              "Recording quality is checked before interpreting its spectral summary.",
+              "Frequency balance and temporal variability are treated as resting-state descriptions.",
+              "The findings are not used as standalone diagnostic evidence."
+            ],
+            "conclusion": "The recording provides a usable synthetic summary of resting-state activity.",
+            "confidence": "moderate"
+          }
+        }
+      }
+    },
+    {
+      "recording_id": "04-cognitive_challenge_cz_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "04_cognitive_challenge_cz_f4",
+      "shape": [
+        2,
+        11520
+      ],
+      "dtype": "float32",
+      "representation": "raw_eeg",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "Cz",
+        "F4"
+      ],
+      "condition": "cognitive_challenge_cz_f4",
+      "task": "cognitive_task",
+      "quality": {
+        "usable": true,
+        "artifact": "none",
+        "usable_fraction": 1.0,
+        "artifact_types": []
+      },
+      "preprocessing": {
+        "source_timesteps": 11520,
+        "stored_timesteps": 11520,
+        "steps": [
+          {
+            "operation": "canonical_import",
+            "parameters": {
+              "source_transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32"
+            }
+          }
+        ]
+      },
+      "analysis": {
+        "method": "welch_relative_power_and_time_domain_summary",
+        "feature_version": "1.0.0",
+        "aggregate_features": {
+          "relative_band_power": {
+            "delta": 0.32371,
+            "theta": 0.174199,
+            "alpha": 0.165599,
+            "beta": 0.235271,
+            "gamma": 0.101221
+          },
+          "dominant_band": "delta",
+          "theta_beta_ratio": 0.740418,
+          "theta_alpha_ratio": 1.051933,
+          "spectral_entropy": 0.883534,
+          "channel_correlation_mean": 0.497922,
+          "temporal_variability": "moderately_variable"
+        },
+        "interpretation_flags": [
+          "delta_dominant",
+          "moderately_variable"
+        ]
+      },
+      "curriculum_targets": {
+        "attention_task_cot": {
+          "scope": "recording",
+          "supervision": "synthetic_from_measured_features",
+          "input_references": [
+            "04-cognitive_challenge_cz_f4__segment-001",
+            "04-cognitive_challenge_cz_f4__segment-002",
+            "04-cognitive_challenge_cz_f4__segment-003"
+          ],
+          "target": {
+            "observations": [
+              "Delta contributes 32.4% of relative power, followed by beta at 23.5%.",
+              "The interval is moderately variable across the analyzed samples.",
+              "The aggregate theta-to-beta ratio is 0.740."
+            ],
+            "reasoning_steps": [
+              "Recording quality is checked before interpreting its spectral summary.",
+              "Frequency balance and temporal variability are treated as task-state descriptions.",
+              "The findings are not used as standalone diagnostic evidence."
+            ],
+            "conclusion": "The recording provides a usable synthetic summary of task-state activity.",
+            "confidence": "moderate"
+          }
+        }
+      }
+    },
+    {
+      "recording_id": "05-pre_omni_harmonic_baseline_cz_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "05_pre_omni_harmonic_baseline_cz_f4",
+      "shape": [
+        2,
+        3840
+      ],
+      "dtype": "float32",
+      "representation": "raw_eeg",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "Cz",
+        "F4"
+      ],
+      "condition": "pre_omni_harmonic_baseline_cz_f4",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": "none",
+        "usable_fraction": 1.0,
+        "artifact_types": []
+      },
+      "preprocessing": {
+        "source_timesteps": 3840,
+        "stored_timesteps": 3840,
+        "steps": [
+          {
+            "operation": "canonical_import",
+            "parameters": {
+              "source_transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32"
+            }
+          }
+        ]
+      },
+      "analysis": {
+        "method": "welch_relative_power_and_time_domain_summary",
+        "feature_version": "1.0.0",
+        "aggregate_features": {
+          "relative_band_power": {
+            "delta": 0.311838,
+            "theta": 0.199793,
+            "alpha": 0.184678,
+            "beta": 0.20788,
+            "gamma": 0.095811
+          },
+          "dominant_band": "delta",
+          "theta_beta_ratio": 0.961098,
+          "theta_alpha_ratio": 1.081845,
+          "spectral_entropy": 0.868678,
+          "channel_correlation_mean": 0.512394,
+          "temporal_variability": "moderately_variable"
+        },
+        "interpretation_flags": [
+          "delta_dominant",
+          "moderately_variable"
+        ]
+      },
+      "curriculum_targets": {
+        "resting_state_cot": {
+          "scope": "recording",
+          "supervision": "synthetic_from_measured_features",
+          "input_references": [
+            "05-pre_omni_harmonic_baseline_cz_f4__segment-001",
+            "05-pre_omni_harmonic_baseline_cz_f4__segment-002"
+          ],
+          "target": {
+            "observations": [
+              "Delta contributes 31.2% of relative power, followed by beta at 20.8%.",
+              "The interval is moderately variable across the analyzed samples.",
+              "The aggregate theta-to-beta ratio is 0.961."
+            ],
+            "reasoning_steps": [
+              "Recording quality is checked before interpreting its spectral summary.",
+              "Frequency balance and temporal variability are treated as resting-state descriptions.",
+              "The findings are not used as standalone diagnostic evidence."
+            ],
+            "conclusion": "The recording provides a usable synthetic summary of resting-state activity.",
+            "confidence": "moderate"
+          }
+        }
+      }
+    },
+    {
+      "recording_id": "06-omni_harmonic_assessment_cz_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "06_omni_harmonic_assessment_cz_f4",
+      "shape": [
+        2,
+        7680
+      ],
+      "dtype": "float32",
+      "representation": "raw_eeg",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "Cz",
+        "F4"
+      ],
+      "condition": "omni_harmonic_assessment_cz_f4",
+      "task": "auditory_task",
+      "quality": {
+        "usable": true,
+        "artifact": "none",
+        "usable_fraction": 1.0,
+        "artifact_types": []
+      },
+      "preprocessing": {
+        "source_timesteps": 7680,
+        "stored_timesteps": 7680,
+        "steps": [
+          {
+            "operation": "canonical_import",
+            "parameters": {
+              "source_transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32"
+            }
+          }
+        ]
+      },
+      "analysis": {
+        "method": "welch_relative_power_and_time_domain_summary",
+        "feature_version": "1.0.0",
+        "aggregate_features": {
+          "relative_band_power": {
+            "delta": 0.342371,
+            "theta": 0.163205,
+            "alpha": 0.148897,
+            "beta": 0.24251,
+            "gamma": 0.103017
+          },
+          "dominant_band": "delta",
+          "theta_beta_ratio": 0.672983,
+          "theta_alpha_ratio": 1.096093,
+          "spectral_entropy": 0.882196,
+          "channel_correlation_mean": 0.496398,
+          "temporal_variability": "highly_variable"
+        },
+        "interpretation_flags": [
+          "delta_dominant",
+          "highly_variable"
+        ]
+      },
+      "curriculum_targets": {
+        "attention_task_cot": {
+          "scope": "recording",
+          "supervision": "synthetic_from_measured_features",
+          "input_references": [
+            "06-omni_harmonic_assessment_cz_f4__segment-001",
+            "06-omni_harmonic_assessment_cz_f4__segment-002"
+          ],
+          "target": {
+            "observations": [
+              "Delta contributes 34.2% of relative power, followed by beta at 24.3%.",
+              "The interval is highly variable across the analyzed samples.",
+              "The aggregate theta-to-beta ratio is 0.673."
+            ],
+            "reasoning_steps": [
+              "Recording quality is checked before interpreting its spectral summary.",
+              "Frequency balance and temporal variability are treated as task-state descriptions.",
+              "The findings are not used as standalone diagnostic evidence."
+            ],
+            "conclusion": "The recording provides a usable synthetic summary of task-state activity.",
+            "confidence": "moderate"
+          }
+        }
+      }
+    },
+    {
+      "recording_id": "07-eyes_open_baseline_o1_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "07_eyes_open_baseline_o1_f4",
+      "shape": [
+        2,
+        7680
+      ],
+      "dtype": "float32",
+      "representation": "raw_eeg",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "O1",
+        "F4"
+      ],
+      "condition": "eyes_open_baseline_o1_f4",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": "none",
+        "usable_fraction": 1.0,
+        "artifact_types": []
+      },
+      "preprocessing": {
+        "source_timesteps": 7680,
+        "stored_timesteps": 7680,
+        "steps": [
+          {
+            "operation": "canonical_import",
+            "parameters": {
+              "source_transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32"
+            }
+          }
+        ]
+      },
+      "analysis": {
+        "method": "welch_relative_power_and_time_domain_summary",
+        "feature_version": "1.0.0",
+        "aggregate_features": {
+          "relative_band_power": {
+            "delta": 0.331253,
+            "theta": 0.182129,
+            "alpha": 0.182106,
+            "beta": 0.212752,
+            "gamma": 0.09176
+          },
+          "dominant_band": "delta",
+          "theta_beta_ratio": 0.856062,
+          "theta_alpha_ratio": 1.000126,
+          "spectral_entropy": 0.868763,
+          "channel_correlation_mean": 0.540281,
+          "temporal_variability": "moderately_variable"
+        },
+        "interpretation_flags": [
+          "delta_dominant",
+          "moderately_variable"
+        ]
+      },
+      "curriculum_targets": {
+        "resting_state_cot": {
+          "scope": "recording",
+          "supervision": "synthetic_from_measured_features",
+          "input_references": [
+            "07-eyes_open_baseline_o1_f4__segment-001",
+            "07-eyes_open_baseline_o1_f4__segment-002"
+          ],
+          "target": {
+            "observations": [
+              "Delta contributes 33.1% of relative power, followed by beta at 21.3%.",
+              "The interval is moderately variable across the analyzed samples.",
+              "The aggregate theta-to-beta ratio is 0.856."
+            ],
+            "reasoning_steps": [
+              "Recording quality is checked before interpreting its spectral summary.",
+              "Frequency balance and temporal variability are treated as resting-state descriptions.",
+              "The findings are not used as standalone diagnostic evidence."
+            ],
+            "conclusion": "The recording provides a usable synthetic summary of resting-state activity.",
+            "confidence": "moderate"
+          }
+        }
+      }
+    },
+    {
+      "recording_id": "08-eyes_closed_o1_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "08_eyes_closed_o1_f4",
+      "shape": [
+        2,
+        5120
+      ],
+      "dtype": "float32",
+      "representation": "raw_eeg",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "O1",
+        "F4"
+      ],
+      "condition": "eyes_closed_o1_f4",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": "none",
+        "usable_fraction": 1.0,
+        "artifact_types": []
+      },
+      "preprocessing": {
+        "source_timesteps": 5120,
+        "stored_timesteps": 5120,
+        "steps": [
+          {
+            "operation": "canonical_import",
+            "parameters": {
+              "source_transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32"
+            }
+          }
+        ]
+      },
+      "analysis": {
+        "method": "welch_relative_power_and_time_domain_summary",
+        "feature_version": "1.0.0",
+        "aggregate_features": {
+          "relative_band_power": {
+            "delta": 0.328551,
+            "theta": 0.163928,
+            "alpha": 0.204667,
+            "beta": 0.215609,
+            "gamma": 0.087245
+          },
+          "dominant_band": "delta",
+          "theta_beta_ratio": 0.760302,
+          "theta_alpha_ratio": 0.80095,
+          "spectral_entropy": 0.86495,
+          "channel_correlation_mean": 0.516273,
+          "temporal_variability": "moderately_variable"
+        },
+        "interpretation_flags": [
+          "delta_dominant",
+          "moderately_variable"
+        ]
+      },
+      "curriculum_targets": {
+        "resting_state_cot": {
+          "scope": "recording",
+          "supervision": "synthetic_from_measured_features",
+          "input_references": [
+            "08-eyes_closed_o1_f4__segment-001"
+          ],
+          "target": {
+            "observations": [
+              "Delta contributes 32.9% of relative power, followed by beta at 21.6%.",
+              "The interval is moderately variable across the analyzed samples.",
+              "The aggregate theta-to-beta ratio is 0.760."
+            ],
+            "reasoning_steps": [
+              "Recording quality is checked before interpreting its spectral summary.",
+              "Frequency balance and temporal variability are treated as resting-state descriptions.",
+              "The findings are not used as standalone diagnostic evidence."
+            ],
+            "conclusion": "The recording provides a usable synthetic summary of resting-state activity.",
+            "confidence": "moderate"
+          }
+        }
+      }
+    },
+    {
+      "recording_id": "09-eyes_open_o1_f4_30s",
+      "signal_path": "signals.npz",
+      "signal_key": "09_eyes_open_o1_f4_30s",
+      "shape": [
+        2,
+        5120
+      ],
+      "dtype": "float32",
+      "representation": "raw_eeg",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "O1",
+        "F4"
+      ],
+      "condition": "eyes_open_o1_f4_30s",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": "none",
+        "usable_fraction": 1.0,
+        "artifact_types": []
+      },
+      "preprocessing": {
+        "source_timesteps": 5120,
+        "stored_timesteps": 5120,
+        "steps": [
+          {
+            "operation": "canonical_import",
+            "parameters": {
+              "source_transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32"
+            }
+          }
+        ]
+      },
+      "analysis": {
+        "method": "welch_relative_power_and_time_domain_summary",
+        "feature_version": "1.0.0",
+        "aggregate_features": {
+          "relative_band_power": {
+            "delta": 0.351774,
+            "theta": 0.160714,
+            "alpha": 0.151201,
+            "beta": 0.239631,
+            "gamma": 0.09668
+          },
+          "dominant_band": "delta",
+          "theta_beta_ratio": 0.670673,
+          "theta_alpha_ratio": 1.062916,
+          "spectral_entropy": 0.875547,
+          "channel_correlation_mean": 0.504575,
+          "temporal_variability": "highly_variable"
+        },
+        "interpretation_flags": [
+          "delta_dominant",
+          "highly_variable"
+        ]
+      },
+      "curriculum_targets": {
+        "resting_state_cot": {
+          "scope": "recording",
+          "supervision": "synthetic_from_measured_features",
+          "input_references": [
+            "09-eyes_open_o1_f4_30s__segment-001"
+          ],
+          "target": {
+            "observations": [
+              "Delta contributes 35.2% of relative power, followed by beta at 24.0%.",
+              "The interval is highly variable across the analyzed samples.",
+              "The aggregate theta-to-beta ratio is 0.671."
+            ],
+            "reasoning_steps": [
+              "Recording quality is checked before interpreting its spectral summary.",
+              "Frequency balance and temporal variability are treated as resting-state descriptions.",
+              "The findings are not used as standalone diagnostic evidence."
+            ],
+            "conclusion": "The recording provides a usable synthetic summary of resting-state activity.",
+            "confidence": "moderate"
+          }
+        }
+      }
+    },
+    {
+      "recording_id": "10-eyes_closed_f3_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "10_eyes_closed_f3_f4",
+      "shape": [
+        2,
+        11520
+      ],
+      "dtype": "float32",
+      "representation": "raw_eeg",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "F3",
+        "F4"
+      ],
+      "condition": "eyes_closed_f3_f4",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": "none",
+        "usable_fraction": 1.0,
+        "artifact_types": []
+      },
+      "preprocessing": {
+        "source_timesteps": 11520,
+        "stored_timesteps": 11520,
+        "steps": [
+          {
+            "operation": "canonical_import",
+            "parameters": {
+              "source_transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32"
+            }
+          }
+        ]
+      },
+      "analysis": {
+        "method": "welch_relative_power_and_time_domain_summary",
+        "feature_version": "1.0.0",
+        "aggregate_features": {
+          "relative_band_power": {
+            "delta": 0.32371,
+            "theta": 0.174199,
+            "alpha": 0.165599,
+            "beta": 0.235271,
+            "gamma": 0.101221
+          },
+          "dominant_band": "delta",
+          "theta_beta_ratio": 0.740418,
+          "theta_alpha_ratio": 1.051933,
+          "spectral_entropy": 0.883534,
+          "channel_correlation_mean": 0.497922,
+          "temporal_variability": "moderately_variable"
+        },
+        "interpretation_flags": [
+          "delta_dominant",
+          "moderately_variable"
+        ]
+      },
+      "curriculum_targets": {
+        "resting_state_cot": {
+          "scope": "recording",
+          "supervision": "synthetic_from_measured_features",
+          "input_references": [
+            "10-eyes_closed_f3_f4__segment-001",
+            "10-eyes_closed_f3_f4__segment-002",
+            "10-eyes_closed_f3_f4__segment-003"
+          ],
+          "target": {
+            "observations": [
+              "Delta contributes 32.4% of relative power, followed by beta at 23.5%.",
+              "The interval is moderately variable across the analyzed samples.",
+              "The aggregate theta-to-beta ratio is 0.740."
+            ],
+            "reasoning_steps": [
+              "Recording quality is checked before interpreting its spectral summary.",
+              "Frequency balance and temporal variability are treated as resting-state descriptions.",
+              "The findings are not used as standalone diagnostic evidence."
+            ],
+            "conclusion": "The recording provides a usable synthetic summary of resting-state activity.",
+            "confidence": "moderate"
+          }
+        }
+      }
+    },
+    {
+      "recording_id": "11-eyes_closed_fz_f4",
+      "signal_path": "signals.npz",
+      "signal_key": "11_eyes_closed_fz_f4",
+      "shape": [
+        2,
+        11520
+      ],
+      "dtype": "float32",
+      "representation": "raw_eeg",
+      "layout": "channels_first",
+      "sampling_rate_hz": 256,
+      "channel_names": [
+        "Fz",
+        "F4"
+      ],
+      "condition": "eyes_closed_fz_f4",
+      "task": "resting_state",
+      "quality": {
+        "usable": true,
+        "artifact": "none",
+        "usable_fraction": 0.999913,
+        "artifact_types": []
+      },
+      "preprocessing": {
+        "source_timesteps": 11520,
+        "stored_timesteps": 11520,
+        "steps": [
+          {
+            "operation": "canonical_import",
+            "parameters": {
+              "source_transformation": "extracted_subject_from_cohort_cell_transposed_to_channels_first_and_cast_to_float32"
+            }
+          }
+        ]
+      },
+      "analysis": {
+        "method": "welch_relative_power_and_time_domain_summary",
+        "feature_version": "1.0.0",
+        "aggregate_features": {
+          "relative_band_power": {
+            "delta": 0.303749,
+            "theta": 0.172246,
+            "alpha": 0.147826,
+            "beta": 0.256187,
+            "gamma": 0.119992
+          },
+          "dominant_band": "delta",
+          "theta_beta_ratio": 0.672345,
+          "theta_alpha_ratio": 1.165194,
+          "spectral_entropy": 0.901163,
+          "channel_correlation_mean": 0.438209,
+          "temporal_variability": "moderately_variable"
+        },
+        "interpretation_flags": [
+          "delta_dominant",
+          "moderately_variable"
+        ]
+      },
+      "curriculum_targets": {
+        "resting_state_cot": {
+          "scope": "recording",
+          "supervision": "synthetic_from_measured_features",
+          "input_references": [
+            "11-eyes_closed_fz_f4__segment-001",
+            "11-eyes_closed_fz_f4__segment-002"
+          ],
+          "target": {
+            "observations": [
+              "Delta contributes 30.4% of relative power, followed by beta at 25.6%.",
+              "The interval is moderately variable across the analyzed samples.",
+              "The aggregate theta-to-beta ratio is 0.672."
+            ],
+            "reasoning_steps": [
+              "Recording quality is checked before interpreting its spectral summary.",
+              "Frequency balance and temporal variability are treated as resting-state descriptions.",
+              "The findings are not used as standalone diagnostic evidence."
+            ],
+            "conclusion": "The recording provides a usable synthetic summary of resting-state activity.",
+            "confidence": "moderate"
+          }
+        }
+      }
+    }
+  ]
+}

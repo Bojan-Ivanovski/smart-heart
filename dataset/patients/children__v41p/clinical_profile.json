@@ -1,0 +1,82 @@
+{
+  "referral": {
+    "reason": "Evaluation of intermittent attention difficulty during demanding school activities.",
+    "referral_source": "school_teacher"
+  },
+  "comorbidity_screen": {
+    "anxiety": "not_indicated",
+    "depression": "not_indicated",
+    "learning_disorder": "screening_recommended",
+    "sleep": {
+      "average_hours": 9.106662,
+      "difficulty": "mild_sleep_onset_delay",
+      "daytime_fatigue": "mild",
+      "disorder": "not_indicated"
+    }
+  },
+  "alternative_explanations": [
+    {
+      "factor": "mild_sleep_onset_delay",
+      "assessment": "May account for occasional attention variability."
+    }
+  ],
+  "informants": [
+    {
+      "role": "parent",
+      "summary": "Occasional reminders are helpful, but home routines are generally completed independently."
+    },
+    {
+      "role": "teacher",
+      "summary": "Attention occasionally decreases during lengthy assignments without a persistent cross-setting pattern."
+    }
+  ],
+  "functional_impairment": {
+    "settings": [
+      "school"
+    ],
+    "academic": "mild",
+    "social": "none",
+    "home": "none"
+  },
+  "symptoms": {
+    "duration_months": 21,
+    "onset_age_years": 10,
+    "inattention": {
+      "count": 5,
+      "maximum": 9,
+      "examples": [
+        "Occasionally loses track of school materials and homework.",
+        "Sometimes needs multi-step instructions repeated.",
+        "Attention decreases during lengthy independent assignments."
+      ]
+    },
+    "hyperactivity_impulsivity": {
+      "count": 1,
+      "maximum": 9,
+      "examples": [
+        "Fidgets when seated for extended periods."
+      ]
+    },
+    "pattern": "situational",
+    "recent_changes": "stable"
+  },
+  "rating_scales": [
+    {
+      "instrument": "synthetic_parent_adhd_scale",
+      "score": 5,
+      "maximum": 27,
+      "interpretation": "low"
+    },
+    {
+      "instrument": "synthetic_teacher_adhd_scale",
+      "score": 11,
+      "maximum": 27,
+      "interpretation": "borderline"
+    }
+  ],
+  "medication": {
+    "adhd_medication_status": "not_applicable",
+    "medicated_during_recording": false,
+    "other_medications": []
+  }
+}

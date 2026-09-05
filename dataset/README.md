@@ -7,19 +7,33 @@ It is not generated at runtime and does not require archive extraction.
 
 ```text
 dataset/
+  schema/
+    clinical_profile.schema.json
+    patient.schema.json
+    recordings.schema.json
+    segments.schema.json
   patients/
     <patient-id>/
+      clinical_profile.json
       patient.json
+      recordings.json
       signals.npz
+      segments.json
 ```
 
+`schema/` contains strict JSON Schema Draft 2020-12 contracts for every JSON
+artifact in each generated patient directory. Generated patient data must pass the
+corresponding schema plus cross-file reference and numerical-consistency validation.
+
 Each `patient.json` contains patient-level metadata, diagnosis, recording
-metadata, optional explicitly annotated windows, and curriculum targets.
-The loader discovers these files directly from `patients/*/patient.json`.
+resources, and patient-level curriculum targets. Generated patient directories
+separate clinical evidence, recording analysis, and segment-level targets into the
+other JSON files. The loader discovers patients directly from
+`patients/*/patient.json` and remains compatible with records awaiting generation.
 
 Each `signals.npz` contains the patient's recordings as `float32`,
 channels-first arrays. A recording's `signal_key` identifies its array. Runtime
-windows are slices of these arrays and are not duplicated on disk.
+model windows are runtime slices of these arrays and are not duplicated on disk.
 
 ## Contract Rules
 
@@ -27,8 +41,11 @@ windows are slices of these arrays and are not duplicated on disk.
 - A patient and all their recordings always belong to one persisted split.
 - Signals have shape `[channels, timesteps]` and use `float32` storage.
 - Missing metadata is represented by `null`; it must not be invented.
-- `windows` is reserved for explicitly annotated intervals and can be empty.
-- Runtime windowing does not modify the stored recording.
+- `segments` contains variable-length, signal-derived regions with meaningful targets.
+- Each segment defines a fixed-size runtime window policy for model input.
+- Segment window policies are authoritative; CLI window settings apply only to legacy records.
+- Runtime windowing stays inside segment boundaries and does not modify the recording.
+- Measured evidence, synthetic interpretation, and protected diagnosis remain separate.
 - Curriculum evidence must identify its supervision source.
 - `diagnostic_cot.target.diagnosis` is currently the only universal target.
 

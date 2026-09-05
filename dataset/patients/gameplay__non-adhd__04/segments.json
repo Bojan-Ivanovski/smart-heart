@@ -1,0 +1,1027 @@
+{
+  "patient_id": "gameplay__non-adhd__04",
+  "segments": [
+    {
+      "segment_id": "emotiv-control-01__segment-001",
+      "recording_id": "emotiv-control-01",
+      "start_timestep": 0,
+      "end_timestep": 1024,
+      "duration_seconds": null,
+      "segment_type": "representative_background",
+      "selection_reason": "This region represents a sustained background pattern without a large spectral or artifact deviation. The measured dominant band is theta and the theta-to-beta ratio is 1.418.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.116211
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.0,
+          "theta": 0.383759,
+          "alpha": 0.157377,
+          "beta": 0.270561,
+          "gamma": 0.188303
+        },
+        "dominant_band": "theta",
+        "theta_beta_ratio": 1.418383,
+        "spectral_entropy": 0.824295,
+        "rms_amplitude_normalized": 5.127909,
+        "zero_crossing_rate": 0.0
+      },
+      "window_policy": {
+        "size_samples": 512,
+        "stride_samples": 256,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "emotiv-control-01__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "B",
+            "answer_text": "Theta",
+            "explanation": "Theta has the largest measured relative power at 0.384."
+          },
+          {
+            "question_id": "emotiv-control-01__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable gameplay band-power time series with theta-dominant spectral activity.",
+            "spectral_description": "Theta contributes 38.4% of relative power, followed by beta at 27.1%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "Automatic review identified moderate extreme-amplitude artifact."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "emotiv-control-01__segment-002",
+      "recording_id": "emotiv-control-01",
+      "start_timestep": 1024,
+      "end_timestep": 3072,
+      "duration_seconds": null,
+      "segment_type": "beta_enrichment",
+      "selection_reason": "This region contains sustained beta enrichment relative to the recording-level spectral profile. The measured dominant band is theta and the theta-to-beta ratio is 2.065.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.116211
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.0,
+          "theta": 0.506973,
+          "alpha": 0.172174,
+          "beta": 0.245455,
+          "gamma": 0.075398
+        },
+        "dominant_band": "theta",
+        "theta_beta_ratio": 2.065442,
+        "spectral_entropy": 0.7375,
+        "rms_amplitude_normalized": 24.690113,
+        "zero_crossing_rate": 0.0
+      },
+      "window_policy": {
+        "size_samples": 512,
+        "stride_samples": 256,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "emotiv-control-01__segment-002__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "B",
+            "answer_text": "Theta",
+            "explanation": "Theta has the largest measured relative power at 0.507."
+          },
+          {
+            "question_id": "emotiv-control-01__segment-002__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable gameplay band-power time series with theta-dominant spectral activity.",
+            "spectral_description": "Theta contributes 50.7% of relative power, followed by beta at 24.5%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "Automatic review identified moderate extreme-amplitude artifact."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "emotiv-control-01__segment-003",
+      "recording_id": "emotiv-control-01",
+      "start_timestep": 3072,
+      "end_timestep": 4096,
+      "duration_seconds": null,
+      "segment_type": "representative_background",
+      "selection_reason": "This region represents a sustained background pattern without a large spectral or artifact deviation. The measured dominant band is theta and the theta-to-beta ratio is 1.828.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.158203
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.0,
+          "theta": 0.479549,
+          "alpha": 0.17721,
+          "beta": 0.262396,
+          "gamma": 0.080845
+        },
+        "dominant_band": "theta",
+        "theta_beta_ratio": 1.827577,
+        "spectral_entropy": 0.753975,
+        "rms_amplitude_normalized": 38.106325,
+        "zero_crossing_rate": 0.0
+      },
+      "window_policy": {
+        "size_samples": 512,
+        "stride_samples": 256,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "emotiv-control-01__segment-003__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "B",
+            "answer_text": "Theta",
+            "explanation": "Theta has the largest measured relative power at 0.480."
+          },
+          {
+            "question_id": "emotiv-control-01__segment-003__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable gameplay band-power time series with theta-dominant spectral activity.",
+            "spectral_description": "Theta contributes 48.0% of relative power, followed by beta at 26.2%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "Automatic review identified moderate extreme-amplitude artifact."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "emotiv-control-02__segment-001",
+      "recording_id": "emotiv-control-02",
+      "start_timestep": 0,
+      "end_timestep": 4096,
+      "duration_seconds": null,
+      "segment_type": "beta_enrichment",
+      "selection_reason": "This region contains sustained beta enrichment relative to the recording-level spectral profile. The measured dominant band is theta and the theta-to-beta ratio is 3.190.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.19751
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.0,
+          "theta": 0.492043,
+          "alpha": 0.303347,
+          "beta": 0.154253,
+          "gamma": 0.050357
+        },
+        "dominant_band": "theta",
+        "theta_beta_ratio": 3.189844,
+        "spectral_entropy": 0.714305,
+        "rms_amplitude_normalized": 215.216524,
+        "zero_crossing_rate": 0.0
+      },
+      "window_policy": {
+        "size_samples": 512,
+        "stride_samples": 256,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "emotiv-control-02__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "B",
+            "answer_text": "Theta",
+            "explanation": "Theta has the largest measured relative power at 0.492."
+          },
+          {
+            "question_id": "emotiv-control-02__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable gameplay band-power time series with theta-dominant spectral activity.",
+            "spectral_description": "Theta contributes 49.2% of relative power, followed by alpha at 30.3%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "Automatic review identified moderate extreme-amplitude artifact."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "emotiv-control-03__segment-001",
+      "recording_id": "emotiv-control-03",
+      "start_timestep": 0,
+      "end_timestep": 2225,
+      "duration_seconds": null,
+      "segment_type": "alpha_enrichment",
+      "selection_reason": "This region contains sustained alpha enrichment relative to the recording-level spectral profile. The measured dominant band is theta and the theta-to-beta ratio is 1.520.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.177978
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.0,
+          "theta": 0.364321,
+          "alpha": 0.169217,
+          "beta": 0.239715,
+          "gamma": 0.226747
+        },
+        "dominant_band": "theta",
+        "theta_beta_ratio": 1.519809,
+        "spectral_entropy": 0.837155,
+        "rms_amplitude_normalized": 39.481447,
+        "zero_crossing_rate": 0.0
+      },
+      "window_policy": {
+        "size_samples": 512,
+        "stride_samples": 256,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "emotiv-control-03__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "B",
+            "answer_text": "Theta",
+            "explanation": "Theta has the largest measured relative power at 0.364."
+          },
+          {
+            "question_id": "emotiv-control-03__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable gameplay band-power time series with theta-dominant spectral activity.",
+            "spectral_description": "Theta contributes 36.4% of relative power, followed by beta at 24.0%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "Automatic review identified moderate extreme-amplitude artifact."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "emotiv-control-04__segment-001",
+      "recording_id": "emotiv-control-04",
+      "start_timestep": 0,
+      "end_timestep": 2770,
+      "duration_seconds": null,
+      "segment_type": "representative_background",
+      "selection_reason": "This region represents a sustained background pattern without a large spectral or artifact deviation. The measured dominant band is beta and the theta-to-beta ratio is 0.492.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.152708
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.0,
+          "theta": 0.2082,
+          "alpha": 0.131058,
+          "beta": 0.42294,
+          "gamma": 0.237802
+        },
+        "dominant_band": "beta",
+        "theta_beta_ratio": 0.492268,
+        "spectral_entropy": 0.806837,
+        "rms_amplitude_normalized": 4.877438,
+        "zero_crossing_rate": 0.0
+      },
+      "window_policy": {
+        "size_samples": 512,
+        "stride_samples": 256,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "emotiv-control-04__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "D",
+            "answer_text": "Beta",
+            "explanation": "Beta has the largest measured relative power at 0.423."
+          },
+          {
+            "question_id": "emotiv-control-04__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable gameplay band-power time series with beta-dominant spectral activity.",
+            "spectral_description": "Beta contributes 42.3% of relative power, followed by gamma at 23.8%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "Automatic review identified moderate extreme-amplitude artifact."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "emotiv-control-05__segment-001",
+      "recording_id": "emotiv-control-05",
+      "start_timestep": 0,
+      "end_timestep": 2048,
+      "duration_seconds": null,
+      "segment_type": "representative_background",
+      "selection_reason": "This region represents a sustained background pattern without a large spectral or artifact deviation. The measured dominant band is theta and the theta-to-beta ratio is 2.777.",
+      "quality": {
+        "usable": false,
+        "artifact_fraction": 0.378418
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.0,
+          "theta": 0.518262,
+          "alpha": 0.2161,
+          "beta": 0.186642,
+          "gamma": 0.078996
+        },
+        "dominant_band": "theta",
+        "theta_beta_ratio": 2.776771,
+        "spectral_entropy": 0.736604,
+        "rms_amplitude_normalized": 164.165758,
+        "zero_crossing_rate": 0.0
+      },
+      "window_policy": {
+        "size_samples": 512,
+        "stride_samples": 256,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "emotiv-control-05__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "B",
+            "answer_text": "Theta",
+            "explanation": "Theta has the largest measured relative power at 0.518."
+          },
+          {
+            "question_id": "emotiv-control-05__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable gameplay band-power time series with theta-dominant spectral activity.",
+            "spectral_description": "Theta contributes 51.8% of relative power, followed by alpha at 21.6%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "Automatic review identified severe extreme-amplitude artifact."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "emotiv-control-05__segment-002",
+      "recording_id": "emotiv-control-05",
+      "start_timestep": 2048,
+      "end_timestep": 4096,
+      "duration_seconds": null,
+      "segment_type": "beta_enrichment",
+      "selection_reason": "This region contains sustained beta enrichment relative to the recording-level spectral profile. The measured dominant band is beta and the theta-to-beta ratio is 0.709.",
+      "quality": {
+        "usable": false,
+        "artifact_fraction": 0.227539
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.0,
+          "theta": 0.278067,
+          "alpha": 0.168438,
+          "beta": 0.391924,
+          "gamma": 0.161571
+        },
+        "dominant_band": "beta",
+        "theta_beta_ratio": 0.709492,
+        "spectral_entropy": 0.818633,
+        "rms_amplitude_normalized": 39.338467,
+        "zero_crossing_rate": 0.0
+      },
+      "window_policy": {
+        "size_samples": 512,
+        "stride_samples": 256,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "emotiv-control-05__segment-002__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "D",
+            "answer_text": "Beta",
+            "explanation": "Beta has the largest measured relative power at 0.392."
+          },
+          {
+            "question_id": "emotiv-control-05__segment-002__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable gameplay band-power time series with beta-dominant spectral activity.",
+            "spectral_description": "Beta contributes 39.2% of relative power, followed by theta at 27.8%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "Automatic review identified severe extreme-amplitude artifact."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "keyboard-control-01__segment-001",
+      "recording_id": "keyboard-control-01",
+      "start_timestep": 0,
+      "end_timestep": 2580,
+      "duration_seconds": null,
+      "segment_type": "artifact_burden",
+      "selection_reason": "This region contains a sustained increase in automatically detected extreme-amplitude activity. The measured dominant band is beta and the theta-to-beta ratio is 0.704.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.056977
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.0,
+          "theta": 0.259403,
+          "alpha": 0.218376,
+          "beta": 0.368391,
+          "gamma": 0.15383
+        },
+        "dominant_band": "beta",
+        "theta_beta_ratio": 0.704151,
+        "spectral_entropy": 0.831429,
+        "rms_amplitude_normalized": 2.751421,
+        "zero_crossing_rate": 0.0
+      },
+      "window_policy": {
+        "size_samples": 512,
+        "stride_samples": 256,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "keyboard-control-01__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "D",
+            "answer_text": "Beta",
+            "explanation": "Beta has the largest measured relative power at 0.368."
+          },
+          {
+            "question_id": "keyboard-control-01__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable gameplay band-power time series with beta-dominant spectral activity.",
+            "spectral_description": "Beta contributes 36.8% of relative power, followed by theta at 25.9%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "Automatic review identified moderate extreme-amplitude artifact."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "keyboard-control-02__segment-001",
+      "recording_id": "keyboard-control-02",
+      "start_timestep": 0,
+      "end_timestep": 1024,
+      "duration_seconds": null,
+      "segment_type": "alpha_enrichment",
+      "selection_reason": "This region contains sustained alpha enrichment relative to the recording-level spectral profile. The measured dominant band is alpha and the theta-to-beta ratio is 0.804.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.039062
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.0,
+          "theta": 0.240008,
+          "alpha": 0.32299,
+          "beta": 0.29859,
+          "gamma": 0.138412
+        },
+        "dominant_band": "alpha",
+        "theta_beta_ratio": 0.803805,
+        "spectral_entropy": 0.833923,
+        "rms_amplitude_normalized": 3.01532,
+        "zero_crossing_rate": 0.0
+      },
+      "window_policy": {
+        "size_samples": 512,
+        "stride_samples": 256,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "keyboard-control-02__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "C",
+            "answer_text": "Alpha",
+            "explanation": "Alpha has the largest measured relative power at 0.323."
+          },
+          {
+            "question_id": "keyboard-control-02__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable gameplay band-power time series with alpha-dominant spectral activity.",
+            "spectral_description": "Alpha contributes 32.3% of relative power, followed by beta at 29.9%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "Automatic review identified minor extreme-amplitude artifact."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "keyboard-control-02__segment-002",
+      "recording_id": "keyboard-control-02",
+      "start_timestep": 1024,
+      "end_timestep": 2455,
+      "duration_seconds": null,
+      "segment_type": "representative_background",
+      "selection_reason": "This region represents a sustained background pattern without a large spectral or artifact deviation. The measured dominant band is theta and the theta-to-beta ratio is 1.106.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.008386
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.0,
+          "theta": 0.334415,
+          "alpha": 0.267377,
+          "beta": 0.302481,
+          "gamma": 0.095727
+        },
+        "dominant_band": "theta",
+        "theta_beta_ratio": 1.105574,
+        "spectral_entropy": 0.811024,
+        "rms_amplitude_normalized": 2.96421,
+        "zero_crossing_rate": 0.0
+      },
+      "window_policy": {
+        "size_samples": 512,
+        "stride_samples": 256,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "keyboard-control-02__segment-002__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "B",
+            "answer_text": "Theta",
+            "explanation": "Theta has the largest measured relative power at 0.334."
+          },
+          {
+            "question_id": "keyboard-control-02__segment-002__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable gameplay band-power time series with theta-dominant spectral activity.",
+            "spectral_description": "Theta contributes 33.4% of relative power, followed by beta at 30.2%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "No material extreme-amplitude artifact was detected automatically."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "keyboard-control-03__segment-001",
+      "recording_id": "keyboard-control-03",
+      "start_timestep": 0,
+      "end_timestep": 3125,
+      "duration_seconds": null,
+      "segment_type": "representative_background",
+      "selection_reason": "This region represents a sustained background pattern without a large spectral or artifact deviation. The measured dominant band is alpha and the theta-to-beta ratio is 0.993.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.04288
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.0,
+          "theta": 0.27892,
+          "alpha": 0.361286,
+          "beta": 0.280789,
+          "gamma": 0.079005
+        },
+        "dominant_band": "alpha",
+        "theta_beta_ratio": 0.993344,
+        "spectral_entropy": 0.796012,
+        "rms_amplitude_normalized": 3.602776,
+        "zero_crossing_rate": 0.0
+      },
+      "window_policy": {
+        "size_samples": 512,
+        "stride_samples": 256,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "keyboard-control-03__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "C",
+            "answer_text": "Alpha",
+            "explanation": "Alpha has the largest measured relative power at 0.361."
+          },
+          {
+            "question_id": "keyboard-control-03__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable gameplay band-power time series with alpha-dominant spectral activity.",
+            "spectral_description": "Alpha contributes 36.1% of relative power, followed by beta at 28.1%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "Automatic review identified minor extreme-amplitude artifact."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "keyboard-control-04__segment-001",
+      "recording_id": "keyboard-control-04",
+      "start_timestep": 0,
+      "end_timestep": 3130,
+      "duration_seconds": null,
+      "segment_type": "representative_background",
+      "selection_reason": "This region represents a sustained background pattern without a large spectral or artifact deviation. The measured dominant band is alpha and the theta-to-beta ratio is 0.857.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.011182
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.0,
+          "theta": 0.259738,
+          "alpha": 0.327789,
+          "beta": 0.302922,
+          "gamma": 0.109551
+        },
+        "dominant_band": "alpha",
+        "theta_beta_ratio": 0.857442,
+        "spectral_entropy": 0.820032,
+        "rms_amplitude_normalized": 3.038988,
+        "zero_crossing_rate": 0.0
+      },
+      "window_policy": {
+        "size_samples": 512,
+        "stride_samples": 256,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "keyboard-control-04__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "C",
+            "answer_text": "Alpha",
+            "explanation": "Alpha has the largest measured relative power at 0.328."
+          },
+          {
+            "question_id": "keyboard-control-04__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable gameplay band-power time series with alpha-dominant spectral activity.",
+            "spectral_description": "Alpha contributes 32.8% of relative power, followed by beta at 30.3%.",
+            "temporal_description": "The interval is moderately variable across the analyzed samples.",
+            "quality_note": "Automatic review identified minor extreme-amplitude artifact."
+          }
+        }
+      }
+    },
+    {
+      "segment_id": "keyboard-control-05__segment-001",
+      "recording_id": "keyboard-control-05",
+      "start_timestep": 0,
+      "end_timestep": 2640,
+      "duration_seconds": null,
+      "segment_type": "representative_background",
+      "selection_reason": "This region represents a sustained background pattern without a large spectral or artifact deviation. The measured dominant band is alpha and the theta-to-beta ratio is 1.168.",
+      "quality": {
+        "usable": true,
+        "artifact_fraction": 0.029167
+      },
+      "measured_features": {
+        "relative_band_power": {
+          "delta": 0.0,
+          "theta": 0.298884,
+          "alpha": 0.375649,
+          "beta": 0.255841,
+          "gamma": 0.069626
+        },
+        "dominant_band": "alpha",
+        "theta_beta_ratio": 1.168241,
+        "spectral_entropy": 0.784776,
+        "rms_amplitude_normalized": 3.736609,
+        "zero_crossing_rate": 0.0
+      },
+      "window_policy": {
+        "size_samples": 512,
+        "stride_samples": 256,
+        "maximum_windows": 10,
+        "selection": "evenly_spaced"
+      },
+      "curriculum_targets": {
+        "mcq_warmup": [
+          {
+            "question_id": "keyboard-control-05__segment-001__mcq-001",
+            "question": "Which frequency band has the greatest relative power?",
+            "options": {
+              "A": "Delta",
+              "B": "Theta",
+              "C": "Alpha",
+              "D": "Beta"
+            },
+            "answer": "C",
+            "answer_text": "Alpha",
+            "explanation": "Alpha has the largest measured relative power at 0.376."
+          },
+          {
+            "question_id": "keyboard-control-05__segment-001__mcq-002",
+            "question": "How should the measured theta-to-beta ratio be used?",
+            "options": {
+              "A": "As definitive proof of ADHD",
+              "B": "As one descriptive EEG feature",
+              "C": "As a measure of recording duration",
+              "D": "As proof of a specific artifact"
+            },
+            "answer": "B",
+            "answer_text": "As one descriptive EEG feature",
+            "explanation": "The ratio describes spectral balance and is not independently diagnostic."
+          }
+        ],
+        "eeg_captioning": {
+          "scope": "segment",
+          "supervision": "synthetic_from_measured_features",
+          "target": {
+            "summary": "Usable gameplay band-power time series with alpha-dominant spectral activity.",
+            "spectral_description": "Alpha contributes 37.6% of relative power, followed by theta at 29.9%.",
+            "temporal_description": "The interval is highly variable across the analyzed samples.",
+            "quality_note": "Automatic review identified minor extreme-amplitude artifact."
+          }
+        }
+      }
+    }
+  ]
+}

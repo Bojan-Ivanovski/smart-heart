@@ -1,0 +1,331 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smartheart.local/schema/segments.schema.json",
+  "title": "SmartHeart Segments",
+  "description": "Meaningful signal regions, measured evidence, runtime window policy, and segment-level curriculum supervision.",
+  "type": "object",
+  "required": [
+    "patient_id",
+    "segments"
+  ],
+  "properties": {
+    "patient_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "segments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/segment"
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+    },
+    "nonEmptyText": {
+      "type": "string",
+      "minLength": 1
+    },
+    "proportion": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "band": {
+      "enum": [
+        "delta",
+        "theta",
+        "alpha",
+        "beta",
+        "gamma"
+      ]
+    },
+    "relativeBandPower": {
+      "type": "object",
+      "required": [
+        "delta",
+        "theta",
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "properties": {
+        "delta": {
+          "$ref": "#/$defs/proportion"
+        },
+        "theta": {
+          "$ref": "#/$defs/proportion"
+        },
+        "alpha": {
+          "$ref": "#/$defs/proportion"
+        },
+        "beta": {
+          "$ref": "#/$defs/proportion"
+        },
+        "gamma": {
+          "$ref": "#/$defs/proportion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "segment": {
+      "type": "object",
+      "required": [
+        "segment_id",
+        "recording_id",
+        "start_timestep",
+        "end_timestep",
+        "duration_seconds",
+        "segment_type",
+        "selection_reason",
+        "quality",
+        "measured_features",
+        "window_policy",
+        "curriculum_targets"
+      ],
+      "properties": {
+        "segment_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "recording_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "start_timestep": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end_timestep": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "duration_seconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "segment_type": {
+          "$ref": "#/$defs/identifier"
+        },
+        "selection_reason": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "quality": {
+          "type": "object",
+          "required": [
+            "usable",
+            "artifact_fraction"
+          ],
+          "properties": {
+            "usable": {
+              "type": "boolean"
+            },
+            "artifact_fraction": {
+              "$ref": "#/$defs/proportion"
+            }
+          },
+          "additionalProperties": false
+        },
+        "measured_features": {
+          "$ref": "#/$defs/measuredFeatures"
+        },
+        "window_policy": {
+          "$ref": "#/$defs/windowPolicy"
+        },
+        "curriculum_targets": {
+          "$ref": "#/$defs/curriculumTargets"
+        }
+      },
+      "additionalProperties": false
+    },
+    "windowPolicy": {
+      "type": "object",
+      "required": [
+        "size_samples",
+        "stride_samples",
+        "maximum_windows",
+        "selection"
+      ],
+      "properties": {
+        "size_samples": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "stride_samples": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximum_windows": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "selection": {
+          "enum": [
+            "evenly_spaced",
+            "random"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "measuredFeatures": {
+      "type": "object",
+      "required": [
+        "relative_band_power",
+        "dominant_band",
+        "theta_beta_ratio",
+        "spectral_entropy",
+        "rms_amplitude_normalized",
+        "zero_crossing_rate"
+      ],
+      "properties": {
+        "relative_band_power": {
+          "$ref": "#/$defs/relativeBandPower"
+        },
+        "dominant_band": {
+          "$ref": "#/$defs/band"
+        },
+        "theta_beta_ratio": {
+          "type": "number",
+          "minimum": 0
+        },
+        "spectral_entropy": {
+          "$ref": "#/$defs/proportion"
+        },
+        "rms_amplitude_normalized": {
+          "type": "number",
+          "minimum": 0
+        },
+        "zero_crossing_rate": {
+          "$ref": "#/$defs/proportion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "curriculumTargets": {
+      "type": "object",
+      "required": [
+        "mcq_warmup",
+        "eeg_captioning"
+      ],
+      "properties": {
+        "mcq_warmup": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/mcq"
+          }
+        },
+        "eeg_captioning": {
+          "$ref": "#/$defs/captionTarget"
+        }
+      },
+      "additionalProperties": false
+    },
+    "mcq": {
+      "type": "object",
+      "required": [
+        "question_id",
+        "question",
+        "options",
+        "answer",
+        "answer_text",
+        "explanation"
+      ],
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "question": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "options": {
+          "type": "object",
+          "required": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "properties": {
+            "A": {
+              "$ref": "#/$defs/nonEmptyText"
+            },
+            "B": {
+              "$ref": "#/$defs/nonEmptyText"
+            },
+            "C": {
+              "$ref": "#/$defs/nonEmptyText"
+            },
+            "D": {
+              "$ref": "#/$defs/nonEmptyText"
+            }
+          },
+          "additionalProperties": false
+        },
+        "answer": {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        },
+        "answer_text": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "explanation": {
+          "$ref": "#/$defs/nonEmptyText"
+        }
+      },
+      "additionalProperties": false
+    },
+    "captionTarget": {
+      "type": "object",
+      "required": [
+        "scope",
+        "supervision",
+        "target"
+      ],
+      "properties": {
+        "scope": {
+          "const": "segment"
+        },
+        "supervision": {
+          "$ref": "#/$defs/identifier"
+        },
+        "target": {
+          "type": "object",
+          "required": [
+            "summary",
+            "spectral_description",
+            "temporal_description",
+            "quality_note"
+          ],
+          "properties": {
+            "summary": {
+              "$ref": "#/$defs/nonEmptyText"
+            },
+            "spectral_description": {
+              "$ref": "#/$defs/nonEmptyText"
+            },
+            "temporal_description": {
+              "$ref": "#/$defs/nonEmptyText"
+            },
+            "quality_note": {
+              "$ref": "#/$defs/nonEmptyText"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

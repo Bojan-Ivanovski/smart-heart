@@ -1,0 +1,312 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smartheart.local/schema/patient.schema.json",
+  "title": "SmartHeart Patient",
+  "description": "Patient-level metadata, protected ground truth, resource links, and diagnostic curriculum supervision.",
+  "type": "object",
+  "required": [
+    "patient_id",
+    "metadata",
+    "resources",
+    "clinical_ground_truth",
+    "curriculum_targets"
+  ],
+  "properties": {
+    "patient_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "metadata": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "source_dataset",
+        "split_group",
+        "split",
+        "annotation",
+        "demographics"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "pattern": "^2\\.0\\.0(?:-draft)?$"
+        },
+        "source_dataset": {
+          "$ref": "#/$defs/identifier"
+        },
+        "split_group": {
+          "$ref": "#/$defs/identifier"
+        },
+        "split": {
+          "enum": [
+            "train",
+            "validation",
+            "test"
+          ]
+        },
+        "annotation": {
+          "type": "object",
+          "required": [
+            "seed",
+            "generation_basis"
+          ],
+          "properties": {
+            "seed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "generation_basis": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "demographics": {
+          "type": "object",
+          "required": [
+            "sex",
+            "age_years",
+            "age_group",
+            "handedness",
+            "education_context"
+          ],
+          "properties": {
+            "sex": {
+              "enum": [
+                "female",
+                "male",
+                "other",
+                "unknown"
+              ]
+            },
+            "age_years": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 120
+            },
+            "age_group": {
+              "enum": [
+                "child",
+                "adolescent",
+                "adult",
+                "older_adult"
+              ]
+            },
+            "handedness": {
+              "enum": [
+                "left",
+                "right",
+                "ambidextrous",
+                "unknown"
+              ]
+            },
+            "education_context": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "resources": {
+      "type": "object",
+      "required": [
+        "clinical_profile",
+        "recordings",
+        "segments",
+        "signals"
+      ],
+      "properties": {
+        "clinical_profile": {
+          "const": "clinical_profile.json"
+        },
+        "recordings": {
+          "const": "recordings.json"
+        },
+        "segments": {
+          "const": "segments.json"
+        },
+        "signals": {
+          "const": "signals.npz"
+        }
+      },
+      "additionalProperties": false
+    },
+    "clinical_ground_truth": {
+      "type": "object",
+      "required": [
+        "diagnosis",
+        "label_source",
+        "verified"
+      ],
+      "properties": {
+        "diagnosis": {
+          "$ref": "#/$defs/diagnosis"
+        },
+        "label_source": {
+          "enum": [
+            "source_dataset_group",
+            "clinical_assessment",
+            "research_protocol",
+            "synthetic_generation",
+            "unknown"
+          ]
+        },
+        "verified": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "curriculum_targets": {
+      "type": "object",
+      "required": [
+        "diagnostic_cot"
+      ],
+      "properties": {
+        "diagnostic_cot": {
+          "$ref": "#/$defs/diagnosticTarget"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+    },
+    "diagnosis": {
+      "enum": [
+        "ADHD",
+        "NOT_ADHD",
+        "UNCERTAIN"
+      ]
+    },
+    "nonEmptyText": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidenceList": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/nonEmptyText"
+      }
+    },
+    "diagnosticTarget": {
+      "type": "object",
+      "required": [
+        "scope",
+        "supervision",
+        "input_references",
+        "target"
+      ],
+      "properties": {
+        "scope": {
+          "const": "patient"
+        },
+        "supervision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_references": {
+          "type": "object",
+          "required": [
+            "recording_ids",
+            "clinical_profile"
+          ],
+          "properties": {
+            "recording_ids": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/identifier"
+              }
+            },
+            "clinical_profile": {
+              "const": "clinical_profile.json"
+            }
+          },
+          "additionalProperties": false
+        },
+        "target": {
+          "type": "object",
+          "required": [
+            "eeg_evidence",
+            "clinical_evidence",
+            "alternative_explanations",
+            "reasoning_steps",
+            "conclusion"
+          ],
+          "properties": {
+            "eeg_evidence": {
+              "$ref": "#/$defs/evidenceList"
+            },
+            "clinical_evidence": {
+              "$ref": "#/$defs/evidenceList"
+            },
+            "alternative_explanations": {
+              "$ref": "#/$defs/evidenceList"
+            },
+            "reasoning_steps": {
+              "$ref": "#/$defs/evidenceList"
+            },
+            "conclusion": {
+              "type": "object",
+              "required": [
+                "diagnosis",
+                "presentation",
+                "severity",
+                "confidence"
+              ],
+              "properties": {
+                "diagnosis": {
+                  "$ref": "#/$defs/diagnosis"
+                },
+                "presentation": {
+                  "enum": [
+                    "predominantly_inattentive",
+                    "predominantly_hyperactive_impulsive",
+                    "combined",
+                    "unspecified",
+                    "not_applicable"
+                  ]
+                },
+                "severity": {
+                  "enum": [
+                    "none",
+                    "mild",
+                    "moderate",
+                    "severe",
+                    "not_applicable"
+                  ]
+                },
+                "confidence": {
+                  "enum": [
+                    "low",
+                    "moderate",
+                    "high"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

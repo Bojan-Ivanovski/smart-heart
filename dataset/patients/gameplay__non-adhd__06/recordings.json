@@ -1,0 +1,182 @@
+{
+  "patient_id": "gameplay__non-adhd__06",
+  "recordings": [
+    {
+      "recording_id": "emotiv-control-01",
+      "signal_path": "signals.npz",
+      "signal_key": "emotiv_control_01",
+      "shape": [
+        5,
+        2560
+      ],
+      "dtype": "float32",
+      "representation": "band_power_timeseries",
+      "layout": "channels_first",
+      "sampling_rate_hz": null,
+      "channel_names": [
+        "theta",
+        "alpha",
+        "low_beta",
+        "high_beta",
+        "gamma"
+      ],
+      "condition": "gameplay_emotiv_control",
+      "task": "gameplay",
+      "quality": {
+        "usable": true,
+        "artifact": "minor",
+        "usable_fraction": 0.962109,
+        "artifact_types": [
+          "extreme_amplitude"
+        ]
+      },
+      "preprocessing": {
+        "source_timesteps": 2560,
+        "stored_timesteps": 2560,
+        "steps": [
+          {
+            "operation": "canonical_import",
+            "parameters": {
+              "source_transformation": "selected_five_bandpower_columns_cast_to_float32"
+            }
+          }
+        ]
+      },
+      "analysis": {
+        "method": "band_power_channel_and_time_domain_summary",
+        "feature_version": "1.0.0",
+        "aggregate_features": {
+          "relative_band_power": {
+            "delta": 0.0,
+            "theta": 0.346687,
+            "alpha": 0.166684,
+            "beta": 0.321643,
+            "gamma": 0.164986
+          },
+          "dominant_band": "theta",
+          "theta_beta_ratio": 1.077863,
+          "theta_alpha_ratio": 2.079906,
+          "spectral_entropy": 0.82515,
+          "channel_correlation_mean": 0.736218,
+          "temporal_variability": "highly_variable"
+        },
+        "interpretation_flags": [
+          "theta_dominant",
+          "highly_variable"
+        ]
+      },
+      "curriculum_targets": {
+        "attention_task_cot": {
+          "scope": "recording",
+          "supervision": "synthetic_from_measured_features",
+          "input_references": [
+            "emotiv-control-01__segment-001"
+          ],
+          "target": {
+            "observations": [
+              "Theta contributes 34.7% of relative power, followed by beta at 32.2%.",
+              "The interval is highly variable across the analyzed samples.",
+              "The aggregate theta-to-beta ratio is 1.078."
+            ],
+            "reasoning_steps": [
+              "Recording quality is checked before interpreting its spectral summary.",
+              "Frequency balance and temporal variability are treated as task-state descriptions.",
+              "The findings are not used as standalone diagnostic evidence."
+            ],
+            "conclusion": "The recording provides a usable synthetic summary of task-state activity.",
+            "confidence": "moderate"
+          }
+        }
+      }
+    },
+    {
+      "recording_id": "emotiv-control-02",
+      "signal_path": "signals.npz",
+      "signal_key": "emotiv_control_02",
+      "shape": [
+        5,
+        4096
+      ],
+      "dtype": "float32",
+      "representation": "band_power_timeseries",
+      "layout": "channels_first",
+      "sampling_rate_hz": null,
+      "channel_names": [
+        "theta",
+        "alpha",
+        "low_beta",
+        "high_beta",
+        "gamma"
+      ],
+      "condition": "gameplay_emotiv_control",
+      "task": "gameplay",
+      "quality": {
+        "usable": true,
+        "artifact": "moderate",
+        "usable_fraction": 0.802979,
+        "artifact_types": [
+          "extreme_amplitude"
+        ]
+      },
+      "preprocessing": {
+        "source_timesteps": 9600,
+        "stored_timesteps": 4096,
+        "steps": [
+          {
+            "operation": "canonical_import",
+            "parameters": {
+              "source_transformation": "selected_five_bandpower_columns_and_linearly_resampled_to_4096_timesteps"
+            }
+          }
+        ]
+      },
+      "analysis": {
+        "method": "band_power_channel_and_time_domain_summary",
+        "feature_version": "1.0.0",
+        "aggregate_features": {
+          "relative_band_power": {
+            "delta": 0.0,
+            "theta": 0.238152,
+            "alpha": 0.116344,
+            "beta": 0.382735,
+            "gamma": 0.262769
+          },
+          "dominant_band": "beta",
+          "theta_beta_ratio": 0.622237,
+          "theta_alpha_ratio": 2.046964,
+          "spectral_entropy": 0.814421,
+          "channel_correlation_mean": 0.630826,
+          "temporal_variability": "highly_variable"
+        },
+        "interpretation_flags": [
+          "beta_dominant",
+          "highly_variable"
+        ]
+      },
+      "curriculum_targets": {
+        "attention_task_cot": {
+          "scope": "recording",
+          "supervision": "synthetic_from_measured_features",
+          "input_references": [
+            "emotiv-control-02__segment-001",
+            "emotiv-control-02__segment-002"
+          ],
+          "target": {
+            "observations": [
+              "Beta contributes 38.3% of relative power, followed by gamma at 26.3%.",
+              "The interval is highly variable across the analyzed samples.",
+              "The aggregate theta-to-beta ratio is 0.622."
+            ],
+            "reasoning_steps": [
+              "Recording quality is checked before interpreting its spectral summary.",
+              "Frequency balance and temporal variability are treated as task-state descriptions.",
+              "The findings are not used as standalone diagnostic evidence."
+            ],
+            "conclusion": "The recording provides a usable synthetic summary of task-state activity.",
+            "confidence": "moderate"
+          }
+        }
+      }
+    }
+  ]
+}

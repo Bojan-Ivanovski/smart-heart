@@ -1,0 +1,109 @@
+{
+  "patient_id": "children__v129",
+  "recordings": [
+    {
+      "recording_id": "visual-attention-01",
+      "signal_path": "signals.npz",
+      "signal_key": "visual_attention_01",
+      "shape": [
+        19,
+        11208
+      ],
+      "dtype": "float32",
+      "representation": "raw_eeg",
+      "layout": "channels_first",
+      "sampling_rate_hz": 128,
+      "channel_names": [
+        "Fz",
+        "Cz",
+        "Pz",
+        "C3",
+        "T3",
+        "C4",
+        "T4",
+        "Fp1",
+        "Fp2",
+        "F3",
+        "F4",
+        "F7",
+        "F8",
+        "P3",
+        "P4",
+        "T5",
+        "T6",
+        "O1",
+        "O2"
+      ],
+      "condition": "visual_attention_cartoon_counting",
+      "task": "visual_attention",
+      "quality": {
+        "usable": true,
+        "artifact": "minor",
+        "usable_fraction": 0.985546,
+        "artifact_types": [
+          "extreme_amplitude"
+        ]
+      },
+      "preprocessing": {
+        "source_timesteps": 11208,
+        "stored_timesteps": 11208,
+        "steps": [
+          {
+            "operation": "canonical_import",
+            "parameters": {
+              "source_transformation": "transposed_to_channels_first_and_cast_to_float32"
+            }
+          }
+        ]
+      },
+      "analysis": {
+        "method": "welch_relative_power_and_time_domain_summary",
+        "feature_version": "1.0.0",
+        "aggregate_features": {
+          "relative_band_power": {
+            "delta": 0.809995,
+            "theta": 0.115417,
+            "alpha": 0.034476,
+            "beta": 0.027732,
+            "gamma": 0.01238
+          },
+          "dominant_band": "delta",
+          "theta_beta_ratio": 4.161871,
+          "theta_alpha_ratio": 3.347749,
+          "spectral_entropy": 0.599697,
+          "channel_correlation_mean": 0.466181,
+          "temporal_variability": "moderately_variable"
+        },
+        "interpretation_flags": [
+          "delta_dominant",
+          "moderately_variable"
+        ]
+      },
+      "curriculum_targets": {
+        "attention_task_cot": {
+          "scope": "recording",
+          "supervision": "synthetic_from_measured_features",
+          "input_references": [
+            "visual-attention-01__segment-001",
+            "visual-attention-01__segment-002",
+            "visual-attention-01__segment-003"
+          ],
+          "target": {
+            "observations": [
+              "Delta contributes 81.0% of relative power, followed by theta at 11.5%.",
+              "The interval is moderately variable across the analyzed samples.",
+              "The aggregate theta-to-beta ratio is 4.162."
+            ],
+            "reasoning_steps": [
+              "Recording quality is checked before interpreting its spectral summary.",
+              "Frequency balance and temporal variability are treated as task-state descriptions.",
+              "The findings are not used as standalone diagnostic evidence."
+            ],
+            "conclusion": "The recording provides a usable synthetic summary of task-state activity.",
+            "confidence": "moderate"
+          }
+        }
+      }
+    }
+  ]
+}

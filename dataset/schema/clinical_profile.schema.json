@@ -1,0 +1,335 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smartheart.local/schema/clinical_profile.schema.json",
+  "title": "SmartHeart Synthetic Clinical Profile",
+  "description": "Synthetic clinical evidence presented to the model. Protected diagnosis labels are intentionally forbidden.",
+  "type": "object",
+  "required": [
+    "referral",
+    "comorbidity_screen",
+    "alternative_explanations",
+    "informants",
+    "functional_impairment",
+    "symptoms",
+    "rating_scales",
+    "medication"
+  ],
+  "properties": {
+    "referral": {
+      "type": "object",
+      "required": [
+        "reason",
+        "referral_source"
+      ],
+      "properties": {
+        "reason": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "referral_source": {
+          "enum": [
+            "parent",
+            "school_teacher",
+            "school_counselor",
+            "self",
+            "clinician",
+            "research_protocol",
+            "other"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "comorbidity_screen": {
+      "type": "object",
+      "required": [
+        "anxiety",
+        "depression",
+        "learning_disorder",
+        "sleep"
+      ],
+      "properties": {
+        "anxiety": {
+          "$ref": "#/$defs/screeningStatus"
+        },
+        "depression": {
+          "$ref": "#/$defs/screeningStatus"
+        },
+        "learning_disorder": {
+          "$ref": "#/$defs/screeningStatus"
+        },
+        "sleep": {
+          "type": "object",
+          "required": [
+            "average_hours",
+            "difficulty",
+            "daytime_fatigue",
+            "disorder"
+          ],
+          "properties": {
+            "average_hours": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 24
+            },
+            "difficulty": {
+              "enum": [
+                "none",
+                "mild_sleep_onset_delay",
+                "frequent_night_waking",
+                "insufficient_sleep",
+                "irregular_schedule"
+              ]
+            },
+            "daytime_fatigue": {
+              "$ref": "#/$defs/severity"
+            },
+            "disorder": {
+              "$ref": "#/$defs/screeningStatus"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "alternative_explanations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "factor",
+          "assessment"
+        ],
+        "properties": {
+          "factor": {
+            "$ref": "#/$defs/nonEmptyText"
+          },
+          "assessment": {
+            "$ref": "#/$defs/nonEmptyText"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "informants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "role",
+          "summary"
+        ],
+        "properties": {
+          "role": {
+            "enum": [
+              "parent",
+              "teacher",
+              "caregiver",
+              "self",
+              "clinician"
+            ]
+          },
+          "summary": {
+            "$ref": "#/$defs/nonEmptyText"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "functional_impairment": {
+      "type": "object",
+      "required": [
+        "settings",
+        "academic",
+        "social",
+        "home"
+      ],
+      "properties": {
+        "settings": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "school",
+              "home",
+              "work",
+              "social"
+            ]
+          }
+        },
+        "academic": {
+          "$ref": "#/$defs/severity"
+        },
+        "social": {
+          "$ref": "#/$defs/severity"
+        },
+        "home": {
+          "$ref": "#/$defs/severity"
+        }
+      },
+      "additionalProperties": false
+    },
+    "symptoms": {
+      "type": "object",
+      "required": [
+        "duration_months",
+        "onset_age_years",
+        "inattention",
+        "hyperactivity_impulsivity",
+        "pattern",
+        "recent_changes"
+      ],
+      "properties": {
+        "duration_months": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "onset_age_years": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 120
+        },
+        "inattention": {
+          "$ref": "#/$defs/symptomDomain"
+        },
+        "hyperactivity_impulsivity": {
+          "$ref": "#/$defs/symptomDomain"
+        },
+        "pattern": {
+          "enum": [
+            "persistent",
+            "intermittent",
+            "situational"
+          ]
+        },
+        "recent_changes": {
+          "enum": [
+            "stable",
+            "improving",
+            "worsening"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "rating_scales": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "instrument",
+          "score",
+          "maximum",
+          "interpretation"
+        ],
+        "properties": {
+          "instrument": {
+            "$ref": "#/$defs/nonEmptyText"
+          },
+          "score": {
+            "type": "number",
+            "minimum": 0
+          },
+          "maximum": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "interpretation": {
+            "enum": [
+              "low",
+              "borderline",
+              "elevated"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "medication": {
+      "type": "object",
+      "required": [
+        "adhd_medication_status",
+        "medicated_during_recording",
+        "other_medications"
+      ],
+      "properties": {
+        "adhd_medication_status": {
+          "enum": [
+            "unmedicated",
+            "currently_medicated",
+            "medication_withheld",
+            "not_applicable",
+            "unknown"
+          ]
+        },
+        "medicated_during_recording": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "other_medications": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "nonEmptyText": {
+      "type": "string",
+      "minLength": 1
+    },
+    "severity": {
+      "enum": [
+        "none",
+        "mild",
+        "moderate",
+        "severe"
+      ]
+    },
+    "screeningStatus": {
+      "enum": [
+        "not_indicated",
+        "mild_features_below_diagnostic_threshold",
+        "elevated_features",
+        "screening_recommended"
+      ]
+    },
+    "symptomDomain": {
+      "type": "object",
+      "required": [
+        "count",
+        "maximum",
+        "examples"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9
+        },
+        "maximum": {
+          "const": 9
+        },
+        "examples": {
+          "type": "array",
+          "maxItems": 9,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/nonEmptyText"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

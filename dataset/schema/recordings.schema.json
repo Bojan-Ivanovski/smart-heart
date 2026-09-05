@@ -1,0 +1,386 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smartheart.local/schema/recordings.schema.json",
+  "title": "SmartHeart Recordings",
+  "description": "Patient recording metadata, preprocessing provenance, aggregate measurements, and recording-level curriculum supervision.",
+  "type": "object",
+  "required": [
+    "patient_id",
+    "recordings"
+  ],
+  "properties": {
+    "patient_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "recordings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/recording"
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+    },
+    "nonEmptyText": {
+      "type": "string",
+      "minLength": 1
+    },
+    "band": {
+      "enum": [
+        "delta",
+        "theta",
+        "alpha",
+        "beta",
+        "gamma"
+      ]
+    },
+    "relativeBandPower": {
+      "type": "object",
+      "required": [
+        "delta",
+        "theta",
+        "alpha",
+        "beta",
+        "gamma"
+      ],
+      "properties": {
+        "delta": {
+          "$ref": "#/$defs/proportion"
+        },
+        "theta": {
+          "$ref": "#/$defs/proportion"
+        },
+        "alpha": {
+          "$ref": "#/$defs/proportion"
+        },
+        "beta": {
+          "$ref": "#/$defs/proportion"
+        },
+        "gamma": {
+          "$ref": "#/$defs/proportion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "proportion": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "recording": {
+      "type": "object",
+      "required": [
+        "recording_id",
+        "signal_path",
+        "signal_key",
+        "shape",
+        "dtype",
+        "representation",
+        "layout",
+        "sampling_rate_hz",
+        "channel_names",
+        "condition",
+        "task",
+        "quality",
+        "preprocessing",
+        "analysis",
+        "curriculum_targets"
+      ],
+      "properties": {
+        "recording_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "signal_path": {
+          "const": "signals.npz"
+        },
+        "signal_key": {
+          "$ref": "#/$defs/identifier"
+        },
+        "shape": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "integer",
+              "minimum": 1
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "dtype": {
+          "const": "float32"
+        },
+        "representation": {
+          "enum": [
+            "raw_eeg",
+            "band_power_timeseries"
+          ]
+        },
+        "layout": {
+          "const": "channels_first"
+        },
+        "sampling_rate_hz": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "channel_names": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "condition": {
+          "$ref": "#/$defs/identifier"
+        },
+        "task": {
+          "$ref": "#/$defs/identifier"
+        },
+        "quality": {
+          "$ref": "#/$defs/quality"
+        },
+        "preprocessing": {
+          "$ref": "#/$defs/preprocessing"
+        },
+        "analysis": {
+          "$ref": "#/$defs/analysis"
+        },
+        "curriculum_targets": {
+          "$ref": "#/$defs/curriculumTargets"
+        }
+      },
+      "additionalProperties": false
+    },
+    "quality": {
+      "type": "object",
+      "required": [
+        "usable",
+        "artifact",
+        "usable_fraction",
+        "artifact_types"
+      ],
+      "properties": {
+        "usable": {
+          "type": "boolean"
+        },
+        "artifact": {
+          "enum": [
+            null,
+            "none",
+            "minor",
+            "moderate",
+            "severe"
+          ]
+        },
+        "usable_fraction": {
+          "$ref": "#/$defs/proportion"
+        },
+        "artifact_types": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "preprocessing": {
+      "type": "object",
+      "required": [
+        "source_timesteps",
+        "stored_timesteps",
+        "steps"
+      ],
+      "properties": {
+        "source_timesteps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "stored_timesteps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "operation",
+              "parameters"
+            ],
+            "properties": {
+              "operation": {
+                "$ref": "#/$defs/identifier"
+              },
+              "parameters": {
+                "type": "object"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "analysis": {
+      "type": "object",
+      "required": [
+        "method",
+        "feature_version",
+        "aggregate_features",
+        "interpretation_flags"
+      ],
+      "properties": {
+        "method": {
+          "$ref": "#/$defs/identifier"
+        },
+        "feature_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "aggregate_features": {
+          "type": "object",
+          "required": [
+            "relative_band_power",
+            "dominant_band",
+            "theta_beta_ratio",
+            "theta_alpha_ratio",
+            "spectral_entropy",
+            "channel_correlation_mean",
+            "temporal_variability"
+          ],
+          "properties": {
+            "relative_band_power": {
+              "$ref": "#/$defs/relativeBandPower"
+            },
+            "dominant_band": {
+              "$ref": "#/$defs/band"
+            },
+            "theta_beta_ratio": {
+              "type": "number",
+              "minimum": 0
+            },
+            "theta_alpha_ratio": {
+              "type": "number",
+              "minimum": 0
+            },
+            "spectral_entropy": {
+              "$ref": "#/$defs/proportion"
+            },
+            "channel_correlation_mean": {
+              "type": "number",
+              "minimum": -1,
+              "maximum": 1
+            },
+            "temporal_variability": {
+              "enum": [
+                "stable",
+                "moderately_variable",
+                "highly_variable"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "interpretation_flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "curriculumTargets": {
+      "type": "object",
+      "properties": {
+        "attention_task_cot": {
+          "$ref": "#/$defs/recordingReasoningTarget"
+        },
+        "resting_state_cot": {
+          "$ref": "#/$defs/recordingReasoningTarget"
+        }
+      },
+      "additionalProperties": false
+    },
+    "recordingReasoningTarget": {
+      "type": "object",
+      "required": [
+        "scope",
+        "supervision",
+        "input_references",
+        "target"
+      ],
+      "properties": {
+        "scope": {
+          "const": "recording"
+        },
+        "supervision": {
+          "$ref": "#/$defs/identifier"
+        },
+        "input_references": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        },
+        "target": {
+          "type": "object",
+          "required": [
+            "observations",
+            "reasoning_steps",
+            "conclusion",
+            "confidence"
+          ],
+          "properties": {
+            "observations": {
+              "$ref": "#/$defs/evidenceList"
+            },
+            "reasoning_steps": {
+              "$ref": "#/$defs/evidenceList"
+            },
+            "conclusion": {
+              "$ref": "#/$defs/nonEmptyText"
+            },
+            "confidence": {
+              "enum": [
+                "low",
+                "moderate",
+                "high"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidenceList": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/nonEmptyText"
+      }
+    }
+  },
+  "additionalProperties": false
+}

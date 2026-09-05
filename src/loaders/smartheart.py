@@ -67,7 +67,9 @@ class SmartHeartDataset(Dataset):
         self.window_size = window_size
         self.window_stride = window_stride
         self.patients: list[CanonicalPatient] = []
-        self.samples: list[tuple[CanonicalRecording, tuple[int, int]]] = []
+        self.samples: list[
+            tuple[CanonicalRecording, tuple[int, int], str | None]
+        ] = []
 
         patients_path = self.path / "patients"
         if not patients_path.is_dir():
@@ -82,7 +84,13 @@ class SmartHeartDataset(Dataset):
 
         for patient_path in patient_paths:
             metadata = self._read_json(patient_path)
-            if source_dataset and metadata.get("source_dataset") != source_dataset:
+            patient_metadata = metadata.get("metadata", metadata)
+            if not isinstance(patient_metadata, dict):
+                raise ValueError(f"Invalid patient metadata in '{patient_path}'.")
+            if (
+                source_dataset
+                and patient_metadata.get("source_dataset") != source_dataset
+            ):
                 continue
             patient_id = str(metadata.get("patient_id", ""))
             if patient_id in patient_ids:
@@ -108,15 +116,18 @@ class SmartHeartDataset(Dataset):
         patient_path: Path,
         metadata: dict[str, object],
     ) -> None:
+        patient_metadata = metadata.get("metadata", metadata)
+        if not isinstance(patient_metadata, dict):
+            raise ValueError(f"Invalid patient metadata in '{patient_path}'.")
         ground_truth = metadata["clinical_ground_truth"]
         if not isinstance(ground_truth, dict):
             raise ValueError(f"Invalid clinical ground truth in '{patient_path}'.")
 
         patient = CanonicalPatient(
             patient_id=str(metadata["patient_id"]),
-            split=str(metadata["split"]),
+            split=str(patient_metadata["split"]),
             diagnosis=str(ground_truth["diagnosis"]),
-            source_dataset=str(metadata["source_dataset"]),
+            source_dataset=str(patient_metadata["source_dataset"]),
         )
         if patient.patient_id != patient_path.parent.name:
             raise ValueError(f"Patient ID mismatch in '{patient_path}'.")
@@ -126,7 +137,33 @@ class SmartHeartDataset(Dataset):
             raise ValueError(f"Invalid diagnosis in '{patient_path}'.")
 
         self.patients.append(patient)
-        recordings = metadata.get("recordings")
+        resources = metadata.get("resources")
+        segments_by_recording: dict[str, list[dict[str, object]]] | None = None
+        if isinstance(resources, dict) and "recordings" in resources:
+            recording_document = self._read_json(
+                patient_path.parent / str(resources["recordings"])
+            )
+            if recording_document.get("patient_id") != patient.patient_id:
+                raise ValueError(f"Recording patient ID mismatch in '{patient_path}'.")
+            recordings = recording_document.get("recordings")
+            segment_resource = resources.get("segments")
+            if segment_resource:
+                segment_document = self._read_json(
+                    patient_path.parent / str(segment_resource)
+                )
+                if segment_document.get("patient_id") != patient.patient_id:
+                    raise ValueError(f"Segment patient ID mismatch in '{patient_path}'.")
+                segments = segment_document.get("segments")
+                if not isinstance(segments, list) or not segments:
+                    raise ValueError(f"Invalid segments list in '{patient_path}'.")
+                segments_by_recording = {}
+                for segment in segments:
+                    if not isinstance(segment, dict):
+                        raise ValueError(f"Invalid segment in '{patient_path}'.")
+                    recording_id = str(segment.get("recording_id", ""))
+                    segments_by_recording.setdefault(recording_id, []).append(segment)
+        else:
+            recordings = metadata.get("recordings")
         if not isinstance(recordings, list) or not recordings:
             raise ValueError(f"Invalid recordings list in '{patient_path}'.")
 
@@ -150,18 +187,56 @@ class SmartHeartDataset(Dataset):
                 condition=str(value["condition"]),
                 task=str(value["task"]),
             )
-            spans = build_window_spans(
-                recording.timestep_count,
-                self.window_size,
-                self.window_stride,
+            recording_segments = (
+                segments_by_recording.get(recording.recording_id, [])
+                if segments_by_recording is not None
+                else []
             )
-            self.samples.extend((recording, span) for span in spans)
+            if recording_segments:
+                for segment in recording_segments:
+                    self._add_segment_samples(recording, segment, patient_path)
+            elif segments_by_recording is None:
+                spans = build_window_spans(
+                    recording.timestep_count,
+                    self.window_size,
+                    self.window_stride,
+                )
+                self.samples.extend((recording, span, None) for span in spans)
+
+    def _add_segment_samples(
+        self,
+        recording: CanonicalRecording,
+        segment: dict[str, object],
+        patient_path: Path,
+    ) -> None:
+        segment_id = str(segment.get("segment_id", ""))
+        start = int(segment["start_timestep"])
+        end = int(segment["end_timestep"])
+        if not segment_id or not 0 <= start < end <= recording.timestep_count:
+            raise ValueError(f"Invalid segment '{segment_id}' in '{patient_path}'.")
+        policy = segment.get("window_policy")
+        if not isinstance(policy, dict):
+            raise ValueError(f"Missing window policy for '{segment_id}'.")
+        window_size = int(policy["size_samples"])
+        window_stride = int(policy["stride_samples"])
+        local_spans = build_window_spans(end - start, window_size, window_stride)
+        maximum_windows = int(policy["maximum_windows"])
+        if len(local_spans) > maximum_windows:
+            indices = [
+                round(index * (len(local_spans) - 1) / (maximum_windows - 1))
+                for index in range(maximum_windows)
+            ] if maximum_windows > 1 else [len(local_spans) // 2]
+            local_spans = [local_spans[index] for index in indices]
+        self.samples.extend(
+            (recording, (start + local_start, start + local_end), segment_id)
+            for local_start, local_end in local_spans
+        )
 
     def __len__(self) -> int:
         return len(self.samples)
 
     def __getitem__(self, index: int) -> dict[str, object]:
-        recording, (start, end) = self.samples[index]
+        recording, (start, end), segment_id = self.samples[index]
         time_series = recording.load()[:, start:end]
         mean = time_series.mean(dim=1)
         standard_deviation = time_series.std(dim=1, unbiased=False)
@@ -191,6 +266,7 @@ class SmartHeartDataset(Dataset):
             ],
             "patient_id": recording.patient.patient_id,
             "recording_id": recording.recording_id,
+            "segment_id": segment_id,
             "window_start": start,
             "window_end": end,
             "split": recording.patient.split,

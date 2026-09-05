@@ -1,390 +1,84 @@
 {
-  "schema_version": "1.0.0",
   "patient_id": "gameplay__adhd__09",
-  "split_group": "gameplay__adhd__09",
-  "split": "validation",
-  "source_dataset": "adhd_gameplay",
-  "demographics": {
-    "age_group": null,
-    "age_years": null,
-    "sex": null
+  "metadata": {
+    "schema_version": "2.0.0-draft",
+    "source_dataset": "adhd_gameplay",
+    "split_group": "gameplay__adhd__09",
+    "split": "validation",
+    "annotation": {
+      "seed": 3506904233,
+      "generation_basis": [
+        "measured_signal_features",
+        "diagnosis_conditioned_synthetic_clinical_profile"
+      ]
+    },
+    "demographics": {
+      "sex": "male",
+      "age_years": 43,
+      "age_group": "adult",
+      "handedness": "right",
+      "education_context": "postsecondary_or_employment"
+    }
+  },
+  "resources": {
+    "clinical_profile": "clinical_profile.json",
+    "recordings": "recordings.json",
+    "segments": "segments.json",
+    "signals": "signals.npz"
   },
   "clinical_ground_truth": {
     "diagnosis": "ADHD",
     "label_source": "source_dataset_group",
     "verified": true
   },
-  "recordings": [
-    {
-      "recording_id": "emotiv-control-01",
-      "signal_path": "signals.npz",
-      "signal_key": "emotiv_control_01",
-      "representation": "band_power_timeseries",
-      "shape": [
-        5,
-        2535
-      ],
-      "dtype": "float32",
-      "layout": "channels_first",
-      "sampling_rate_hz": null,
-      "channel_names": [
-        "theta",
-        "alpha",
-        "low_beta",
-        "high_beta",
-        "gamma"
-      ],
-      "condition": "gameplay_emotiv_control",
-      "task": "gameplay",
-      "quality": {
-        "usable": true,
-        "artifact": null,
-        "artifact_types": [],
-        "review_status": "not_reviewed"
-      },
-      "transformation": "selected_five_bandpower_columns_cast_to_float32",
-      "original_timesteps": 2535
-    },
-    {
-      "recording_id": "emotiv-control-02",
-      "signal_path": "signals.npz",
-      "signal_key": "emotiv_control_02",
-      "representation": "band_power_timeseries",
-      "shape": [
-        5,
-        930
-      ],
-      "dtype": "float32",
-      "layout": "channels_first",
-      "sampling_rate_hz": null,
-      "channel_names": [
-        "theta",
-        "alpha",
-        "low_beta",
-        "high_beta",
-        "gamma"
-      ],
-      "condition": "gameplay_emotiv_control",
-      "task": "gameplay",
-      "quality": {
-        "usable": true,
-        "artifact": null,
-        "artifact_types": [],
-        "review_status": "not_reviewed"
-      },
-      "transformation": "selected_five_bandpower_columns_cast_to_float32",
-      "original_timesteps": 930
-    },
-    {
-      "recording_id": "emotiv-control-03",
-      "signal_path": "signals.npz",
-      "signal_key": "emotiv_control_03",
-      "representation": "band_power_timeseries",
-      "shape": [
-        5,
-        825
-      ],
-      "dtype": "float32",
-      "layout": "channels_first",
-      "sampling_rate_hz": null,
-      "channel_names": [
-        "theta",
-        "alpha",
-        "low_beta",
-        "high_beta",
-        "gamma"
-      ],
-      "condition": "gameplay_emotiv_control",
-      "task": "gameplay",
-      "quality": {
-        "usable": true,
-        "artifact": null,
-        "artifact_types": [],
-        "review_status": "not_reviewed"
-      },
-      "transformation": "selected_five_bandpower_columns_cast_to_float32",
-      "original_timesteps": 825
-    },
-    {
-      "recording_id": "emotiv-control-04",
-      "signal_path": "signals.npz",
-      "signal_key": "emotiv_control_04",
-      "representation": "band_power_timeseries",
-      "shape": [
-        5,
-        1095
-      ],
-      "dtype": "float32",
-      "layout": "channels_first",
-      "sampling_rate_hz": null,
-      "channel_names": [
-        "theta",
-        "alpha",
-        "low_beta",
-        "high_beta",
-        "gamma"
-      ],
-      "condition": "gameplay_emotiv_control",
-      "task": "gameplay",
-      "quality": {
-        "usable": true,
-        "artifact": null,
-        "artifact_types": [],
-        "review_status": "not_reviewed"
-      },
-      "transformation": "selected_five_bandpower_columns_cast_to_float32",
-      "original_timesteps": 1095
-    },
-    {
-      "recording_id": "emotiv-control-05",
-      "signal_path": "signals.npz",
-      "signal_key": "emotiv_control_05",
-      "representation": "band_power_timeseries",
-      "shape": [
-        5,
-        1640
-      ],
-      "dtype": "float32",
-      "layout": "channels_first",
-      "sampling_rate_hz": null,
-      "channel_names": [
-        "theta",
-        "alpha",
-        "low_beta",
-        "high_beta",
-        "gamma"
-      ],
-      "condition": "gameplay_emotiv_control",
-      "task": "gameplay",
-      "quality": {
-        "usable": true,
-        "artifact": null,
-        "artifact_types": [],
-        "review_status": "not_reviewed"
-      },
-      "transformation": "selected_five_bandpower_columns_cast_to_float32",
-      "original_timesteps": 1640
-    },
-    {
-      "recording_id": "emotiv-control-06",
-      "signal_path": "signals.npz",
-      "signal_key": "emotiv_control_06",
-      "representation": "band_power_timeseries",
-      "shape": [
-        5,
-        1215
-      ],
-      "dtype": "float32",
-      "layout": "channels_first",
-      "sampling_rate_hz": null,
-      "channel_names": [
-        "theta",
-        "alpha",
-        "low_beta",
-        "high_beta",
-        "gamma"
-      ],
-      "condition": "gameplay_emotiv_control",
-      "task": "gameplay",
-      "quality": {
-        "usable": true,
-        "artifact": null,
-        "artifact_types": [],
-        "review_status": "not_reviewed"
-      },
-      "transformation": "selected_five_bandpower_columns_cast_to_float32",
-      "original_timesteps": 1215
-    },
-    {
-      "recording_id": "keyboard-control-01",
-      "signal_path": "signals.npz",
-      "signal_key": "keyboard_control_01",
-      "representation": "band_power_timeseries",
-      "shape": [
-        5,
-        490
-      ],
-      "dtype": "float32",
-      "layout": "channels_first",
-      "sampling_rate_hz": null,
-      "channel_names": [
-        "theta",
-        "alpha",
-        "low_beta",
-        "high_beta",
-        "gamma"
-      ],
-      "condition": "gameplay_keyboard_control",
-      "task": "gameplay",
-      "quality": {
-        "usable": true,
-        "artifact": null,
-        "artifact_types": [],
-        "review_status": "not_reviewed"
-      },
-      "transformation": "selected_five_bandpower_columns_cast_to_float32",
-      "original_timesteps": 490
-    },
-    {
-      "recording_id": "keyboard-control-02",
-      "signal_path": "signals.npz",
-      "signal_key": "keyboard_control_02",
-      "representation": "band_power_timeseries",
-      "shape": [
-        5,
-        565
-      ],
-      "dtype": "float32",
-      "layout": "channels_first",
-      "sampling_rate_hz": null,
-      "channel_names": [
-        "theta",
-        "alpha",
-        "low_beta",
-        "high_beta",
-        "gamma"
-      ],
-      "condition": "gameplay_keyboard_control",
-      "task": "gameplay",
-      "quality": {
-        "usable": true,
-        "artifact": null,
-        "artifact_types": [],
-        "review_status": "not_reviewed"
-      },
-      "transformation": "selected_five_bandpower_columns_cast_to_float32",
-      "original_timesteps": 565
-    },
-    {
-      "recording_id": "keyboard-control-03",
-      "signal_path": "signals.npz",
-      "signal_key": "keyboard_control_03",
-      "representation": "band_power_timeseries",
-      "shape": [
-        5,
-        590
-      ],
-      "dtype": "float32",
-      "layout": "channels_first",
-      "sampling_rate_hz": null,
-      "channel_names": [
-        "theta",
-        "alpha",
-        "low_beta",
-        "high_beta",
-        "gamma"
-      ],
-      "condition": "gameplay_keyboard_control",
-      "task": "gameplay",
-      "quality": {
-        "usable": true,
-        "artifact": null,
-        "artifact_types": [],
-        "review_status": "not_reviewed"
-      },
-      "transformation": "selected_five_bandpower_columns_cast_to_float32",
-      "original_timesteps": 590
-    },
-    {
-      "recording_id": "keyboard-control-04",
-      "signal_path": "signals.npz",
-      "signal_key": "keyboard_control_04",
-      "representation": "band_power_timeseries",
-      "shape": [
-        5,
-        455
-      ],
-      "dtype": "float32",
-      "layout": "channels_first",
-      "sampling_rate_hz": null,
-      "channel_names": [
-        "theta",
-        "alpha",
-        "low_beta",
-        "high_beta",
-        "gamma"
-      ],
-      "condition": "gameplay_keyboard_control",
-      "task": "gameplay",
-      "quality": {
-        "usable": true,
-        "artifact": null,
-        "artifact_types": [],
-        "review_status": "not_reviewed"
-      },
-      "transformation": "selected_five_bandpower_columns_cast_to_float32",
-      "original_timesteps": 455
-    },
-    {
-      "recording_id": "keyboard-control-05",
-      "signal_path": "signals.npz",
-      "signal_key": "keyboard_control_05",
-      "representation": "band_power_timeseries",
-      "shape": [
-        5,
-        370
-      ],
-      "dtype": "float32",
-      "layout": "channels_first",
-      "sampling_rate_hz": null,
-      "channel_names": [
-        "theta",
-        "alpha",
-        "low_beta",
-        "high_beta",
-        "gamma"
-      ],
-      "condition": "gameplay_keyboard_control",
-      "task": "gameplay",
-      "quality": {
-        "usable": true,
-        "artifact": null,
-        "artifact_types": [],
-        "review_status": "not_reviewed"
-      },
-      "transformation": "selected_five_bandpower_columns_cast_to_float32",
-      "original_timesteps": 370
-    },
-    {
-      "recording_id": "keyboard-control-06",
-      "signal_path": "signals.npz",
-      "signal_key": "keyboard_control_06",
-      "representation": "band_power_timeseries",
-      "shape": [
-        5,
-        380
-      ],
-      "dtype": "float32",
-      "layout": "channels_first",
-      "sampling_rate_hz": null,
-      "channel_names": [
-        "theta",
-        "alpha",
-        "low_beta",
-        "high_beta",
-        "gamma"
-      ],
-      "condition": "gameplay_keyboard_control",
-      "task": "gameplay",
-      "quality": {
-        "usable": true,
-        "artifact": null,
-        "artifact_types": [],
-        "review_status": "not_reviewed"
-      },
-      "transformation": "selected_five_bandpower_columns_cast_to_float32",
-      "original_timesteps": 380
-    }
-  ],
-  "windows": [],
   "curriculum_targets": {
     "diagnostic_cot": {
       "scope": "patient",
-      "target": {
-        "diagnosis": "ADHD"
+      "supervision": "synthetic_clinical_profile_plus_measured_eeg_features",
+      "input_references": {
+        "recording_ids": [
+          "emotiv-control-01",
+          "emotiv-control-02",
+          "emotiv-control-03",
+          "emotiv-control-04",
+          "emotiv-control-05",
+          "emotiv-control-06",
+          "keyboard-control-01",
+          "keyboard-control-02",
+          "keyboard-control-03",
+          "keyboard-control-04",
+          "keyboard-control-05",
+          "keyboard-control-06"
+        ],
+        "clinical_profile": "clinical_profile.json"
       },
-      "supervision": "source_dataset_group",
-      "evidence": []
+      "target": {
+        "eeg_evidence": [
+          "The mean recording-level theta-to-beta ratio is 4.699.",
+          "The EEG findings are nonspecific and are treated only as supporting context."
+        ],
+        "clinical_evidence": [
+          "The synthetic profile contains 9 inattentive symptoms.",
+          "Reports from self and clinician describe difficulty in more than one setting.",
+          "The synthetic history describes persistent functional impairment."
+        ],
+        "alternative_explanations": [
+          "May contribute to fatigue but does not fully explain the cross-setting symptom pattern.",
+          "Additional clinical screening remains appropriate where indicated."
+        ],
+        "reasoning_steps": [
+          "The duration and distribution of synthetic symptoms are reviewed.",
+          "Functional impairment and agreement between informants are considered.",
+          "Alternative explanations are compared with the represented symptom pattern.",
+          "EEG summaries are retained as supporting context rather than diagnostic proof."
+        ],
+        "conclusion": {
+          "diagnosis": "ADHD",
+          "presentation": "predominantly_inattentive",
+          "severity": "moderate",
+          "confidence": "moderate"
+        }
+      }
     }
   }
 }

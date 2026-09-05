@@ -1,0 +1,84 @@
+{
+  "referral": {
+    "reason": "Evaluation of intermittent attention difficulty during demanding work activities.",
+    "referral_source": "self"
+  },
+  "comorbidity_screen": {
+    "anxiety": "not_indicated",
+    "depression": "not_indicated",
+    "learning_disorder": "screening_recommended",
+    "sleep": {
+      "average_hours": 6.966389,
+      "difficulty": "mild_sleep_onset_delay",
+      "daytime_fatigue": "mild",
+      "disorder": "not_indicated"
+    }
+  },
+  "alternative_explanations": [
+    {
+      "factor": "mild_sleep_onset_delay",
+      "assessment": "May account for occasional attention variability."
+    }
+  ],
+  "informants": [
+    {
+      "role": "self",
+      "summary": "The patient reports occasional distraction during lengthy work but generally completes daily responsibilities independently."
+    },
+    {
+      "role": "clinician",
+      "summary": "Clinical interview does not identify a persistent cross-setting pattern."
+    }
+  ],
+  "functional_impairment": {
+    "settings": [
+      "work"
+    ],
+    "academic": "none",
+    "social": "none",
+    "home": "none"
+  },
+  "symptoms": {
+    "duration_months": 12,
+    "onset_age_years": 37,
+    "inattention": {
+      "count": 5,
+      "maximum": 9,
+      "examples": [
+        "Loses track of deadlines when several tasks compete for attention.",
+        "Needs written reminders for multi-step responsibilities.",
+        "Attention decreases during lengthy independent work."
+      ]
+    },
+    "hyperactivity_impulsivity": {
+      "count": 3,
+      "maximum": 9,
+      "examples": [
+        "Fidgets when seated for extended periods.",
+        "Occasionally interrupts group discussions.",
+        "Sometimes has difficulty waiting during group activities."
+      ]
+    },
+    "pattern": "situational",
+    "recent_changes": "stable"
+  },
+  "rating_scales": [
+    {
+      "instrument": "synthetic_adult_self_report_scale",
+      "score": 6,
+      "maximum": 27,
+      "interpretation": "low"
+    },
+    {
+      "instrument": "synthetic_clinician_adhd_scale",
+      "score": 11,
+      "maximum": 27,
+      "interpretation": "borderline"
+    }
+  ],
+  "medication": {
+    "adhd_medication_status": "not_applicable",
+    "medicated_during_recording": false,
+    "other_medications": []
+  }
+}
