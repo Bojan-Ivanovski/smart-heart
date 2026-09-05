@@ -113,11 +113,12 @@ class CurriculumDataset(Dataset, ABC):
     def _prepare_time_series(
         samples: Sequence[dict[str, object]],
     ) -> tuple[list[Tensor], list[str]]:
-        series_by_channel: dict[tuple[str, str], list[Tensor]] = defaultdict(list)
-        context_by_channel: dict[tuple[str, str], tuple[str, str]] = {}
+        prepared: list[Tensor] = []
+        descriptions: list[str] = []
 
         for sample in samples:
             recording_id = str(sample["recording_id"])
+            segment_id = str(sample["segment_id"])
             channel_names = list(sample["channel_names"])
             time_series = sample["time_series"]
             if not isinstance(time_series, Tensor):
@@ -126,29 +127,20 @@ class CurriculumDataset(Dataset, ABC):
                 raise ValueError("Channel metadata does not match the time series.")
 
             for channel_name, channel in zip(channel_names, time_series):
-                key = recording_id, str(channel_name)
-                series_by_channel[key].append(channel.to(dtype=torch.float32))
-                context_by_channel[key] = (
-                    str(sample["representation"]),
-                    str(sample["condition"]),
+                series = channel.to(dtype=torch.float32)
+                mean = series.mean()
+                standard_deviation = series.std(unbiased=False)
+                scale = standard_deviation.clamp_min(1e-6)
+                prepared.append((series - mean) / scale)
+                representation = str(sample["representation"])
+                condition = str(sample["condition"])
+                descriptions.append(
+                    f"Recording {recording_id}, segment {segment_id}, channel "
+                    f"{channel_name}, contains {representation} from the "
+                    f"{condition} condition. Its original mean is "
+                    f"{mean.item():.4f} and standard deviation is "
+                    f"{standard_deviation.item():.4f}."
                 )
-
-        prepared: list[Tensor] = []
-        descriptions: list[str] = []
-        for key, chunks in series_by_channel.items():
-            recording_id, channel_name = key
-            series = torch.cat(chunks)
-            mean = series.mean()
-            standard_deviation = series.std(unbiased=False)
-            scale = standard_deviation.clamp_min(1e-6)
-            prepared.append((series - mean) / scale)
-            representation, condition = context_by_channel[key]
-            descriptions.append(
-                f"Recording {recording_id}, channel {channel_name}, contains "
-                f"{representation} from the {condition} condition. Its original "
-                f"mean is {mean.item():.4f} and standard deviation is "
-                f"{standard_deviation.item():.4f}."
-            )
 
         return prepared, descriptions
 
