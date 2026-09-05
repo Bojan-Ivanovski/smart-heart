@@ -42,8 +42,9 @@ model windows are runtime slices of these arrays and are not duplicated on disk.
 - Signals have shape `[channels, timesteps]` and use `float32` storage.
 - Missing metadata is represented by `null`; it must not be invented.
 - `segments` contains variable-length, signal-derived regions with meaningful targets.
-- Each segment defines a fixed-size runtime window policy for model input.
-- Segment window policies are authoritative and cannot be overridden by the CLI.
+- Each segment defines the default runtime window policy for model input.
+- The CLI can override window size while preserving each segment policy's
+  stride-to-size ratio and maximum-window limit.
 - Runtime windowing stays inside segment boundaries and does not modify the recording.
 - Every emitted window receives a cached spectral and time-domain analysis derived
   from its exact signal values.

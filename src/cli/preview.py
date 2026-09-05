@@ -37,6 +37,13 @@ def preview(
         DatasetSource,
         typer.Option(help="Restrict the preview to one source dataset."),
     ] = DatasetSource.ALL,
+    window_size: Annotated[
+        int | None,
+        typer.Option(
+            min=1,
+            help="Override window size while preserving each segment's overlap ratio.",
+        ),
+    ] = None,
     stage: Annotated[
         CurriculumStageName,
         typer.Option(help="Curriculum stage whose model input and target are shown."),
@@ -51,6 +58,7 @@ def preview(
         dataset_root,
         split=split,
         source_dataset=source.filter_value,
+        window_size=window_size,
     )
     curriculum_stage = Curriculum(dataset, _PREVIEW_EOS_TOKEN).get(stage.value)
     if not curriculum_stage:

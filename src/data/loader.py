@@ -19,11 +19,15 @@ class SmartHeartDataset(Dataset):
         split: DatasetSplit | str | None = None,
         source_dataset: str | None = None,
         include_unusable: bool = False,
+        window_size: int | None = None,
     ) -> None:
+        if window_size is not None and window_size < 1:
+            raise ValueError("window_size must be at least 1 when provided.")
         self.dataset_root = dataset_root.resolve()
         self.split = DatasetSplit(split) if split is not None else None
         self.source_dataset = source_dataset
         self.include_unusable = include_unusable
+        self.window_size = window_size
         self._documents: dict[str, PatientDocuments] = {}
         self._recordings: dict[tuple[str, str], Recording] = {}
         self._segments: dict[tuple[str, str], Segment] = {}
@@ -194,13 +198,20 @@ class SmartHeartDataset(Dataset):
         return analysis
 
     def _add_segment_windows(self, patient_id: str, segment: Segment) -> None:
-        size = segment.window_policy.size_samples
-        stride = segment.window_policy.stride_samples
+        policy = segment.window_policy
+        size = policy.size_samples
+        stride = policy.stride_samples
+        if self.window_size is not None:
+            size = self.window_size
+            stride = max(
+                1,
+                round(size * policy.stride_samples / policy.size_samples),
+            )
         length = segment.end_timestep - segment.start_timestep
         local_spans = self._window_spans(length, size, stride)
         local_spans = self._limit_spans(
             local_spans,
-            segment.window_policy.maximum_windows,
+            policy.maximum_windows,
         )
         self._samples.extend(
             (

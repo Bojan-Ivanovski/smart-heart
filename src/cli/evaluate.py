@@ -49,6 +49,13 @@ def evaluate(
         DatasetSource,
         typer.Option(help="Restrict evaluation to one source dataset."),
     ] = DatasetSource.ALL,
+    window_size: Annotated[
+        int | None,
+        typer.Option(
+            min=1,
+            help="Override window size while preserving each segment's overlap ratio.",
+        ),
+    ] = None,
     stage: Annotated[
         list[CurriculumStageName] | None,
         typer.Option(
@@ -82,6 +89,7 @@ def evaluate(
         dataset_root,
         split=split.value,
         source_dataset=source.filter_value,
+        window_size=window_size,
     )
     runtime = resolve_runtime(device)
     config = EvaluationConfig(
