@@ -54,12 +54,18 @@ class Trainer:
         stages: tuple[str, ...] | None = None,
     ) -> TrainingSummary:
         self._set_seed(config.seed)
+        print(
+            f"[train] loading model={config.model_id} "
+            f"runtime={self.runtime.kind.value}",
+            flush=True,
+        )
         model = self.model_factory.create(
             config.model_id,
             architecture=config.architecture,
             enable_lora=config.enable_lora,
             gradient_checkpointing=config.gradient_checkpointing,
         )
+        print("[train] model ready", flush=True)
         curriculum = Curriculum(dataset, self._eos_token(model))
         selected = self._select_stages(curriculum, stages)
         empty_stages = tuple(stage.name for stage in selected if len(stage) == 0)
@@ -70,7 +76,10 @@ class Trainer:
                 "Choose a stage available for this source."
             )
         if empty_stages:
-            print(f"[train] skipping stages with no samples: {', '.join(empty_stages)}")
+            print(
+                f"[train] skipping stages with no samples: {', '.join(empty_stages)}",
+                flush=True,
+            )
             selected = tuple(stage for stage in selected if len(stage) > 0)
         if not selected:
             raise ValueError("The selected dataset has no curriculum samples.")
@@ -102,7 +111,19 @@ class Trainer:
                 previous_name,
             )
             if initialized_from is not None:
+                print(
+                    f"[train] stage={stage.name} loading_checkpoint="
+                    f"{initialized_from}",
+                    flush=True,
+                )
                 model.load_from_file(str(initialized_from))
+
+            print(
+                f"[train] stage={stage.name} samples={len(stage)} "
+                f"epochs={config.epochs_per_stage} "
+                f"batch_size={config.batch_size}",
+                flush=True,
+            )
 
             summaries.append(
                 self._train_stage(
@@ -171,14 +192,16 @@ class Trainer:
                 print(
                     f"[train] stage={stage.name} "
                     f"epoch={epoch}/{config.epochs_per_stage} "
-                    f"step={batch_index} loss={final_loss:.6f}"
+                    f"step={batch_index} loss={final_loss:.6f}",
+                    flush=True,
                 )
             if epoch_steps == 0:
                 raise ValueError(f"Stage '{stage.name}' produced no batches.")
             print(
                 f"[train] stage={stage.name} "
                 f"epoch={epoch}/{config.epochs_per_stage} "
-                f"average_loss={epoch_loss / epoch_steps:.6f}"
+                f"average_loss={epoch_loss / epoch_steps:.6f}",
+                flush=True,
             )
             checkpoint = manager.save(model, stage.name)
 
