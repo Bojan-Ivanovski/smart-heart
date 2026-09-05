@@ -110,8 +110,14 @@ class Evaluator:
         )
         prediction_pairs: list[PredictionPair] = []
         rows: list[dict[str, object]] = []
+        total_batches = len(dataloader)
+        print(
+            f"[evaluate] stage={stage.name} split={split} "
+            f"samples={len(stage)} batches={total_batches}",
+            flush=True,
+        )
         with torch.inference_mode():
-            for batch in dataloader:
+            for batch_index, batch in enumerate(dataloader, start=1):
                 generated = model.generate(
                     batch,
                     max_new_tokens=_GENERATION_TOKEN_LIMIT,
@@ -139,6 +145,16 @@ class Evaluator:
                             "expected": expected,
                             "predicted": predicted,
                         }
+                    )
+                if (
+                    batch_index == 1
+                    or batch_index % 10 == 0
+                    or batch_index == total_batches
+                ):
+                    print(
+                        f"[evaluate] stage={stage.name} split={split} "
+                        f"batch={batch_index}/{total_batches}",
+                        flush=True,
                     )
 
         metrics = evaluate_stage(stage.name, prediction_pairs)
