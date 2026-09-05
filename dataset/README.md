@@ -7,25 +7,15 @@ It is not generated at runtime and does not require archive extraction.
 
 ```text
 dataset/
-  manifest.json
-  schema.json
-  examples/
-    mock_patient.json
   patients/
     <patient-id>/
       patient.json
       signals.npz
 ```
 
-`manifest.json` is the discovery index. It records every patient, permanent
-train/validation/test assignment, diagnosis, source cohort, and recording count.
-
-`examples/mock_patient.json` is a synthetic, forward-looking curriculum
-contract. It is documentation only and is not listed in the manifest or loaded
-for training.
-
 Each `patient.json` contains patient-level metadata, diagnosis, recording
 metadata, optional explicitly annotated windows, and curriculum targets.
+The loader discovers these files directly from `patients/*/patient.json`.
 
 Each `signals.npz` contains the patient's recordings as `float32`,
 channels-first arrays. A recording's `signal_key` identifies its array. Runtime
@@ -48,7 +38,7 @@ windows are slices of these arrays and are not duplicated on disk.
   19 EEG channels at 128 Hz.
 - `adhd_cognitive_function`: 79 valid adults across resting, cognitive, and
   auditory conditions using paired EEG channels at 256 Hz. One publisher-marked
-  corrupted subject is excluded in `manifest.json`.
+  corrupted subject was excluded during normalization.
 - `adhd_gameplay`: 10 gameplay subjects with five-band power time series. The
   source does not provide a reliable sampling rate for these derived values.
 

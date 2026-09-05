@@ -69,17 +69,26 @@ class SmartHeartDataset(Dataset):
         self.patients: list[CanonicalPatient] = []
         self.samples: list[tuple[CanonicalRecording, tuple[int, int]]] = []
 
-        manifest_path = self.path / "manifest.json"
-        if not manifest_path.is_file():
+        patients_path = self.path / "patients"
+        if not patients_path.is_dir():
             raise FileNotFoundError(
-                f"Canonical dataset manifest not found at '{manifest_path}'."
+                f"Canonical patient directory not found at '{patients_path}'."
             )
 
-        manifest = self._read_json(manifest_path)
-        for entry in manifest.get("patients", []):
-            if source_dataset and entry.get("source_dataset") != source_dataset:
+        patient_ids: set[str] = set()
+        patient_paths = sorted(patients_path.glob("*/patient.json"))
+        if not patient_paths:
+            raise ValueError(f"No patient metadata found under '{patients_path}'.")
+
+        for patient_path in patient_paths:
+            metadata = self._read_json(patient_path)
+            if source_dataset and metadata.get("source_dataset") != source_dataset:
                 continue
-            self._add_patient(entry)
+            patient_id = str(metadata.get("patient_id", ""))
+            if patient_id in patient_ids:
+                raise ValueError(f"Duplicate patient ID '{patient_id}'.")
+            patient_ids.add(patient_id)
+            self._add_patient(patient_path, metadata)
 
         if source_dataset and not self.patients:
             raise ValueError(
@@ -94,9 +103,11 @@ class SmartHeartDataset(Dataset):
             raise ValueError(f"Expected a JSON object in '{path}'.")
         return value
 
-    def _add_patient(self, entry: dict[str, object]) -> None:
-        patient_path = self.path / str(entry["path"])
-        metadata = self._read_json(patient_path)
+    def _add_patient(
+        self,
+        patient_path: Path,
+        metadata: dict[str, object],
+    ) -> None:
         ground_truth = metadata["clinical_ground_truth"]
         if not isinstance(ground_truth, dict):
             raise ValueError(f"Invalid clinical ground truth in '{patient_path}'.")
@@ -107,15 +118,8 @@ class SmartHeartDataset(Dataset):
             diagnosis=str(ground_truth["diagnosis"]),
             source_dataset=str(metadata["source_dataset"]),
         )
-        if patient.patient_id != entry["patient_id"]:
+        if patient.patient_id != patient_path.parent.name:
             raise ValueError(f"Patient ID mismatch in '{patient_path}'.")
-        for field, actual in (
-            ("split", patient.split),
-            ("source_dataset", patient.source_dataset),
-            ("diagnosis", patient.diagnosis),
-        ):
-            if actual != entry[field]:
-                raise ValueError(f"Patient {field} mismatch in '{patient_path}'.")
         if patient.split not in {"train", "validation", "test"}:
             raise ValueError(f"Invalid split in '{patient_path}'.")
         if patient.diagnosis not in {"ADHD", "NOT_ADHD"}:
@@ -123,10 +127,8 @@ class SmartHeartDataset(Dataset):
 
         self.patients.append(patient)
         recordings = metadata.get("recordings")
-        if not isinstance(recordings, list):
+        if not isinstance(recordings, list) or not recordings:
             raise ValueError(f"Invalid recordings list in '{patient_path}'.")
-        if len(recordings) != entry["recording_count"]:
-            raise ValueError(f"Patient recording count mismatch in '{patient_path}'.")
 
         for value in recordings:
             if not isinstance(value, dict):
