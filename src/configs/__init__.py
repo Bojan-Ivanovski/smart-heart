@@ -1,1 +1,0 @@
-"""Validated SmartHeart configuration objects."""

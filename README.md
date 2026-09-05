@@ -18,7 +18,8 @@ The canonical dataset contract, layout, and source summary are documented in [da
 
 ## Source Code
 
-More information about the current implementation can be found in [src/README.md](src/README.md).
+The implementation is organized under `src/` into CLI, curriculum, data,
+domain, evaluation, and training layers.
 
 ## Repository Layout
 
@@ -32,28 +33,29 @@ More information about the current implementation can be found in [src/README.md
 
 ## Usage
 
-Preview the active gameplay dataset without initializing a language model:
+Preview the first MCQ model input and expected answer without initializing a
+language model:
 
 ```powershell
-python -m src.main
+python -m src.main preview
 ```
 
 Start training explicitly:
 
 ```powershell
-python -m src.main --mode train --dataset gameplay --device auto
+python -m src.main train --device auto
 ```
 
-Evaluate the saved checkpoint on both held-out partitions:
+Evaluate the saved curriculum checkpoints on the validation partition:
 
 ```powershell
-python -m src.main --mode evaluate --dataset gameplay --evaluation-split both
+python -m src.main evaluate --split validation --device auto
 ```
 
-Training automatically loads the checkpoint matching `--model-id` when that file
-already exists under `--checkpoint-root`. To discard it and train from the base
-model, add `--fresh-start`; this deletes only the selected model's checkpoint.
-Checkpoints contain model weights, so reuse is a warm start rather than an optimizer
-or epoch resume.
+Training automatically loads the checkpoint matching the model, architecture,
+and curriculum stage when it already exists under `--checkpoint-root`. To discard
+the selected model's curriculum checkpoints and train from the base model, add
+`--fresh-start`. Checkpoints contain model weights, so reuse is a warm start rather
+than an optimizer or epoch resume.
 
-See [src/README.md](src/README.md) or run `python -m src.main --help` for additional options.
+Run `python -m src.main --help` and a command's `--help` option for the complete CLI.

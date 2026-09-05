@@ -1,1 +1,1 @@
-"""SmartHeart EEG classification package."""
+"""SmartHeart training and evaluation package."""
