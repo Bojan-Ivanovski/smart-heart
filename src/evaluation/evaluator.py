@@ -151,9 +151,19 @@ class Evaluator:
                     or batch_index % 10 == 0
                     or batch_index == total_batches
                 ):
+                    running_metrics = evaluate_stage(
+                        stage.name,
+                        prediction_pairs,
+                    )
+                    metric_text = " ".join(
+                        f"{name}={value:.4f}"
+                        for name, value in running_metrics.items()
+                    )
                     print(
                         f"[evaluate] stage={stage.name} split={split} "
-                        f"batch={batch_index}/{total_batches}",
+                        f"batch={batch_index}/{total_batches} "
+                        f"samples={len(prediction_pairs)}/{len(stage)} "
+                        f"{metric_text}",
                         flush=True,
                     )
 
