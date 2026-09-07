@@ -13,7 +13,6 @@ from .common import (
     DEFAULT_DATASET_ROOT,
     DEFAULT_OUTPUT_ROOT,
     CurriculumStageName,
-    DatasetSource,
     EvaluationSplit,
     stage_names,
 )
@@ -45,10 +44,6 @@ def evaluate(
             help="Canonical dataset directory.",
         ),
     ] = DEFAULT_DATASET_ROOT,
-    source: Annotated[
-        DatasetSource,
-        typer.Option(help="Restrict evaluation to one source dataset."),
-    ] = DatasetSource.ALL,
     window_size: Annotated[
         int | None,
         typer.Option(
@@ -88,7 +83,6 @@ def evaluate(
     dataset = SmartHeartDataset(
         dataset_root,
         split=split.value,
-        source_dataset=source.filter_value,
         window_size=window_size,
     )
     runtime = resolve_runtime(device)

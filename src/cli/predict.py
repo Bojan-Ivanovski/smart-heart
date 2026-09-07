@@ -14,7 +14,6 @@ from .common import (
     DEFAULT_CHECKPOINT_ROOT,
     DEFAULT_DATASET_ROOT,
     CurriculumStageName,
-    DatasetSource,
 )
 
 
@@ -44,10 +43,6 @@ def predict(
         DatasetSplit,
         typer.Option(help="Patient split from which to select one input."),
     ] = DatasetSplit.TEST,
-    source: Annotated[
-        DatasetSource,
-        typer.Option(help="Restrict prediction to one source dataset."),
-    ] = DatasetSource.COGNITIVE_FUNCTION,
     stage: Annotated[
         CurriculumStageName,
         typer.Option(help="Checkpoint and curriculum prompt to use."),
@@ -89,7 +84,6 @@ def predict(
     dataset = SmartHeartDataset(
         dataset_root,
         split=split,
-        source_dataset=source.filter_value,
         window_size=window_size,
     )
     runtime = resolve_runtime(device)

@@ -11,7 +11,6 @@ from ..domain.patient import DatasetSplit
 from .common import (
     DEFAULT_DATASET_ROOT,
     CurriculumStageName,
-    DatasetSource,
 )
 
 
@@ -33,10 +32,6 @@ def preview(
         DatasetSplit | None,
         typer.Option(help="Restrict the preview to one persisted patient split."),
     ] = None,
-    source: Annotated[
-        DatasetSource,
-        typer.Option(help="Restrict the preview to one source dataset."),
-    ] = DatasetSource.ALL,
     window_size: Annotated[
         int | None,
         typer.Option(
@@ -57,7 +52,6 @@ def preview(
     dataset = SmartHeartDataset(
         dataset_root,
         split=split,
-        source_dataset=source.filter_value,
         window_size=window_size,
     )
     curriculum_stage = Curriculum(dataset, _PREVIEW_EOS_TOKEN).get(stage.value)

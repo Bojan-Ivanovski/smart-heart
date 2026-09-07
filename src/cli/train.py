@@ -12,7 +12,6 @@ from .common import (
     DEFAULT_CHECKPOINT_ROOT,
     DEFAULT_DATASET_ROOT,
     CurriculumStageName,
-    DatasetSource,
     stage_names,
 )
 
@@ -39,10 +38,6 @@ def train(
             help="Canonical dataset directory.",
         ),
     ] = DEFAULT_DATASET_ROOT,
-    source: Annotated[
-        DatasetSource,
-        typer.Option(help="Restrict training to one source dataset."),
-    ] = DatasetSource.ALL,
     window_size: Annotated[
         int | None,
         typer.Option(
@@ -99,7 +94,6 @@ def train(
     dataset = SmartHeartDataset(
         dataset_root,
         split="train",
-        source_dataset=source.filter_value,
         window_size=window_size,
     )
     runtime = resolve_runtime(device)

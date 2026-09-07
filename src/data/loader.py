@@ -17,7 +17,6 @@ class SmartHeartDataset(Dataset):
         dataset_root: Path,
         *,
         split: DatasetSplit | str | None = None,
-        source_dataset: str | None = None,
         include_unusable: bool = False,
         window_size: int | None = None,
     ) -> None:
@@ -25,7 +24,6 @@ class SmartHeartDataset(Dataset):
             raise ValueError("window_size must be at least 1 when provided.")
         self.dataset_root = dataset_root.resolve()
         self.split = DatasetSplit(split) if split is not None else None
-        self.source_dataset = source_dataset
         self.include_unusable = include_unusable
         self.window_size = window_size
         self._documents: dict[str, PatientDocuments] = {}
@@ -45,9 +43,6 @@ class SmartHeartDataset(Dataset):
             patient, _, recordings, segments = documents
             if self.split is not None and patient.metadata.split != self.split:
                 continue
-            if source_dataset and patient.metadata.source_dataset != source_dataset:
-                continue
-
             self._documents[patient.patient_id] = documents
             for recording in recordings.recordings:
                 self._recordings[(patient.patient_id, recording.recording_id)] = recording

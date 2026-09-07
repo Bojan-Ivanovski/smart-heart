@@ -8,17 +8,6 @@ DEFAULT_CHECKPOINT_ROOT = PROJECT_ROOT / "checkpoints"
 DEFAULT_OUTPUT_ROOT = PROJECT_ROOT / "results"
 
 
-class DatasetSource(str, Enum):
-    ALL = "all"
-    CHILDREN = "adhd_children"
-    COGNITIVE_FUNCTION = "adhd_cognitive_function"
-    GAMEPLAY = "adhd_gameplay"
-
-    @property
-    def filter_value(self) -> str | None:
-        return None if self is DatasetSource.ALL else self.value
-
-
 class CurriculumStageName(str, Enum):
     MCQ = "stage1_mcq"
     EEG_CAPTIONING = "stage2_eeg_captioning"
