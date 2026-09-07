@@ -40,6 +40,13 @@ language model:
 python -m src.main preview
 ```
 
+Generate one prediction from the final diagnostic checkpoint without running
+evaluation metrics:
+
+```powershell
+python -m src.main predict
+```
+
 Start training explicitly:
 
 ```powershell

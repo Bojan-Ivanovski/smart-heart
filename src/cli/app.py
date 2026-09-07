@@ -1,6 +1,7 @@
 import typer
 
 from .evaluate import evaluate
+from .predict import predict
 from .preview import preview
 from .train import train
 
@@ -13,5 +14,6 @@ app = typer.Typer(
 )
 
 app.command()(preview)
+app.command()(predict)
 app.command()(train)
 app.command()(evaluate)
