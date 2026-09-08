@@ -3,8 +3,6 @@
   "metadata": {
     "schema_version": "2.0.0-draft",
     "source_dataset": "adhd_cognitive_function",
-    "split_group": "cognitive-function__mc__010",
-    "split": "test",
     "annotation": {
       "seed": 3267279122,
       "generation_basis": [

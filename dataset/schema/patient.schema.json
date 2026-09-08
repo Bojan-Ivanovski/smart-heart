@@ -20,8 +20,6 @@
       "required": [
         "schema_version",
         "source_dataset",
-        "split_group",
-        "split",
         "annotation",
         "demographics"
       ],
@@ -32,16 +30,6 @@
         },
         "source_dataset": {
           "$ref": "#/$defs/identifier"
-        },
-        "split_group": {
-          "$ref": "#/$defs/identifier"
-        },
-        "split": {
-          "enum": [
-            "train",
-            "validation",
-            "test"
-          ]
         },
         "annotation": {
           "type": "object",

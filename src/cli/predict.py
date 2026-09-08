@@ -4,8 +4,7 @@ from typing import Annotated
 
 import typer
 
-from ..data import SmartHeartDataset
-from ..domain.patient import DatasetSplit
+from ..data import DatasetSplit, SmartHeartDataset
 from ..inference import PredictionConfig, Predictor
 from ..models import ModelArchitecture, OpenTSLMModelFactory
 from ..runtime import RuntimeKind, resolve_runtime

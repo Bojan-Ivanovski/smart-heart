@@ -17,7 +17,7 @@ from .diagnostic_conclusion import (
 from .diagnostic_input_references import DiagnosticInputReferences
 from .diagnostic_output import DiagnosticOutput
 from .diagnostic_target import DiagnosticTarget
-from .metadata import DatasetSplit, PatientMetadata
+from .metadata import PatientMetadata
 from .resources import PatientResources
 
 
@@ -42,7 +42,6 @@ __all__ = [
     "Annotation",
     "ClinicalGroundTruth",
     "Confidence",
-    "DatasetSplit",
     "Demographics",
     "Diagnosis",
     "DiagnosticConclusion",

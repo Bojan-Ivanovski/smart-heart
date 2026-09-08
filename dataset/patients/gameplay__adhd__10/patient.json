@@ -3,8 +3,6 @@
   "metadata": {
     "schema_version": "2.0.0-draft",
     "source_dataset": "adhd_gameplay",
-    "split_group": "gameplay__adhd__10",
-    "split": "test",
     "annotation": {
       "seed": 3038801364,
       "generation_basis": [

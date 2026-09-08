@@ -6,7 +6,7 @@ The goal of SmartHeart is to train a model using OpenTSLM technology so it can u
 
 ## Current Status
 
-The repository includes a canonical patient-level EEG dataset and an OpenTSLM training pipeline. It supports raw EEG and gameplay band-power recordings, configurable time-series windows, persisted patient-level dataset splits, LoRA training, deterministic seeds, automatic checkpoint reuse, and automatic XLA, CUDA, MPS, or CPU selection.
+The repository includes a canonical patient-level EEG dataset and an OpenTSLM training pipeline. It supports raw EEG and gameplay band-power recordings, configurable time-series windows, deterministic patient-level dataset splits, LoRA training, deterministic seeds, automatic checkpoint reuse, and automatic XLA, CUDA, MPS, or CPU selection.
 
 ## Environment
 

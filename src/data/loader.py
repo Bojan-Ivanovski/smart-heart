@@ -6,7 +6,7 @@ from torch.utils.data import Dataset
 
 from .features import analyze_window
 from .parser import PatientDocuments, parse_patient
-from ..domain.patient import DatasetSplit
+from .split import DatasetSplit, assign_patient_splits
 from ..domain.recording import Recording
 from ..domain.segment import Segment, WindowAnalysis
 
@@ -31,17 +31,25 @@ class SmartHeartDataset(Dataset):
         self._segments: dict[tuple[str, str], Segment] = {}
         self._samples: list[tuple[str, str, str, int, int]] = []
         self._window_analysis_cache: dict[int, WindowAnalysis] = {}
+        self._patient_splits: dict[str, DatasetSplit] = {}
 
         patients_root = self.dataset_root / "patients"
         if not patients_root.is_dir():
             raise ValueError(f"Patient directory does not exist: '{patients_root}'.")
 
-        for directory in sorted(patients_root.iterdir()):
-            if not directory.is_dir() or not (directory / "patient.json").is_file():
-                continue
-            documents = parse_patient(directory)
+        parsed_documents = [
+            parse_patient(directory)
+            for directory in sorted(patients_root.iterdir())
+            if directory.is_dir() and (directory / "patient.json").is_file()
+        ]
+        self._patient_splits = assign_patient_splits(
+            [documents[0] for documents in parsed_documents]
+        )
+
+        for documents in parsed_documents:
             patient, _, recordings, segments = documents
-            if self.split is not None and patient.metadata.split != self.split:
+            patient_split = self._patient_splits[patient.patient_id]
+            if self.split is not None and patient_split != self.split:
                 continue
             self._documents[patient.patient_id] = documents
             for recording in recordings.recordings:
@@ -126,7 +134,7 @@ class SmartHeartDataset(Dataset):
             "segment_id": segment_id,
             "window_start": start,
             "window_end": end,
-            "split": patient.metadata.split.value,
+            "split": self._patient_splits[patient_id].value,
             "source_dataset": patient.metadata.source_dataset,
             "channel_names": recording.channel_names,
             "representation": recording.representation.value,

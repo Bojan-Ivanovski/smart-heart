@@ -38,7 +38,9 @@ model windows are runtime slices of these arrays and are not duplicated on disk.
 ## Contract Rules
 
 - Patient IDs are globally unique and are the unit of dataset splitting.
-- A patient and all their recordings always belong to one persisted split.
+- Runtime code creates a deterministic 60/20/20 patient split, stratified by
+  source cohort and diagnosis with seed 42.
+- A patient and all their recordings always belong to one runtime split.
 - Signals have shape `[channels, timesteps]` and use `float32` storage.
 - Missing metadata is represented by `null`; it must not be invented.
 - `segments` contains variable-length, signal-derived regions with meaningful targets.

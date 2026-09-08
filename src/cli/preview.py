@@ -5,8 +5,7 @@ from typing import Annotated
 import typer
 
 from ..curriculum import Curriculum
-from ..data import SmartHeartDataset
-from ..domain.patient import DatasetSplit
+from ..data import DatasetSplit, SmartHeartDataset
 
 from .common import (
     DEFAULT_DATASET_ROOT,
@@ -30,7 +29,7 @@ def preview(
     ] = DEFAULT_DATASET_ROOT,
     split: Annotated[
         DatasetSplit | None,
-        typer.Option(help="Restrict the preview to one persisted patient split."),
+        typer.Option(help="Restrict the preview to one runtime patient split."),
     ] = None,
     window_size: Annotated[
         int | None,

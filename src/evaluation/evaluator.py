@@ -5,8 +5,7 @@ from pathlib import Path
 import torch
 
 from ..curriculum import Curriculum, CurriculumStage
-from ..data import SmartHeartDataset, build_dataloader
-from ..domain.patient import DatasetSplit
+from ..data import DatasetSplit, SmartHeartDataset, build_dataloader
 from ..models import OpenTSLMModel, OpenTSLMModelFactory
 from ..runtime import Runtime
 from ..training import CheckpointManager

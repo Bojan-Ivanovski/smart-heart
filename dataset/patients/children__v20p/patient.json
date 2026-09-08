@@ -3,8 +3,6 @@
   "metadata": {
     "schema_version": "2.0.0-draft",
     "source_dataset": "adhd_children",
-    "split_group": "children__v20p",
-    "split": "validation",
     "annotation": {
       "seed": 1313195693,
       "generation_basis": [
