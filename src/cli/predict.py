@@ -13,6 +13,7 @@ from .common import (
     DEFAULT_CHECKPOINT_ROOT,
     DEFAULT_DATASET_ROOT,
     CurriculumStageName,
+    MODEL_SOURCE_DATASET,
 )
 
 
@@ -83,6 +84,7 @@ def predict(
     dataset = SmartHeartDataset(
         dataset_root,
         split=split,
+        source_dataset=MODEL_SOURCE_DATASET,
         window_size=window_size,
     )
     runtime = resolve_runtime(device)

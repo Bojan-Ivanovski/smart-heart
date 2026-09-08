@@ -10,6 +10,7 @@ from ..data import DatasetSplit, SmartHeartDataset
 from .common import (
     DEFAULT_DATASET_ROOT,
     CurriculumStageName,
+    MODEL_SOURCE_DATASET,
 )
 
 
@@ -51,6 +52,7 @@ def preview(
     dataset = SmartHeartDataset(
         dataset_root,
         split=split,
+        source_dataset=MODEL_SOURCE_DATASET,
         window_size=window_size,
     )
     curriculum_stage = Curriculum(dataset, _PREVIEW_EOS_TOKEN).get(stage.value)

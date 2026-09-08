@@ -15,6 +15,9 @@ The project currently targets Python `3.12`, as defined in `.python-version`. Ba
 ## Datasets
 
 The canonical dataset contract, layout, and source summary are documented in [dataset/README.md](dataset/README.md).
+The model-facing preview, training, evaluation, and prediction commands use the
+`adhd_cognitive_function` cohort. The other canonical cohorts remain available
+for dataset analysis and future experiments.
 
 ## Source Code
 

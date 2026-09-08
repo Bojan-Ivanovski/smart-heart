@@ -6,6 +6,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_DATASET_ROOT = PROJECT_ROOT / "dataset"
 DEFAULT_CHECKPOINT_ROOT = PROJECT_ROOT / "checkpoints"
 DEFAULT_OUTPUT_ROOT = PROJECT_ROOT / "results"
+MODEL_SOURCE_DATASET = "adhd_cognitive_function"
 
 
 class CurriculumStageName(str, Enum):

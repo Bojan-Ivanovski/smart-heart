@@ -14,6 +14,7 @@ from .common import (
     DEFAULT_OUTPUT_ROOT,
     CurriculumStageName,
     EvaluationSplit,
+    MODEL_SOURCE_DATASET,
     stage_names,
 )
 
@@ -83,6 +84,7 @@ def evaluate(
     dataset = SmartHeartDataset(
         dataset_root,
         split=split.value,
+        source_dataset=MODEL_SOURCE_DATASET,
         window_size=window_size,
     )
     runtime = resolve_runtime(device)

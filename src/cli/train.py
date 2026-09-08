@@ -12,6 +12,7 @@ from .common import (
     DEFAULT_CHECKPOINT_ROOT,
     DEFAULT_DATASET_ROOT,
     CurriculumStageName,
+    MODEL_SOURCE_DATASET,
     stage_names,
 )
 
@@ -94,6 +95,7 @@ def train(
     dataset = SmartHeartDataset(
         dataset_root,
         split="train",
+        source_dataset=MODEL_SOURCE_DATASET,
         window_size=window_size,
     )
     runtime = resolve_runtime(device)
