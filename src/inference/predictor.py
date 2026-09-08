@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
+from secrets import randbelow
 
 import torch
 from torch.utils.data import Dataset
@@ -34,12 +35,14 @@ class PredictionConfig:
 @dataclass(frozen=True)
 class PredictionResult:
     stage: str
+    index: int
     patient_id: str
     recording_ids: tuple[str, ...]
     segment_ids: tuple[str, ...]
     pre_prompt: str
     post_prompt: str
     prediction: str
+    expected_answer: str
     checkpoint: Path
     time_series: tuple[torch.Tensor, ...]
     time_series_text: tuple[str, ...]
@@ -60,10 +63,10 @@ class Predictor:
         config: PredictionConfig,
         *,
         stage_name: str,
-        index: int = 0,
+        index: int | None = None,
         prompt: str | None = None,
     ) -> PredictionResult:
-        if index < 0:
+        if index is not None and index < 0:
             raise ValueError("index must be at least 0.")
         if prompt is not None and not prompt.strip():
             raise ValueError("prompt cannot be empty when provided.")
@@ -81,6 +84,8 @@ class Predictor:
         stage = Curriculum(dataset, str(eos_token)).get(stage_name)
         if not stage:
             raise ValueError(f"Stage '{stage_name}' has no samples.")
+        if index is None:
+            index = randbelow(len(stage))
         if index >= len(stage):
             raise ValueError(
                 f"index must be smaller than the stage size ({len(stage)})."
@@ -119,12 +124,17 @@ class Predictor:
 
         return PredictionResult(
             stage=stage.name,
+            index=index,
             patient_id=str(sample["patient_id"]),
             recording_ids=tuple(str(value) for value in sample["recording_ids"]),
             segment_ids=tuple(str(value) for value in sample["segment_ids"]),
             pre_prompt=str(sample["pre_prompt"]),
             post_prompt=str(sample["post_prompt"]),
             prediction=self._without_eos(str(generated[0]), str(eos_token)),
+            expected_answer=self._without_eos(
+                str(sample["answer"]),
+                str(eos_token),
+            ),
             checkpoint=checkpoint,
             time_series=tuple(sample["time_series"]),
             time_series_text=tuple(

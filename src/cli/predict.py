@@ -54,9 +54,12 @@ def predict(
         typer.Option(help="Curriculum prompt to use with the latest checkpoint."),
     ] = CurriculumStageName.DIAGNOSTIC_COT,
     index: Annotated[
-        int,
-        typer.Option(min=0, help="Curriculum sample index to predict."),
-    ] = 0,
+        int | None,
+        typer.Option(
+            min=0,
+            help="Curriculum sample index; omit to select one randomly.",
+        ),
+    ] = None,
     window_size: Annotated[
         int,
         typer.Option(min=1, help="Window size used to train this stage checkpoint."),
@@ -129,6 +132,7 @@ def predict(
             json.dump(
                 {
                     "stage": result.stage,
+                    "index": result.index,
                     "patient_id": result.patient_id,
                     "recording_ids": result.recording_ids,
                     "segment_ids": result.segment_ids,
@@ -136,6 +140,7 @@ def predict(
                     "pre_prompt": result.pre_prompt,
                     "post_prompt": result.post_prompt,
                     "prediction": result.prediction,
+                    "expected_answer": result.expected_answer,
                     "time_series_count": len(result.time_series),
                     "time_series_text": result.time_series_text,
                     "plot": str(plot_path),
@@ -156,6 +161,7 @@ def _render_prediction(result: PredictionResult, plot_path: Path) -> None:
     metadata.add_column(style="bold cyan", no_wrap=True)
     metadata.add_column()
     metadata.add_row("Stage", result.stage)
+    metadata.add_row("Sample index", str(result.index))
     metadata.add_row("Patient", result.patient_id)
     metadata.add_row("Checkpoint", str(result.checkpoint))
     metadata.add_row("Input series", str(len(result.time_series)))
@@ -200,5 +206,12 @@ def _render_prediction(result: PredictionResult, plot_path: Path) -> None:
             Text(result.prediction),
             title="Model Prediction",
             border_style="green",
+        )
+    )
+    console.print(
+        Panel(
+            Text(result.expected_answer),
+            title="Expected Answer",
+            border_style="yellow",
         )
     )
