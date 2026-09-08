@@ -44,7 +44,7 @@ class PredictionResult:
     prediction: str
     expected_answer: str
     checkpoint: Path
-    time_series: tuple[torch.Tensor, ...]
+    time_series_count: int
     time_series_text: tuple[str, ...]
 
 
@@ -136,7 +136,7 @@ class Predictor:
                 str(eos_token),
             ),
             checkpoint=checkpoint,
-            time_series=tuple(sample["time_series"]),
+            time_series_count=len(sample["time_series"]),
             time_series_text=tuple(
                 str(value) for value in sample["time_series_text"]
             ),

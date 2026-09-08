@@ -10,14 +10,12 @@ from rich.text import Text
 
 from ..data import DatasetSplit, SmartHeartDataset
 from ..inference import PredictionConfig, PredictionResult, Predictor
-from ..inference import save_time_series_plot
 from ..models import ModelArchitecture, OpenTSLMModelFactory
 from ..runtime import RuntimeKind, resolve_runtime
 
 from .common import (
     DEFAULT_CHECKPOINT_ROOT,
     DEFAULT_DATASET_ROOT,
-    DEFAULT_OUTPUT_ROOT,
     CurriculumStageName,
     MODEL_SOURCE_DATASET,
 )
@@ -88,14 +86,6 @@ def predict(
             help="Write the prediction and prompt context to a JSON file.",
         ),
     ] = None,
-    plot_output: Annotated[
-        Path,
-        typer.Option(
-            dir_okay=False,
-            resolve_path=True,
-            help="Save a visualization of the time-series inputs.",
-        ),
-    ] = DEFAULT_OUTPUT_ROOT / "prediction_time_series.png",
 ) -> None:
     """Generate one checkpoint prediction without running evaluation metrics."""
     dataset = SmartHeartDataset(
@@ -118,13 +108,6 @@ def predict(
         index=index,
         prompt=prompt,
     )
-    plot_path = save_time_series_plot(
-        result.time_series,
-        result.time_series_text,
-        plot_output,
-        patient_id=result.patient_id,
-    )
-
     if output is not None:
         output.parent.mkdir(parents=True, exist_ok=True)
         temporary = output.with_suffix(f"{output.suffix}.tmp")
@@ -141,9 +124,8 @@ def predict(
                     "post_prompt": result.post_prompt,
                     "prediction": result.prediction,
                     "expected_answer": result.expected_answer,
-                    "time_series_count": len(result.time_series),
+                    "time_series_count": result.time_series_count,
                     "time_series_text": result.time_series_text,
-                    "plot": str(plot_path),
                 },
                 handle,
                 indent=2,
@@ -152,10 +134,10 @@ def predict(
             handle.write("\n")
         temporary.replace(output)
 
-    _render_prediction(result, plot_path)
+    _render_prediction(result)
 
 
-def _render_prediction(result: PredictionResult, plot_path: Path) -> None:
+def _render_prediction(result: PredictionResult) -> None:
     console = Console()
     metadata = Table.grid(padding=(0, 2))
     metadata.add_column(style="bold cyan", no_wrap=True)
@@ -164,8 +146,7 @@ def _render_prediction(result: PredictionResult, plot_path: Path) -> None:
     metadata.add_row("Sample index", str(result.index))
     metadata.add_row("Patient", result.patient_id)
     metadata.add_row("Checkpoint", str(result.checkpoint))
-    metadata.add_row("Input series", str(len(result.time_series)))
-    metadata.add_row("Visualization", str(plot_path))
+    metadata.add_row("Input series", str(result.time_series_count))
 
     shown = result.time_series_text[:6]
     series_summary = "\n".join(
@@ -175,7 +156,7 @@ def _render_prediction(result: PredictionResult, plot_path: Path) -> None:
     if len(result.time_series_text) > len(shown):
         series_summary += (
             f"\n... {len(result.time_series_text) - len(shown)} additional "
-            "series are included in the model input and heatmap."
+            "series are included in the model input."
         )
 
     console.rule("[bold]OpenTSLM EEG Prediction")
