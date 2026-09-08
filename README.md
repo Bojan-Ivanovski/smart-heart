@@ -44,7 +44,9 @@ python -m src.main preview
 ```
 
 Generate one prediction from the final diagnostic checkpoint without running
-evaluation metrics:
+evaluation metrics. The command prints structured prompt and prediction panels
+and saves a visualization of the standardized model inputs to
+`results/prediction_time_series.png`:
 
 ```powershell
 python -m src.main predict

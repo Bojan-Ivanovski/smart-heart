@@ -41,6 +41,8 @@ class PredictionResult:
     post_prompt: str
     prediction: str
     checkpoint: Path
+    time_series: tuple[torch.Tensor, ...]
+    time_series_text: tuple[str, ...]
 
 
 class Predictor:
@@ -124,6 +126,10 @@ class Predictor:
             post_prompt=str(sample["post_prompt"]),
             prediction=self._without_eos(str(generated[0]), str(eos_token)),
             checkpoint=checkpoint,
+            time_series=tuple(sample["time_series"]),
+            time_series_text=tuple(
+                str(value) for value in sample["time_series_text"]
+            ),
         )
 
     @staticmethod

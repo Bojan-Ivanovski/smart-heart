@@ -3,15 +3,21 @@ from pathlib import Path
 from typing import Annotated
 
 import typer
+from rich.console import Console
+from rich.panel import Panel
+from rich.table import Table
+from rich.text import Text
 
 from ..data import DatasetSplit, SmartHeartDataset
-from ..inference import PredictionConfig, Predictor
+from ..inference import PredictionConfig, PredictionResult, Predictor
+from ..inference import save_time_series_plot
 from ..models import ModelArchitecture, OpenTSLMModelFactory
 from ..runtime import RuntimeKind, resolve_runtime
 
 from .common import (
     DEFAULT_CHECKPOINT_ROOT,
     DEFAULT_DATASET_ROOT,
+    DEFAULT_OUTPUT_ROOT,
     CurriculumStageName,
     MODEL_SOURCE_DATASET,
 )
@@ -79,6 +85,14 @@ def predict(
             help="Write the prediction and prompt context to a JSON file.",
         ),
     ] = None,
+    plot_output: Annotated[
+        Path,
+        typer.Option(
+            dir_okay=False,
+            resolve_path=True,
+            help="Save a visualization of the time-series inputs.",
+        ),
+    ] = DEFAULT_OUTPUT_ROOT / "prediction_time_series.png",
 ) -> None:
     """Generate one checkpoint prediction without running evaluation metrics."""
     dataset = SmartHeartDataset(
@@ -101,6 +115,12 @@ def predict(
         index=index,
         prompt=prompt,
     )
+    plot_path = save_time_series_plot(
+        result.time_series,
+        result.time_series_text,
+        plot_output,
+        patient_id=result.patient_id,
+    )
 
     if output is not None:
         output.parent.mkdir(parents=True, exist_ok=True)
@@ -116,6 +136,9 @@ def predict(
                     "pre_prompt": result.pre_prompt,
                     "post_prompt": result.post_prompt,
                     "prediction": result.prediction,
+                    "time_series_count": len(result.time_series),
+                    "time_series_text": result.time_series_text,
+                    "plot": str(plot_path),
                 },
                 handle,
                 indent=2,
@@ -124,11 +147,58 @@ def predict(
             handle.write("\n")
         temporary.replace(output)
 
-    typer.echo(f"stage: {result.stage}")
-    typer.echo(f"patient: {result.patient_id}")
-    typer.echo(f"checkpoint: {result.checkpoint}")
-    typer.echo("\nPROMPT")
-    typer.echo(result.pre_prompt)
-    typer.echo(result.post_prompt)
-    typer.echo("\nPREDICTION")
-    typer.echo(result.prediction)
+    _render_prediction(result, plot_path)
+
+
+def _render_prediction(result: PredictionResult, plot_path: Path) -> None:
+    console = Console()
+    metadata = Table.grid(padding=(0, 2))
+    metadata.add_column(style="bold cyan", no_wrap=True)
+    metadata.add_column()
+    metadata.add_row("Stage", result.stage)
+    metadata.add_row("Patient", result.patient_id)
+    metadata.add_row("Checkpoint", str(result.checkpoint))
+    metadata.add_row("Input series", str(len(result.time_series)))
+    metadata.add_row("Visualization", str(plot_path))
+
+    shown = result.time_series_text[:6]
+    series_summary = "\n".join(
+        f"{index}. {description}"
+        for index, description in enumerate(shown, start=1)
+    )
+    if len(result.time_series_text) > len(shown):
+        series_summary += (
+            f"\n... {len(result.time_series_text) - len(shown)} additional "
+            "series are included in the model input and heatmap."
+        )
+
+    console.rule("[bold]OpenTSLM EEG Prediction")
+    console.print(metadata)
+    console.print(
+        Panel(
+            Text(series_summary),
+            title="Time-Series Input",
+            border_style="cyan",
+        )
+    )
+    console.print(
+        Panel(
+            Text(result.pre_prompt),
+            title="Prompt: Context",
+            border_style="blue",
+        )
+    )
+    console.print(
+        Panel(
+            Text(result.post_prompt),
+            title="Prompt: Question and Output Contract",
+            border_style="blue",
+        )
+    )
+    console.print(
+        Panel(
+            Text(result.prediction),
+            title="Model Prediction",
+            border_style="green",
+        )
+    )
