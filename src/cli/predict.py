@@ -45,7 +45,7 @@ def predict(
     ] = DatasetSplit.TEST,
     stage: Annotated[
         CurriculumStageName,
-        typer.Option(help="Checkpoint and curriculum prompt to use."),
+        typer.Option(help="Curriculum prompt to use with the latest checkpoint."),
     ] = CurriculumStageName.DIAGNOSTIC_COT,
     index: Annotated[
         int,

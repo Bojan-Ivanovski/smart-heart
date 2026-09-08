@@ -80,7 +80,7 @@ def evaluate(
         typer.Option(file_okay=False, resolve_path=True),
     ] = DEFAULT_OUTPUT_ROOT,
 ) -> None:
-    """Evaluate exact stage checkpoints on a held-out patient split."""
+    """Evaluate the latest checkpoint on held-out patient tasks."""
     dataset = SmartHeartDataset(
         dataset_root,
         split=split.value,

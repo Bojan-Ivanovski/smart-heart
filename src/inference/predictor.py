@@ -94,7 +94,7 @@ class Predictor:
             config.checkpoint_root,
             config.model_id,
             config.architecture,
-        ).require(stage_name)
+        ).require_latest()
         model.load_from_file(str(checkpoint))
         model.eval()
 

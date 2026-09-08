@@ -78,11 +78,13 @@ class Evaluator:
         if not selected:
             raise ValueError("The selected dataset has no curriculum samples.")
 
+        checkpoint = manager.require_latest()
+        print(f"[evaluate] loading_checkpoint={checkpoint}", flush=True)
+        model.load_from_file(str(checkpoint))
+        model.eval()
+
         summaries = []
         for stage in selected:
-            checkpoint = manager.require(stage.name)
-            model.load_from_file(str(checkpoint))
-            model.eval()
             summaries.append(
                 self._evaluate_stage(
                     model,

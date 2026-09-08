@@ -87,7 +87,7 @@ def train(
     ] = DEFAULT_CHECKPOINT_ROOT,
     fresh_start: Annotated[
         bool,
-        typer.Option(help="Delete this model's curriculum checkpoints first."),
+        typer.Option(help="Delete this model's checkpoint history first."),
     ] = False,
     seed: Annotated[int, typer.Option(help="Training and shuffle seed.")] = 42,
 ) -> None:

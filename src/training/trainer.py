@@ -92,24 +92,15 @@ class Trainer:
         if config.fresh_start:
             if selected[0].name != all_stage_names[0]:
                 raise ValueError("A fresh curriculum must begin with stage1_mcq.")
-            manager.clear(all_stage_names)
+            manager.clear()
         summaries: list[StageTrainingSummary] = []
-        for stage_index, stage in enumerate(selected):
-            if stages is None:
-                previous_name = (
-                    selected[stage_index - 1].name if stage_index > 0 else None
+        for stage in selected:
+            initialized_from = manager.latest()
+            if initialized_from is None and stage.name != all_stage_names[0]:
+                raise FileNotFoundError(
+                    f"Stage '{stage.name}' requires an existing numbered checkpoint. "
+                    "Begin a new curriculum with stage1_mcq."
                 )
-            else:
-                canonical_index = all_stage_names.index(stage.name)
-                previous_name = (
-                    all_stage_names[canonical_index - 1]
-                    if canonical_index > 0
-                    else None
-                )
-            initialized_from = manager.find_initial_checkpoint(
-                stage.name,
-                previous_name,
-            )
             if initialized_from is not None:
                 print(
                     f"[train] stage={stage.name} loading_checkpoint="
@@ -117,6 +108,12 @@ class Trainer:
                     flush=True,
                 )
                 model.load_from_file(str(initialized_from))
+
+            checkpoint = manager.next_path(stage.name)
+            print(
+                f"[train] stage={stage.name} saving_checkpoint={checkpoint}",
+                flush=True,
+            )
 
             print(
                 f"[train] stage={stage.name} samples={len(stage)} "
@@ -132,6 +129,7 @@ class Trainer:
                     config,
                     manager,
                     initialized_from,
+                    checkpoint,
                 )
             )
 
@@ -149,6 +147,7 @@ class Trainer:
         config: TrainingConfig,
         manager: CheckpointManager,
         initialized_from: Path | None,
+        checkpoint: Path,
     ) -> StageTrainingSummary:
         dataloader = build_dataloader(
             stage,
@@ -203,7 +202,7 @@ class Trainer:
                 f"average_loss={epoch_loss / epoch_steps:.6f}",
                 flush=True,
             )
-            checkpoint = manager.save(model, stage.name)
+            manager.save(model, checkpoint)
 
         return StageTrainingSummary(
             stage=stage.name,

@@ -56,16 +56,19 @@ Start training explicitly:
 python -m src.main train --device auto
 ```
 
-Evaluate the saved curriculum checkpoints on the validation partition:
+Evaluate the latest saved checkpoint on every curriculum task in the validation
+partition:
 
 ```powershell
 python -m src.main evaluate --split validation --device auto
 ```
 
-Training automatically loads the checkpoint matching the model, architecture,
-and curriculum stage when it already exists under `--checkpoint-root`. To discard
-the selected model's curriculum checkpoints and train from the base model, add
-`--fresh-start`. Checkpoints contain model weights, so reuse is a warm start rather
-than an optimizer or epoch resume.
+Training automatically loads the highest-numbered checkpoint for the model and
+architecture. Each training command then creates the next chronological snapshot,
+such as `checkpoint_2_stage_1.pt`; the suffix records which curriculum stage ran,
+not the model's total curriculum coverage. Validation and prediction also load the
+highest-numbered checkpoint. To discard the checkpoint history and train from the
+base model, add `--fresh-start`. Checkpoints contain model weights, so reuse is a
+warm start rather than an optimizer or epoch resume.
 
 Run `python -m src.main --help` and a command's `--help` option for the complete CLI.

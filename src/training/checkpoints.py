@@ -5,6 +5,12 @@ from pathlib import Path
 from ..models import ModelArchitecture, OpenTSLMModel
 
 
+_CHECKPOINT_PATTERN = re.compile(
+    r"checkpoint_(?P<sequence>[1-9][0-9]*)_stage_(?P<stage>[1-9][0-9]*)[.]pt"
+)
+_STAGE_PATTERN = re.compile(r"stage(?P<number>[1-9][0-9]*)_[a-z0-9_]+")
+
+
 class CheckpointManager:
     def __init__(
         self,
@@ -23,44 +29,46 @@ class CheckpointManager:
         if not self.directory.is_relative_to(self.root):
             raise ValueError("Checkpoint directory must be inside checkpoint_root.")
 
-    def path_for(self, stage_name: str) -> Path:
-        if not re.fullmatch(r"stage[1-9][0-9]*_[a-z0-9_]+", stage_name):
-            raise ValueError(f"Invalid curriculum stage name '{stage_name}'.")
-        path = (self.directory / f"{stage_name}.pt").resolve()
-        if path.parent != self.directory:
-            raise ValueError("Checkpoint path escaped the model directory.")
-        return path
-
-    def find_initial_checkpoint(
-        self,
-        stage_name: str,
-        previous_stage_name: str | None,
-    ) -> Path | None:
-        current = self.path_for(stage_name)
-        self._validate_checkpoint_path(current)
-        if current.is_file():
-            return current
-        if previous_stage_name is None:
-            return None
-        previous = self.path_for(previous_stage_name)
-        self._validate_checkpoint_path(previous)
-        if previous.is_file():
-            return previous
-        raise FileNotFoundError(
-            f"Stage '{stage_name}' requires checkpoint '{previous}'."
-        )
-
-    def require(self, stage_name: str) -> Path:
-        path = self.path_for(stage_name)
-        self._validate_checkpoint_path(path)
-        if not path.is_file():
+    def latest(self) -> Path | None:
+        checkpoints = self._numbered_checkpoints()
+        if checkpoints:
+            return checkpoints[-1][1]
+        legacy = self._legacy_checkpoints()
+        if legacy:
+            names = ", ".join(path.name for path in legacy)
             raise FileNotFoundError(
-                f"No checkpoint exists for stage '{stage_name}' at '{path}'."
+                "Found legacy stage-named checkpoints but no numbered checkpoint. "
+                "Rename the latest model to 'checkpoint_1_stage_N.pt' before "
+                f"continuing: {names}."
+            )
+        return None
+
+    def require_latest(self) -> Path:
+        path = self.latest()
+        if path is None:
+            raise FileNotFoundError(
+                f"No numbered curriculum checkpoint exists in '{self.directory}'."
             )
         return path
 
-    def save(self, model: OpenTSLMModel, stage_name: str) -> Path:
-        path = self.path_for(stage_name)
+    def next_path(self, stage_name: str) -> Path:
+        stage_match = _STAGE_PATTERN.fullmatch(stage_name)
+        if stage_match is None:
+            raise ValueError(f"Invalid curriculum stage name '{stage_name}'.")
+        checkpoints = self._numbered_checkpoints()
+        sequence = checkpoints[-1][0] + 1 if checkpoints else 1
+        path = (
+            self.directory
+            / f"checkpoint_{sequence}_stage_{stage_match.group('number')}.pt"
+        ).resolve()
+        self._validate_checkpoint_path(path)
+        return path
+
+    def save(self, model: OpenTSLMModel, path: Path) -> Path:
+        path = path.resolve()
+        self._validate_checkpoint_path(path)
+        if _CHECKPOINT_PATTERN.fullmatch(path.name) is None:
+            raise ValueError(f"Invalid numbered checkpoint path '{path}'.")
         path.parent.mkdir(parents=True, exist_ok=True)
         temporary_path = path.with_suffix(".tmp")
         if temporary_path.exists():
@@ -69,13 +77,43 @@ class CheckpointManager:
         temporary_path.replace(path)
         return path
 
-    def clear(self, stage_names: tuple[str, ...]) -> None:
-        for stage_name in stage_names:
-            path = self.path_for(stage_name)
+    def clear(self) -> None:
+        if not self.directory.is_dir():
+            return
+        for path in self.directory.glob("*.pt"):
+            self._validate_checkpoint_path(path)
             if path.is_file():
                 path.unlink()
 
-    @staticmethod
-    def _validate_checkpoint_path(path: Path) -> None:
+    def _numbered_checkpoints(self) -> list[tuple[int, Path]]:
+        if not self.directory.is_dir():
+            return []
+        checkpoints: list[tuple[int, Path]] = []
+        sequences: set[int] = set()
+        for path in self.directory.glob("checkpoint_*_stage_*.pt"):
+            match = _CHECKPOINT_PATTERN.fullmatch(path.name)
+            if match is None:
+                continue
+            self._validate_checkpoint_path(path)
+            sequence = int(match.group("sequence"))
+            if sequence in sequences:
+                raise ValueError(
+                    f"Duplicate checkpoint sequence number {sequence} in "
+                    f"'{self.directory}'."
+                )
+            sequences.add(sequence)
+            checkpoints.append((sequence, path))
+        return sorted(checkpoints, key=lambda item: item[0])
+
+    def _legacy_checkpoints(self) -> list[Path]:
+        if not self.directory.is_dir():
+            return []
+        return sorted(
+            path for path in self.directory.glob("stage*.pt") if path.is_file()
+        )
+
+    def _validate_checkpoint_path(self, path: Path) -> None:
+        if path.parent != self.directory:
+            raise ValueError("Checkpoint path escaped the model directory.")
         if path.exists() and not path.is_file():
             raise ValueError(f"Checkpoint path is not a file: '{path}'.")
