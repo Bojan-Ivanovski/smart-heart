@@ -43,12 +43,12 @@ def _mcq_metrics(predicted: str, expected: str) -> MetricValues:
         "accuracy": float(
             expected_answer is not None and predicted_answer == expected_answer
         ),
+        "valid_answer_rate": float(predicted_answer is not None),
     }
 
 
 def _caption_metrics(predicted: str, expected: str) -> MetricValues:
     return {
-        "exact_match": float(_normalize(predicted) == _normalize(expected)),
         "token_f1": _token_f1(predicted, expected),
     }
 
@@ -67,7 +67,6 @@ def _recording_cot_metrics(predicted: str, expected: str) -> MetricValues:
         ("low", "moderate", "high"),
     )
     return {
-        "exact_match": float(_normalize(predicted) == _normalize(expected)),
         "token_f1": _token_f1(predicted, expected),
         "conclusion_token_f1": _token_f1(
             predicted_conclusion,
@@ -94,7 +93,6 @@ def _diagnostic_metrics(predicted: str, expected: str) -> MetricValues:
         "confidence": ("low", "moderate", "high"),
     }
     result: MetricValues = {
-        "exact_match": float(_normalize(predicted) == _normalize(expected)),
         "token_f1": _token_f1(predicted, expected),
     }
     for field_name, values in fields.items():
@@ -107,8 +105,16 @@ def _diagnostic_metrics(predicted: str, expected: str) -> MetricValues:
 
 
 def _extract_mcq(value: str) -> str | None:
-    match = re.search(r"(?:^|\bANSWER\s*:\s*)([ABCD])(?:\b|$)", value.upper())
-    return match.group(1) if match else None
+    normalized = value.upper().strip()
+    patterns = (
+        r"^[`*_\"']*\s*([ABCD])(?:\b|[.)\]])",
+        r"\b(?:ANSWER|OPTION|CHOICE)(?:\s+IS)?\s*:?\s*([ABCD])\b",
+    )
+    for pattern in patterns:
+        match = re.search(pattern, normalized)
+        if match is not None:
+            return match.group(1)
+    return None
 
 
 def _section(value: str, start: str, end: str) -> str:
@@ -157,7 +163,3 @@ def _token_f1(predicted: str, expected: str) -> float:
 
 def _tokens(value: str) -> list[str]:
     return re.findall(r"[a-z0-9]+(?:_[a-z0-9]+)*", value.lower())
-
-
-def _normalize(value: str) -> str:
-    return " ".join(_tokens(value))
